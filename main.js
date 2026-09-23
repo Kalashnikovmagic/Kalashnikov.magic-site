@@ -278,10 +278,22 @@ function sectionProgress(section){
 }
 
 function updateTransition(){
-  if(!transition)return;
+  if(!transition || !kingZoom)return;
 
   const p=sectionProgress(transition);
-  const zoom=lerp(.035,5.8,p);
+  const card=kingZoom.querySelector('.king-card');
+  let maxZoom=5.8;
+
+  // Stop when the King card reaches the viewport size instead of zooming
+  // far beyond the screen. This is especially important on phones.
+  if(card){
+    const rect=card.getBoundingClientRect();
+    const baseWidth=Math.max(1,rect.width);
+    const baseHeight=Math.max(1,rect.height);
+    maxZoom=Math.max(1,Math.max(window.innerWidth/baseWidth,window.innerHeight/baseHeight));
+  }
+
+  const zoom=lerp(.035,maxZoom,p);
   kingZoom.style.transform='scale('+zoom+')';
 
   // The zoom and the gaze are one continuous scene:
