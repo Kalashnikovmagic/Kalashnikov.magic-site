@@ -8,31 +8,60 @@ const loaderStatus=$('#loaderStatus');
 
 const statuses=[
   [0,'ПОДГОТАВЛИВАЮ РЕКВИЗИТ'],
-  [24,'СОСТАВЛЯЮ ПРОГРАММУ ДЛЯ ВАС'],
-  [52,'ПРОВЕРЯЮ СВОБОДНЫЕ ДАТЫ'],
-  [78,'ЧИТАЮ ВАШИ МЫСЛИ'],
-  [94,'ПОЧТИ ГОТОВО']
+  [22,'СОСТАВЛЯЮ ПРОГРАММУ ДЛЯ ВАС'],
+  [47,'ПРОВЕРЯЮ СВОБОДНЫЕ ДАТЫ'],
+  [72,'ЧИТАЮ ВАШИ МЫСЛИ'],
+  [91,'ПОЧТИ ГОТОВО']
 ];
 
+let loaderStarted=false;
+
 function runLoader(){
+  if(loaderStarted)return;
+  loaderStarted=true;
+
   const started=performance.now();
-  const duration=2200;
+  const duration=6200;
+
   function tick(now){
     const raw=Math.min(1,(now-started)/duration);
-    const eased=1-Math.pow(1-raw,3);
-    const pct=Math.round(eased*100);
+
+    // Slow, cinematic progress with deliberate pauses near status changes.
+    const eased =
+      raw < .22 ? raw * 0.72 :
+      raw < .47 ? .1584 + (raw-.22) * 0.78 :
+      raw < .72 ? .3534 + (raw-.47) * 0.76 :
+      raw < .91 ? .5434 + (raw-.72) * 0.72 :
+      .6802 + (raw-.91) * 3.55;
+
+    const pct=Math.min(100,Math.round(eased*100));
+
     loaderPercent.textContent=pct+'%';
     loaderFill.style.width=pct+'%';
-    const status=statuses.reduce((acc,item)=>item[0]<=pct?item:acc,statuses[0]);
+
+    const status=statuses.reduce(
+      (acc,item)=>item[0]<=pct?item:acc,
+      statuses[0]
+    );
     loaderStatus.textContent=status[1];
-    if(raw<1){requestAnimationFrame(tick);return}
+
+    if(raw<1){
+      requestAnimationFrame(tick);
+      return;
+    }
+
+    loaderPercent.textContent='100%';
+    loaderFill.style.width='100%';
     loaderStatus.textContent='ГОТОВО';
-    setTimeout(()=>loader.classList.add('is-done'),420);
+
+    setTimeout(()=>loader.classList.add('is-done'),900);
   }
+
   requestAnimationFrame(tick);
 }
+
 window.addEventListener('load',runLoader,{once:true});
-setTimeout(()=>{if(!loader.classList.contains('is-done'))runLoader()},2800);
+setTimeout(runLoader,8000);
 
 const cards=$$('.playing-card');
 cards.forEach(card=>{
