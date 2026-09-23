@@ -190,6 +190,13 @@ button{font:inherit;color:inherit}
   .surprise-card__message{top:calc(50% + 47vw/1.5 + 3vh);bottom:auto;width:94vw;font-size:3vw}
 
 }
+@media(min-width:821px){
+  /* Desktop: keep each cinematic scene compact so the page moves faster. */
+  .hero{height:250vh}
+  .facts{height:180vh}
+  .transition{height:350vh}
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
   .hero{height:auto;min-height:100vh}
