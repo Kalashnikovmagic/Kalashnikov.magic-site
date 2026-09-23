@@ -200,3 +200,23 @@ button{font:inherit;color:inherit}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+/* Scene 03: the uploaded King remains the same card, then gains a live gaze after the zoom. */
+.transition .king-face__eye{
+  visibility:hidden;
+}
+.transition.is-ready .king-face__eye{
+  visibility:visible;
+  background:transparent;
+  border:0;
+  overflow:visible;
+  z-index:4;
+}
+.transition.is-ready .king-face__eye span{
+  background:#050505;
+  width:22%;
+  box-shadow:0 0 0 1px rgba(216,253,62,.18);
+}
+.transition .king-face,
+.transition .king-card__corner{
+  pointer-events:none;
+}
