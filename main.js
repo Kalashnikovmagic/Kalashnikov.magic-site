@@ -258,7 +258,7 @@ function updateTransition(){
   const zoom=lerp(.01,maxZoom,reveal);
 
   const eyeX=baseWidth*.578;
-  const eyeY=baseHeight*.273;
+  const eyeY=baseHeight*.315;
   const cardCenterX=baseWidth*.5;
   const cardCenterY=baseHeight*.5;
   const offsetX=(cardCenterX-eyeX)*zoom;
