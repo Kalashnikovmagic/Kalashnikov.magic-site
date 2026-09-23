@@ -78,8 +78,8 @@ button{font:inherit;color:inherit}
 .card-face--front{transform:rotateY(180deg);background:#eee9de;color:#090909;border:1px solid #c9c2b5;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:10%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
 .card-face--front:after{content:"";position:absolute;inset:9px;border:1px solid rgba(0,0,0,.12);border-radius:clamp(7px,.8vw,12px);pointer-events:none}
 .card-face--front strong{font-size:clamp(38px,5.5vw,82px);line-height:.9;letter-spacing:-.07em;font-weight:600}
-.card-face--front em{font-style:normal;font:600 clamp(12px,1.25vw,19px) var(--mono);letter-spacing:.07em;margin-top:12px}
-.card-face--front small{font-size:clamp(9px,.9vw,13px);line-height:1.45;margin-top:16px;color:#4e4b45}
+.card-face--front em{font-style:normal;font:500 clamp(12px,1.25vw,19px) var(--mono);letter-spacing:.07em;line-height:1.2;margin-top:12px;max-width:82%}
+.card-face--front small{font-size:clamp(9px,.9vw,13px);line-height:1.45;margin-top:16px;color:#4e4b45;max-width:78%}
 .card-corner{position:absolute;top:15px;left:17px;font:500 9px var(--mono);letter-spacing:.1em;color:#8a857b}
 .card-suit{position:absolute;right:17px;bottom:12px;font:27px Georgia,serif;color:#111}
 
