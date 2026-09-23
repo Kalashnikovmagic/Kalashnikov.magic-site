@@ -79,9 +79,9 @@ button{font:inherit;color:inherit}
 .card-face--front strong{position:absolute;top:39%;left:6%;right:6%;font-size:clamp(34px,4.8vw,72px);line-height:.9;letter-spacing:-.075em;font-weight:800;max-width:88%;margin:auto}
 .card-face--front em{position:absolute;top:51%;left:7%;right:7%;font-style:normal;font:500 clamp(12px,1.2vw,18px)/1.2 var(--mono);letter-spacing:.07em;margin:0 auto;max-width:82%}
 .card-face--front small{font:500 clamp(8px,.75vw,11px)/1.35 var(--mono);letter-spacing:.03em;margin-top:16px;color:#4e4b45;max-width:82%}
-.card-face--front .card-number{font-size:clamp(27px,3.5vw,54px);letter-spacing:-.065em;white-space:nowrap}
+.card-face--front .card-number{font-size:clamp(29px,3.8vw,58px);letter-spacing:-.065em;white-space:nowrap}
 .card-face--front .card-number + em{top:47%}
-.card-face--standup strong{font-size:clamp(24px,3vw,46px);letter-spacing:-.055em;white-space:nowrap}
+.card-face--standup strong{font-size:clamp(22px,2.7vw,42px);letter-spacing:-.055em;white-space:nowrap}
 .card-face--standup em{top:51%;font:600 clamp(12px,1.2vw,18px)/1.2 var(--mono);letter-spacing:.07em;max-width:82%}
 .card-corner{position:absolute;top:15px;left:17px;font:500 9px var(--mono);letter-spacing:.1em;color:#8a857b}
 .card-suit{position:absolute;right:17px;bottom:12px;font:27px Georgia,serif;color:#111}
@@ -186,8 +186,8 @@ button{font:inherit;color:inherit}
   .card-face--front strong{font-size:9.2vw}
   .card-face--front em{font-size:2.8vw}
   .card-face--front small{font-size:2.3vw}
-  .card-face--front .card-number{font-size:6.1vw}
-  .card-face--standup strong{font-size:5.8vw}
+  .card-face--front .card-number{font-size:5.9vw}
+  .card-face--standup strong{font-size:5.4vw}
   .card-face--standup em{font-size:2.8vw}
   .playing-card--surprise{width:94vw;height:auto;max-height:none;aspect-ratio:3/2}
   .surprise-card__blur{width:96vw;height:auto;aspect-ratio:3/2}
