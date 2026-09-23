@@ -8,7 +8,6 @@
   <meta name="description" content="Иллюзионист Алексей Калашников — современная иллюзия для свадеб, корпоративов, юбилеев, презентаций и других мероприятий.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.gstatic.com" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -56,46 +55,34 @@
             <span class="playing-card__inner">
               <span class="card-face card-face--back"><i>♠</i><small>НАЖМИТЕ</small></span>
               <span class="card-face card-face--front">
-                <span class="card-corner">01</span>
-                <strong>15 ЛЕТ</strong>
-                <em>В ИЛЛЮЗИОННОМ ИСКУССТВЕ</em>
-                <span class="card-suit">♠</span>
+                <span class="card-corner">01</span><strong>15 ЛЕТ</strong><em>В ИЛЛЮЗИОННОМ ИСКУССТВЕ</em><span class="card-suit">♠</span>
               </span>
             </span>
           </button>
-
           <button class="playing-card" type="button" aria-label="Открыть факт: более 500 выступлений">
             <span class="playing-card__inner">
               <span class="card-face card-face--back"><i>♠</i><small>НАЖМИТЕ</small></span>
               <span class="card-face card-face--front">
-                <span class="card-corner">02</span>
-                <strong>500+</strong>
-                <em>ВЫСТУПЛЕНИЙ</em>
-                <span class="card-suit">♠</span>
+                <span class="card-corner">02</span><strong>500+</strong><em>ВЫСТУПЛЕНИЙ</em><span class="card-suit">♠</span>
               </span>
             </span>
           </button>
-
           <button class="playing-card" type="button" aria-label="Открыть факт: более 50 тысяч удивлённых людей">
             <span class="playing-card__inner">
               <span class="card-face card-face--back"><i>♠</i><small>НАЖМИТЕ</small></span>
               <span class="card-face card-face--front">
-                <span class="card-corner">03</span>
-                <strong class="card-number">50 000+</strong>
-                <em>УДИВЛЁННЫХ ЛЮДЕЙ</em>
-                <span class="card-suit">♠</span>
+                <span class="card-corner">03</span><strong class="card-number">50 000+</strong><em>УДИВЛЁННЫХ ЛЮДЕЙ</em><span class="card-suit">♠</span>
               </span>
             </span>
           </button>
-
           <button class="playing-card" type="button" aria-label="Открыть факт: StandUp Magic">
             <span class="playing-card__inner">
-              <span class="card-face card-face--back"><i>♠</i><small>НАЖМИТЕ</small></span>
-              <span class="card-face card-face--front card-face--standup">
-                <span class="card-corner">04</span>
-                <strong>StandUp Magic</strong>
-                <em>Будет и смешно, и удивительно</em>
-                <span class="card-suit">♠</span>
+              <span class="card-face__inner"></span>
+              <span class="playing-card__inner">
+                <span class="card-face card-face--back"><i>♠</i><small>НАЖМИТЕ</small></span>
+                <span class="card-face card-face--front card-face--standup">
+                  <span class="card-corner">04</span><strong>StandUp Magic</strong><em>Будет и смешно, и удивительно</em><span class="card-suit">♠</span>
+                </span>
               </span>
             </span>
           </button>
@@ -108,11 +95,7 @@
             <span class="playing-card__inner">
               <span class="card-face card-face--back surprise-card__front"><i>♠</i><small>НАЖМИТЕ</small></span>
               <span class="card-face card-face--front bank-card">
-                <span class="bank-card__chip"></span>
-                <span class="bank-card__number">2323 3108 2019 1995</span>
-                <span class="bank-card__expiry-label">EXPIRES END</span>
-                <span class="bank-card__expiry">07/23</span>
-                <span class="bank-card__holder">CARDHOLDER NAME</span>
+                <span class="bank-card__chip"></span><span class="bank-card__number">2323 3108 2019 1995</span><span class="bank-card__expiry-label">EXPIRES END</span><span class="bank-card__expiry">07/23</span><span class="bank-card__holder">CARDHOLDER NAME</span>
               </span>
             </span>
           </button>
@@ -126,18 +109,58 @@
 
     <section class="transition" id="transition" data-scene="transition">
       <div class="transition__sticky">
-        <div class="king-zoom" id="kingZoom">
+        <div class="king-zoom" id="kingZoom" aria-hidden="true">
           <div class="king-card" id="kingCard">
-            <div class="king-face">
-              <div class="king-face__crown">♠</div>
-              <div class="king-face__head">
-                <div class="king-face__eye king-face__eye--left"><span></span></div>
-                <div class="king-face__eye king-face__eye--right"><span></span></div>
-                <div class="king-face__nose"></div>
-                <div class="king-face__moustache"></div>
-              </div>
-              <div class="king-face__robe"></div>
-            </div>
+            <svg class="king-illustration" viewBox="0 0 600 900" role="img" aria-label="Графичный король">
+              <defs>
+                <linearGradient id="kingSilver" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#f1eee6"/>
+                  <stop offset=".48" stop-color="#aaa9a4"/>
+                  <stop offset="1" stop-color="#383838"/>
+                </linearGradient>
+                <radialGradient id="kingFace" cx=".38" cy=".3" r=".8">
+                  <stop offset="0" stop-color="#e6e4de"/>
+                  <stop offset=".6" stop-color="#a9a8a3"/>
+                  <stop offset="1" stop-color="#4b4b4b"/>
+                </radialGradient>
+              </defs>
+
+              <rect width="600" height="900" fill="#090909"/>
+              <path class="king-halo" d="M300 72C166 72 78 180 78 346v208c0 176 100 274 222 274s222-98 222-274V346C522 180 434 72 300 72Z" fill="none" stroke="#3a3a3a" stroke-width="3"/>
+              <path class="king-crown" d="M174 235 146 86l77 66 77-98 77 98 77-66-28 149Z" fill="#151515" stroke="#d8fd3e" stroke-width="4"/>
+              <path d="M174 235h252l-28 38H202Z" fill="#d8fd3e"/>
+              <circle cx="223" cy="151" r="8" fill="#eeeae1"/>
+              <circle cx="300" cy="104" r="9" fill="#eeeae1"/>
+              <circle cx="377" cy="151" r="8" fill="#eeeae1"/>
+
+              <path class="king-head" d="M183 291c0-77 49-116 117-116s117 39 117 116v142c0 104-45 170-117 170s-117-66-117-170Z" fill="url(#kingFace)" stroke="#151515" stroke-width="5"/>
+              <path d="M185 319c20-72 60-104 115-104 59 0 99 33 115 104-39-27-78-39-115-39s-76 12-115 39Z" fill="#222"/>
+              <path d="M230 331c-17 13-29 31-33 51" fill="none" stroke="#252525" stroke-width="8" stroke-linecap="round"/>
+              <path d="M370 331c17 13 29 31 33 51" fill="none" stroke="#252525" stroke-width="8" stroke-linecap="round"/>
+
+              <g class="king-eye king-eye--left">
+                <ellipse cx="243" cy="382" rx="49" ry="28" fill="#eeeae1" stroke="#171717" stroke-width="7"/>
+                <circle class="king-pupil" cx="243" cy="382" r="15" fill="#0a0a0a"/>
+                <circle cx="238" cy="377" r="4" fill="#d8fd3e"/>
+              </g>
+              <g class="king-eye king-eye--right">
+                <ellipse cx="357" cy="382" rx="49" ry="28" fill="#eeeae1" stroke="#171717" stroke-width="7"/>
+                <circle class="king-pupil" cx="357" cy="382" r="15" fill="#0a0a0a"/>
+                <circle cx="352" cy="377" r="4" fill="#d8fd3e"/>
+              </g>
+
+              <path d="M300 397c-13 39-18 73-3 90" fill="none" stroke="#333" stroke-width="7" stroke-linecap="round"/>
+              <path d="M269 495c18 18 44 18 62 0" fill="none" stroke="#151515" stroke-width="8" stroke-linecap="round"/>
+              <path d="M224 484c23 11 42 28 76 29 34-1 53-18 76-29" fill="none" stroke="#151515" stroke-width="18" stroke-linecap="round"/>
+
+              <path d="M153 552c41 38 88 59 147 59s106-21 147-59l83 348H70Z" fill="#111" stroke="#333" stroke-width="5"/>
+              <path d="M222 592c22 23 47 35 78 35s56-12 78-35l39 308H183Z" fill="#202020"/>
+              <path d="M271 617 300 648l29-31 33 283H238Z" fill="#d8fd3e"/>
+              <path d="M180 594c39 36 78 54 120 54s81-18 120-54" fill="none" stroke="#eeeae1" stroke-width="4" opacity=".7"/>
+
+              <text x="48" y="848" class="king-mark">K</text>
+              <text x="552" y="848" text-anchor="end" class="king-mark">♠</text>
+            </svg>
           </div>
         </div>
 
@@ -155,8 +178,7 @@
         <div class="scene-index">03 / 03</div>
       </div>
     </section>
-
- </main>
+  </main>
 
   <script src="main.js"></script>
 </body>
