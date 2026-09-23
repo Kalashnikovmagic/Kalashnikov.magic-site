@@ -113,10 +113,10 @@ button{font:inherit;color:inherit}
 }
 .surprise-card__caption{
   position:absolute;
-  top:calc(50% - min(24vw,250px) - 7vh);
+  top:calc(50% - min(24vw,250px) - 8vh);
   margin:0;
   z-index:4;
-  font:500 clamp(10px,1vw,14px) var(--mono);
+  font:600 clamp(12px,1.35vw,19px) var(--mono);
   letter-spacing:.16em;
   color:var(--lime);
   text-align:center;
@@ -124,11 +124,11 @@ button{font:inherit;color:inherit}
 }
 .surprise-card__message{
   position:absolute;
-  bottom:7vh;
+  top:calc(50% + min(24vw,250px) + 3vh);
   margin:0;
   z-index:4;
   text-align:center;
-  font:500 clamp(10px,1vw,14px)/1.5 var(--mono);
+  font:600 clamp(13px,1.35vw,19px)/1.5 var(--mono);
   letter-spacing:.12em;
   color:var(--bone);
   opacity:0;
@@ -144,14 +144,16 @@ button{font:inherit;color:inherit}
   filter:blur(0);
 }
 .surprise-card__front{
-  background:#eee9de!important;
-  color:#090909!important;
-  border:1px solid #c9c2b5!important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)!important;
+  background:#101010!important;
+  color:#eee!important;
+  border:1px solid #333!important;
+  box-shadow:inset 0 0 0 9px #080808,inset 0 0 0 11px var(--lime)!important;
   flex-direction:column!important;
 }
-.surprise-card__front:after{border-color:rgba(0,0,0,.12)!important}
-.surprise-card__number{position:absolute;top:18px;left:20px;font:500 18px var(--mono);color:#8a857b}
+.surprise-card__front:after{border-color:rgba(255,255,255,.12)!important}
+.surprise-card__front i{font-size:clamp(90px,11vw,190px);color:var(--lime);font-style:normal;opacity:.8}
+.surprise-card__front b{position:absolute;top:16px;left:19px;font:500 15px var(--mono);color:#777}
+.surprise-card__front small{position:absolute;bottom:17px;font:500 8px var(--mono);letter-spacing:.2em;color:#555}
 .surprise-card__blur{position:absolute;width:min(74vw,780px);height:min(49vw,520px);border-radius:18px;background:rgba(238,233,222,.18);filter:blur(45px);opacity:.8}
 
 .bank-card{background:linear-gradient(135deg,#202020,#080808)!important;color:#eee!important}
@@ -222,10 +224,9 @@ button{font:inherit;color:inherit}
   .card-face--front small{font-size:2.3vw}
   .playing-card--surprise{width:94vw;height:auto;max-height:none;aspect-ratio:3/2}
   .surprise-card__blur{width:96vw;height:auto;aspect-ratio:3/2}
-  .surprise-card__caption{top:calc(50% - 47vw/1.5 - 8vh);font-size:2.4vw}
-  .surprise-card__message{bottom:5vh;width:90vw;font-size:2.3vw}
-  .surprise-card__front strong{font-size:7vw!important}
-  .king-card--interactive{transform:scale(1.45)}
+  .surprise-card__caption{top:calc(50% - 47vw/1.5 - 9vh);font-size:3.2vw}
+  .surprise-card__message{top:calc(50% + 47vw/1.5 + 3vh);bottom:auto;width:94vw;font-size:3vw}
+    .king-card--interactive{transform:scale(1.45)}
   .events__copy{top:auto;bottom:5vh;left:6vw}
 }
 @media(prefers-reduced-motion:reduce){
