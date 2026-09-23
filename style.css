@@ -119,10 +119,9 @@ button{font:inherit;color:inherit}
 .bank-card{background:linear-gradient(135deg,#202020,#080808)!important;color:#eee!important}
 .bank-card:after{border-color:rgba(216,253,62,.22)!important}
 .bank-card__chip{position:absolute;left:9%;top:24%;width:18%;aspect-ratio:1.35;border-radius:5px;background:linear-gradient(135deg,#999,#444)}
-.bank-card__expiry-label,.bank-card__holder-label{position:absolute;font:500 clamp(6px,.55vw,9px) var(--mono);letter-spacing:.12em;color:#777}
-.bank-card__expiry-label{left:32%;top:56%}
-.bank-card__expiry{position:absolute;left:32%;top:62%;font:500 clamp(12px,1.1vw,17px) var(--mono);letter-spacing:.08em;color:#eee}
-.bank-card__holder-label{left:9%;bottom:24%}
+.bank-card__number{position:absolute;left:9%;top:47%;font:500 clamp(15px,1.55vw,24px) var(--mono);letter-spacing:.075em;color:#eee;white-space:nowrap}
+.bank-card__expiry-label{position:absolute;left:9%;top:61%;font:500 clamp(6px,.55vw,9px) var(--mono);letter-spacing:.12em;color:#777}
+.bank-card__expiry{position:absolute;left:9%;top:66%;font:500 clamp(12px,1.1vw,17px) var(--mono);letter-spacing:.08em;color:#eee}
 .bank-card__holder{position:absolute;left:9%;bottom:13%;font:500 clamp(11px,1.2vw,18px) var(--mono);letter-spacing:.09em;color:#eee}
 
 .facts__hint{position:absolute;bottom:9vh;margin:0;font:10px var(--mono);letter-spacing:.2em;color:#555;transition:opacity 400ms var(--ease)}
