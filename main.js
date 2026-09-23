@@ -26,7 +26,6 @@ function runLoader(){
   function tick(now){
     const raw=Math.min(1,(now-started)/duration);
 
-    // Slow, cinematic progress with deliberate pauses near status changes.
     const eased =
       raw < .22 ? raw * 0.72 :
       raw < .47 ? .1584 + (raw-.22) * 0.78 :
@@ -63,10 +62,52 @@ function runLoader(){
 window.addEventListener('load',runLoader,{once:true});
 setTimeout(runLoader,8000);
 
-const cards=$$('.playing-card');
-cards.forEach(card=>{
-  card.addEventListener('click',()=>card.classList.toggle('is-flipped'));
+const factsSection=$('#facts');
+const factCards=$$('.playing-card',factsSection).filter(card=>!card.classList.contains('playing-card--surprise'));
+const surpriseCard=$('#surpriseCard');
+const factsHint=$('#factsHint');
+
+factCards.forEach(card=>{
+  card.addEventListener('click',()=>{
+    card.classList.toggle('is-flipped');
+    updateFacts();
+  });
 });
+
+surpriseCard?.addEventListener('click',()=>{
+  surpriseCard.classList.toggle('is-flipped');
+});
+
+function allFactsOpened(){
+  return factCards.length===4 && factCards.every(card=>card.classList.contains('is-flipped'));
+}
+
+function updateFacts(){
+  if(!factsSection)return;
+
+  const opened=allFactsOpened();
+  const p=sectionProgress(factsSection);
+
+  factsSection.classList.toggle('facts--unlocked',opened);
+
+  if(opened){
+    const revealStart=.52;
+    const revealEnd=.66;
+    const surpriseStart=.67;
+
+    factsSection.classList.toggle('is-revealing',p>=revealStart);
+    factsSection.classList.toggle('is-surprise',p>=surpriseStart);
+
+    if(factsHint){
+      factsHint.textContent=p>=surpriseStart
+        ? 'ТУТ ЕЩЁ КОЕ-ЧТО'
+        : 'ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
+    }
+  }else{
+    factsSection.classList.remove('is-revealing','is-surprise');
+    if(factsHint)factsHint.textContent='ОТКРОЙТЕ ВСЕ 4 КАРТЫ';
+  }
+}
 
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
@@ -96,7 +137,7 @@ function updateTransition(){
   kingZoom.style.transform='scale('+zoom+')';
   const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
-  transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
+  transitionLabels.style.filter='blur('+(1-labelsP)*18+'px';
   transition.classList.toggle('is-ready',p>.91);
 }
 
@@ -143,6 +184,7 @@ window.addEventListener('scroll',()=>{targetScroll=window.scrollY},{passive:true
 function frame(){
   smoothScroll=lerp(smoothScroll,targetScroll,.12);
   updateHero();
+  updateFacts();
   updateTransition();
   updateEyes();
   requestAnimationFrame(frame);
