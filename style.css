@@ -200,6 +200,12 @@ button{font:inherit;color:inherit}
     gap:clamp(12px,1.5vw,24px);
   }
 
+  .facts .cards > .playing-card{
+    height:auto;
+    aspect-ratio:240 / 336;
+    align-self:center;
+  }
+
   /* Desktop: keep each cinematic scene compact so the page moves faster. */
   .hero{height:250vh}
   .facts{height:180vh}
