@@ -133,20 +133,20 @@ button{font:inherit;color:inherit}
 
 .transition{height:650vh;background:#000}
 .transition__sticky{display:grid;place-items:center;background:#000}
-.king-zoom{width:100%;height:100%;display:grid;place-items:center;transform:translateX(-18vw) scale(.05);transform-origin:50% 38%;will-change:transform}
-.king-card{position:relative;width:min(43vw,640px);aspect-ratio:2/3;background:url("king.JPG") center center/cover no-repeat;color:#111;border-radius:14px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.7);border:0;will-change:transform}
-.transition .king-card:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.08) 38%,rgba(0,0,0,.38) 100%),radial-gradient(circle at center,transparent 34%,rgba(0,0,0,.32) 100%);mix-blend-mode:multiply}
+.king-zoom{width:100%;height:100%;display:grid;place-items:center;transform:translateZ(0) scale(.01);transform-origin:50% 42%;will-change:transform}
+.king-card{position:relative;width:min(43vw,640px);aspect-ratio:2/3;overflow:visible;background:#090909;color:#eeeae1;will-change:transform}
+.transition .king-card:after{content:"";position:absolute;inset:-2%;z-index:3;pointer-events:none;border-radius:18px;background:radial-gradient(circle at center,transparent 36%,rgba(0,0,0,.62) 100%),linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.5));mix-blend-mode:normal}
 .transition .king-card > *{visibility:hidden}
 .king-card__corner{position:absolute;z-index:3;left:3%;top:2%;font:bold clamp(20px,2.3vw,40px)/.8 Georgia,serif;text-align:center}
-.king-face{position:absolute;inset:9%;overflow:hidden;border:1px solid rgba(0,0,0,.15);background:linear-gradient(140deg,#eee8dc,#d7d0c3)}
-.king-face__crown{position:absolute;top:3%;left:50%;transform:translateX(-50%);font:900 clamp(80px,13vw,210px) Georgia,serif;line-height:1;color:#111;opacity:.9}
-.king-face__head{position:absolute;left:10%;right:10%;top:26%;height:42%;border-radius:48% 48% 42% 42%;background:linear-gradient(135deg,#d5a27f,#b87958);box-shadow:inset -30px -15px 0 rgba(70,35,20,.08)}
+
+
+
 .king-face__eye{position:absolute;top:36%;width:24%;height:9%;background:#f3eee5;border-radius:50%;border:3px solid #161616;overflow:hidden}
 .king-face__eye--left{left:17%}.king-face__eye--right{right:17%}
-.king-face__eye span{position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;border-radius:50%;background:#111;transform:translate(-50%,-50%);will-change:transform}
-.king-face__nose{position:absolute;left:50%;top:37%;width:8%;height:30%;transform:translateX(-50%);border-right:2px solid rgba(50,25,15,.5);border-radius:50%}
-.king-face__moustache{position:absolute;left:50%;bottom:22%;width:45%;height:11%;transform:translateX(-50%);border-top:8px solid #171717;border-radius:50%}
-.king-face__robe{position:absolute;left:10%;right:10%;bottom:-8%;height:35%;background:repeating-linear-gradient(90deg,#111 0 12%,#b08d54 12% 18%,#eee8dc 18% 26%);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+
+
+
+
 .event-labels{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 500ms var(--ease)}
 .event-label{position:absolute;pointer-events:auto;border:0;background:none;color:var(--lime);cursor:pointer;font:600 clamp(15px,1.65vw,24px) var(--mono);letter-spacing:.06em;text-shadow:0 2px 18px rgba(0,0,0,.9);transition:color 350ms,transform 350ms,opacity 350ms}
 .event-label:hover,.event-label.is-active{color:var(--lime);transform:scale(1.08)}
@@ -203,3 +203,9 @@ button{font:inherit;color:inherit}
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
   .hero{height:auto;min-height:100vh}
 }
+.king-illustration{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 30px 90px rgba(0,0,0,.72));}
+.king-illustration .king-halo{opacity:.7}
+.king-illustration .king-mark{font:600 34px var(--mono);letter-spacing:.08em;fill:#d8fd3e}
+.king-illustration .king-eye{transform-box:fill-box;transform-origin:center}
+.king-illustration .king-pupil{will-change:transform}
+.transition .king-card{background:transparent;border-radius:0}
