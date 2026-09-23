@@ -68,10 +68,16 @@ const surpriseCard=$('#surpriseCard');
 const surpriseCardWrap=$('#surpriseCardWrap');
 const surpriseMessage=$('#surpriseMessage');
 const factsHint=$('#factsHint');
+let factsUnlockedAtScroll=null;
 
 factCards.forEach(card=>{
   card.addEventListener('click',()=>{
     card.classList.toggle('is-flipped');
+    if(allFactsOpened()){
+      factsUnlockedAtScroll=window.scrollY;
+    }else{
+      factsUnlockedAtScroll=null;
+    }
     updateFacts();
   });
 });
@@ -94,17 +100,23 @@ function updateFacts(){
   factsSection.classList.toggle('facts--unlocked',opened);
 
   if(opened){
-    const revealStart=.52;
-    const surpriseStart=.70;
+    // The fourth card unlocks the next stage, but never triggers it by itself.
+    // The user must physically scroll after opening the fourth card.
+    if(factsUnlockedAtScroll===null) factsUnlockedAtScroll=window.scrollY;
 
-    factsSection.classList.toggle('is-revealing',p>=revealStart);
-    factsSection.classList.toggle('is-surprise',p>=surpriseStart);
+    const scrollAfterUnlock=Math.max(0,window.scrollY-factsUnlockedAtScroll);
+    const revealStart=140;
+    const surpriseStart=360;
+
+    factsSection.classList.toggle('is-revealing',scrollAfterUnlock>=revealStart);
+    factsSection.classList.toggle('is-surprise',scrollAfterUnlock>=surpriseStart);
 
     if(factsHint){
       factsHint.textContent='ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
     }
   }else{
     factsSection.classList.remove('is-revealing','is-surprise');
+    factsUnlockedAtScroll=null;
     surpriseCard?.classList.remove('is-flipped');
     surpriseCardWrap?.classList.remove('surprise-card--revealed');
     if(factsHint)factsHint.textContent='ОТКРОЙТЕ ВСЕ 4 КАРТЫ';
