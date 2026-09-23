@@ -303,6 +303,44 @@ function updateAll(){
   updateTransition();
 }
 
+let scrollVelocity=0;
+let scrollAnimationFrame=null;
+let lastWheelTime=0;
+
+function animateScrollInertia(){
+  scrollVelocity*=0.88;
+
+  if(Math.abs(scrollVelocity)<0.35){
+    scrollVelocity=0;
+    scrollAnimationFrame=null;
+    updateAll();
+    return;
+  }
+
+  window.scrollBy(0,scrollVelocity);
+  updateAll();
+  scrollAnimationFrame=requestAnimationFrame(animateScrollInertia);
+}
+
+window.addEventListener('wheel',event=>{
+  const now=performance.now();
+  const dt=now-lastWheelTime;
+  lastWheelTime=now;
+
+  // Keep the browser's native scrolling, but add a short visual tail
+  // after the wheel input stops.
+  if(dt>80){
+    scrollVelocity=0;
+  }
+
+  scrollVelocity+=event.deltaY*0.08;
+  scrollVelocity=clamp(scrollVelocity,-28,28);
+
+  if(scrollAnimationFrame===null){
+    scrollAnimationFrame=requestAnimationFrame(animateScrollInertia);
+  }
+},{passive:true});
+
 window.addEventListener('scroll',updateAll,{passive:true});
 updateAll();
 
