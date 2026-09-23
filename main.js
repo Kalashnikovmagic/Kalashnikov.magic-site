@@ -214,8 +214,6 @@ const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
 const transitionHint=$('.transition__hint');
-const transitionEyes=$('.transition .king-pupil');
-
 let pointerX=.5,pointerY=.5;
 
 function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
@@ -265,14 +263,6 @@ function updateHero(){
   }
 }
 
-function updateEyes(){
-  const dx=(pointerX-.5)*2;
-  const dy=(pointerY-.5)*2;
-  transitionEyes.forEach(eye=>{
-    eye.style.transform='translate('+(dx*14)+'px,'+(dy*8.5)+'px)';
-  });
-}
-
 function highlightEvent(eventName,root){
   $$('.event-label',root).forEach(el=>el.classList.toggle('is-active',el.dataset.event===eventName));
 }
@@ -286,11 +276,7 @@ function bindEvents(root){
 }
 bindEvents(transition);
 
-window.addEventListener('pointermove',e=>{
-  pointerX=e.clientX/window.innerWidth;
-  pointerY=e.clientY/window.innerHeight;
-  updateEyes();
-});
+
 
 function updateAll(){
   updateHero();
