@@ -182,9 +182,9 @@ button{font:inherit;color:inherit}
   .card-face--front strong{font-size:9.2vw}
   .card-face--front em{font-size:2.8vw}
   .card-face--front small{font-size:2.3vw}
-  .card-face--front .card-number{font-size:6.2vw}
-  .card-face--standup strong{font-size:5vw}
-  .card-face--standup em{font-size:2.8vw;transform:translateY(-2.5vw)}
+  .card-face--front .card-number{font-size:6.5vw}
+  .card-face--standup strong{font-size:4.7vw}
+  .card-face--standup em{font-size:2.8vw;transform:translateY(-3.5vw)}
   .playing-card--surprise{width:94vw;height:auto;max-height:none;aspect-ratio:3/2}
   .surprise-card__blur{width:96vw;height:auto;aspect-ratio:3/2}
   .surprise-card__caption{top:calc(50% - 47vw/1.5 - 9vh);font-size:3.2vw}
