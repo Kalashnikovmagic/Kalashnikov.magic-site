@@ -101,9 +101,7 @@ function updateFacts(){
     factsSection.classList.toggle('is-surprise',p>=surpriseStart);
 
     if(factsHint){
-      factsHint.textContent=p>=surpriseStart
-        ? 'КАЖЕТСЯ, ТУТ ЕСТЬ КОЕ-ЧТО ЕЩЁ'
-        : 'ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
+      factsHint.textContent='ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
     }
   }else{
     factsSection.classList.remove('is-revealing','is-surprise');
