@@ -104,16 +104,16 @@ button{font:inherit;color:inherit}
   pointer-events:auto;
 }
 .playing-card--surprise{
-  width:min(58vw,520px);
-  height:min(36vw,330px);
-  max-height:330px;
-  aspect-ratio:1.586/1;
+  width:min(72vw,760px);
+  height:min(48vw,500px);
+  max-height:500px;
+  aspect-ratio:3/2;
   filter:drop-shadow(0 30px 70px rgba(0,0,0,.6));
   z-index:2;
 }
 .surprise-card__caption{
   position:absolute;
-  top:calc(50% - min(18vw,165px) - 7vh);
+  top:calc(50% - min(24vw,250px) - 7vh);
   margin:0;
   z-index:4;
   font:500 clamp(10px,1vw,14px) var(--mono);
@@ -152,7 +152,7 @@ button{font:inherit;color:inherit}
 }
 .surprise-card__front:after{border-color:rgba(0,0,0,.12)!important}
 .surprise-card__number{position:absolute;top:18px;left:20px;font:500 18px var(--mono);color:#8a857b}
-.surprise-card__blur{position:absolute;width:min(34vw,430px);height:min(76vh,645px);border-radius:18px;background:rgba(238,233,222,.18);filter:blur(45px);opacity:.8}
+.surprise-card__blur{position:absolute;width:min(74vw,780px);height:min(49vw,520px);border-radius:18px;background:rgba(238,233,222,.18);filter:blur(45px);opacity:.8}
 
 .bank-card{background:linear-gradient(135deg,#202020,#080808)!important;color:#eee!important}
 .bank-card:after{border-color:rgba(216,253,62,.22)!important}
@@ -201,8 +201,8 @@ button{font:inherit;color:inherit}
   .facts{height:360vh}
   .cards{width:88vw;height:70vh;gap:10px}
   .card-face--back{box-shadow:inset 0 0 0 6px #080808,inset 0 0 0 8px var(--lime)}
-  .playing-card--surprise{width:76vw;height:auto;max-height:none;aspect-ratio:1.586/1}
-  .surprise-card__blur{width:78vw;height:auto;aspect-ratio:1.586/1}
+  .playing-card--surprise{width:88vw;height:auto;max-height:none;aspect-ratio:3/2}
+  .surprise-card__blur{width:90vw;height:auto;aspect-ratio:3/2}
   .transition{height:500vh}
   .king-card{width:62vw}
   .event-label{font-size:8px;letter-spacing:.03em}
@@ -220,9 +220,9 @@ button{font:inherit;color:inherit}
   .card-face--front strong{font-size:11vw}
   .card-face--front em{font-size:2.8vw}
   .card-face--front small{font-size:2.3vw}
-  .playing-card--surprise{width:82vw;height:auto;max-height:none;aspect-ratio:1.586/1}
-  .surprise-card__blur{width:84vw;height:auto;aspect-ratio:1.586/1}
-  .surprise-card__caption{top:calc(50% - 41vw/1.586 - 8vh);font-size:2.4vw}
+  .playing-card--surprise{width:94vw;height:auto;max-height:none;aspect-ratio:3/2}
+  .surprise-card__blur{width:96vw;height:auto;aspect-ratio:3/2}
+  .surprise-card__caption{top:calc(50% - 47vw/1.5 - 8vh);font-size:2.4vw}
   .surprise-card__message{bottom:5vh;width:90vw;font-size:2.3vw}
   .surprise-card__front strong{font-size:7vw!important}
   .king-card--interactive{transform:scale(1.45)}
