@@ -1,67 +1,6 @@
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 
-const loader=$('#loader');
-const loaderPercent=$('#loaderPercent');
-const loaderFill=$('#loaderFill');
-const loaderStatus=$('#loaderStatus');
-
-const statuses=[
-  [0,'ПОДГОТАВЛИВАЮ РЕКВИЗИТ'],
-  [22,'СОСТАВЛЯЮ ПРОГРАММУ ДЛЯ ВАС'],
-  [47,'ПРОВЕРЯЮ СВОБОДНЫЕ ДАТЫ'],
-  [72,'ЧИТАЮ ВАШИ МЫСЛИ'],
-  [91,'ПОЧТИ ГОТОВО']
-];
-
-let loaderStarted=false;
-
-function runLoader(){
-  if(loaderStarted)return;
-  loaderStarted=true;
-
-  const started=performance.now();
-  const duration=6200;
-
-  function tick(now){
-    const raw=Math.min(1,(now-started)/duration);
-
-    const eased =
-      raw < .22 ? raw * 0.72 :
-      raw < .47 ? .1584 + (raw-.22) * 0.78 :
-      raw < .72 ? .3534 + (raw-.47) * 0.76 :
-      raw < .91 ? .5434 + (raw-.72) * 0.72 :
-      .6802 + (raw-.91) * 3.55;
-
-    const pct=Math.min(100,Math.round(eased*100));
-
-    loaderPercent.textContent=pct+'%';
-    loaderFill.style.width=pct+'%';
-
-    const status=statuses.reduce(
-      (acc,item)=>item[0]<=pct?item:acc,
-      statuses[0]
-    );
-    loaderStatus.textContent=status[1];
-
-    if(raw<1){
-      requestAnimationFrame(tick);
-      return;
-    }
-
-    loaderPercent.textContent='100%';
-    loaderFill.style.width='100%';
-    loaderStatus.textContent='ГОТОВО';
-
-    setTimeout(()=>loader.classList.add('is-done'),900);
-  }
-
-  requestAnimationFrame(tick);
-}
-
-// Loader temporarily disabled during development.
-
-
 /* -------------------------------------------------------
    HERO FRAME SEQUENCE
    87 WebP frames, driven directly by hero scroll progress.
@@ -88,8 +27,9 @@ function heroFrameUrl(index){
 function resizeHeroCanvas(){
   if(!heroCanvas)return;
 
-  const width=Math.max(1,Math.round(heroCanvas.clientWidth*window.devicePixelRatio));
-  const height=Math.max(1,Math.round(heroCanvas.clientHeight*window.devicePixelRatio));
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  const width=Math.max(1,Math.round(heroCanvas.clientWidth*dpr));
+  const height=Math.max(1,Math.round(heroCanvas.clientHeight*dpr));
 
   if(width===heroCanvas.width && height===heroCanvas.height)return;
 
@@ -182,18 +122,30 @@ async function loadHeroSequence(){
 
   resizeHeroCanvas();
 
-  // First frame appears as soon as possible.
+  // Load the first frame immediately so the hero becomes visible fast.
   await loadHeroFrame(0);
 
-  // Remaining frames load concurrently; the browser cache keeps scrolling responsive.
-  await Promise.all(
-    Array.from({length:HERO_FRAME_COUNT-1},(_,i)=>loadHeroFrame(i+1))
-  );
+  // Load the remaining frames in small batches instead of opening 86
+  // requests at once. This keeps the browser responsive during startup.
+  const batchSize=8;
+
+  for(let start=1;start<HERO_FRAME_COUNT;start+=batchSize){
+    const end=Math.min(HERO_FRAME_COUNT,start+batchSize);
+    await Promise.all(
+      Array.from({length:end-start},(_,offset)=>loadHeroFrame(start+offset))
+    );
+  }
 
   setHeroFrame(0);
 }
 
-window.addEventListener('resize',resizeHeroCanvas,{passive:true});
+window.addEventListener('resize',()=>{
+  resizeHeroCanvas();
+  updateHero();
+  updateFacts();
+  updateTransition();
+},{passive:true});
+
 loadHeroSequence();
 
 
@@ -261,10 +213,9 @@ function updateFacts(){
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
+const transitionHint=$('.transition__hint');
 const transitionEyes=$('.transition .king-pupil');
 
-let targetScroll=window.scrollY;
-let smoothScroll=window.scrollY;
 let pointerX=.5,pointerY=.5;
 
 function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
@@ -341,17 +292,14 @@ window.addEventListener('pointermove',e=>{
   updateEyes();
 });
 
-window.addEventListener('scroll',()=>{targetScroll=window.scrollY},{passive:true});
-
-function frame(){
-  smoothScroll=lerp(smoothScroll,targetScroll,.12);
+function updateAll(){
   updateHero();
   updateFacts();
   updateTransition();
-  updateEyes();
-  requestAnimationFrame(frame);
 }
-frame();
+
+window.addEventListener('scroll',updateAll,{passive:true});
+updateAll();
 
 document.querySelectorAll('[data-scene]').forEach(scene=>{
   scene.addEventListener('pointermove',e=>{
