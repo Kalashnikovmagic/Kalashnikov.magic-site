@@ -239,8 +239,8 @@ button{font:inherit;color:inherit}
   /* Fine desktop alignment for the four fact cards. */
   .facts .playing-card:nth-child(3) .card-number{font-size:clamp(31px,4.05vw,61px)}
   .facts .playing-card:nth-child(3) .card-copy{top:39.8%}
-  .facts .playing-card:nth-child(4) .card-copy{left:0%;right:12%;top:39.8%}
-  .facts .playing-card:nth-child(4) .card-copy > em{transform:translateY(-3px)}
+  .facts .playing-card:nth-child(4) .card-copy{left:-2%;right:14%;top:39.8%}
+  .facts .playing-card:nth-child(4) .card-copy > em{transform:translate(2%, -3px)}
 
   /* Desktop typography: larger UI labels for readability at monitor distance. */
   .event-label--1{top:18%;right:2%;left:auto;transform:none}
