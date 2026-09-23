@@ -248,6 +248,7 @@ button{font:inherit;color:inherit}
   .event-label--4{top:18%;left:2%;right:auto;bottom:auto;transform:none}
   .event-label--7{top:auto;left:auto;right:2%;bottom:16%;transform:none}
 
+  .card-face--back small{font-size:12px;letter-spacing:.2em}
   .hero__title p{font-size:16px}
   .scene-index{font-size:13px;letter-spacing:.18em}
   .facts__intro{font-size:14px}
