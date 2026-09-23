@@ -243,11 +243,13 @@ function updateTransition(){
     // portrait area rather than from the full card.
     const eyeRegionWidth=baseWidth*.14;
     const eyeRegionHeight=baseHeight*.20;
-    maxZoom=Math.max(
+    const calculatedZoom=Math.max(
       8,
       window.innerWidth/Math.max(1,eyeRegionWidth),
       window.innerHeight/Math.max(1,eyeRegionHeight)
     );
+    // Keep the close-up cinematic, without pushing into an extreme crop.
+    maxZoom=Math.min(calculatedZoom,10);
   }
 
   // Start from the visual center, then move the card so the king's eyes
