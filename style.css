@@ -191,6 +191,15 @@ button{font:inherit;color:inherit}
 
 }
 @media(min-width:821px){
+  .facts .cards{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-rows:1fr;
+    grid-template-areas:"card1 card2 card3 card4";
+    width:min(94vw,1500px);
+    height:min(68vh,720px);
+    gap:clamp(12px,1.5vw,24px);
+  }
+
   /* Desktop: keep each cinematic scene compact so the page moves faster. */
   .hero{height:250vh}
   .facts{height:180vh}
