@@ -167,7 +167,7 @@ button{font:inherit;color:inherit}
   .event-label--1{top:1%}
   .event-label--2{top:18%;right:0}
   .event-label--3{top:50%;right:0}
-  .event-label--4{bottom:1%;max-width:42vw}
+  .event-label--4{bottom:18%;right:0;left:auto;max-width:42vw}
   .event-label--5{bottom:18%;left:0}
   .event-label--6{top:50%;left:0}
   .event-label--7{top:18%;left:0}
