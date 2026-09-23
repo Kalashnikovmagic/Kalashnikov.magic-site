@@ -13,7 +13,7 @@
 html{background:var(--ink);scroll-behavior:auto}
 body{margin:0;background:var(--ink);color:var(--bone);font-family:var(--sans);overflow-x:hidden}
 button{font:inherit;color:inherit}
-.grain{position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");animation:grain 0.25s steps(2) infinite}
+.grain{position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");animation:grain 0.25s steps(2) infinite}
 .vignette{position:fixed;inset:0;z-index:49;pointer-events:none;background:radial-gradient(circle at center,transparent 40%,rgba(0,0,0,.62) 100%)}
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(2%,-1%)}50%{transform:translate(-1%,2%)}75%{transform:translate(1%,1%)}100%{transform:translate(-2%,-1%)}}
 
