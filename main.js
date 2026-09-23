@@ -250,7 +250,7 @@ function updateTransition(){
 
   // Start from the visual center, then move the card so the king's eyes
   // stay on the screen center during the close-up.
-  const reveal=1-Math.pow(1-p,1.8);
+  const reveal=1-Math.pow(1-p,3.6);
   const zoom=lerp(.01,maxZoom,reveal);
 
   const eyeX=baseWidth*.578;
