@@ -62,6 +62,141 @@ function runLoader(){
 // Loader temporarily disabled during development.
 
 
+/* -------------------------------------------------------
+   HERO FRAME SEQUENCE
+   87 WebP frames, driven directly by hero scroll progress.
+   ------------------------------------------------------- */
+const hero=$('#hero');
+const heroCanvas=$('#heroCanvas');
+const heroContext=heroCanvas?.getContext('2d',{alpha:false});
+const heroPlaceholder=$('#heroPlaceholder');
+
+const HERO_FRAME_COUNT=87;
+const HERO_FRAME_PATH='assets/hero/frame_';
+const heroFrames=new Array(HERO_FRAME_COUNT);
+let heroFrameWidth=0;
+let heroFrameHeight=0;
+let heroCurrentFrame=-1;
+let heroLastDrawnWidth=0;
+let heroLastDrawnHeight=0;
+let heroLoaded=false;
+
+function heroFrameUrl(index){
+  return HERO_FRAME_PATH+String(index+1).padStart(4,'0')+'.webp';
+}
+
+function resizeHeroCanvas(){
+  if(!heroCanvas)return;
+
+  const width=Math.max(1,Math.round(heroCanvas.clientWidth*window.devicePixelRatio));
+  const height=Math.max(1,Math.round(heroCanvas.clientHeight*window.devicePixelRatio));
+
+  if(width===heroCanvas.width && height===heroCanvas.height)return;
+
+  heroCanvas.width=width;
+  heroCanvas.height=height;
+  heroLastDrawnWidth=0;
+  heroLastDrawnHeight=0;
+
+  if(heroCurrentFrame>=0)drawHeroFrame(heroCurrentFrame);
+}
+
+function drawHeroFrame(index){
+  if(!heroContext || !heroFrames[index])return;
+
+  const image=heroFrames[index];
+  const canvasWidth=heroCanvas.width;
+  const canvasHeight=heroCanvas.height;
+
+  if(!canvasWidth || !canvasHeight)return;
+
+  heroContext.clearRect(0,0,canvasWidth,canvasHeight);
+
+  // cover: fill the viewport without stretching the source frames
+  const scale=Math.max(canvasWidth/image.naturalWidth,canvasHeight/image.naturalHeight);
+  const drawWidth=image.naturalWidth*scale;
+  const drawHeight=image.naturalHeight*scale;
+  const x=(canvasWidth-drawWidth)/2;
+  const y=(canvasHeight-drawHeight)/2;
+
+  heroContext.drawImage(image,x,y,drawWidth,drawHeight);
+  heroCurrentFrame=index;
+  heroLastDrawnWidth=canvasWidth;
+  heroLastDrawnHeight=canvasHeight;
+}
+
+function setHeroFrame(index){
+  if(!heroFrames.length)return;
+  const clamped=clamp(index,0,HERO_FRAME_COUNT-1);
+
+  if(heroFrames[clamped]){
+    drawHeroFrame(clamped);
+    return;
+  }
+
+  // If a fast scroll reaches a frame that is still loading, use the nearest loaded frame.
+  for(let offset=1;offset<HERO_FRAME_COUNT;offset++){
+    const before=clamped-offset;
+    const after=clamped+offset;
+
+    if(before>=0 && heroFrames[before]){
+      drawHeroFrame(before);
+      return;
+    }
+
+    if(after<HERO_FRAME_COUNT && heroFrames[after]){
+      drawHeroFrame(after);
+      return;
+    }
+  }
+}
+
+function loadHeroFrame(index){
+  return new Promise(resolve=>{
+    const image=new Image();
+    image.decoding='async';
+    image.onload=()=>{
+      heroFrames[index]=image;
+
+      if(!heroFrameWidth){
+        heroFrameWidth=image.naturalWidth;
+        heroFrameHeight=image.naturalHeight;
+        resizeHeroCanvas();
+      }
+
+      if(index===0){
+        heroLoaded=true;
+        hero?.classList.add('is-loaded');
+        setHeroFrame(0);
+      }
+
+      resolve(image);
+    };
+    image.onerror=()=>resolve(null);
+    image.src=heroFrameUrl(index);
+  });
+}
+
+async function loadHeroSequence(){
+  if(!heroCanvas)return;
+
+  resizeHeroCanvas();
+
+  // First frame appears as soon as possible.
+  await loadHeroFrame(0);
+
+  // Remaining frames load concurrently; the browser cache keeps scrolling responsive.
+  await Promise.all(
+    Array.from({length:HERO_FRAME_COUNT-1},(_,i)=>loadHeroFrame(i+1))
+  );
+
+  setHeroFrame(0);
+}
+
+window.addEventListener('resize',resizeHeroCanvas,{passive:true});
+loadHeroSequence();
+
+
 const factsSection=$('#facts');
 const factCards=$$('.playing-card',factsSection).filter(card=>!card.classList.contains('playing-card--surprise'));
 const surpriseCard=$('#surpriseCard');
@@ -126,7 +261,7 @@ function updateFacts(){
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
-const transitionEyes=$('.transition .king-face__eye span');
+const transitionEyes=$$('.transition .king-face__eye span');
 
 let targetScroll=window.scrollY;
 let smoothScroll=window.scrollY;
@@ -136,12 +271,15 @@ function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
 function lerp(a,b,t){return a+(b-a)*t}
 
 function sectionProgress(section){
+  if(!section)return 0;
   const rect=section.getBoundingClientRect();
   const distance=section.offsetHeight-window.innerHeight;
   return clamp(-rect.top/Math.max(1,distance),0,1);
 }
 
 function updateTransition(){
+  if(!transition)return;
+
   const p=sectionProgress(transition);
   const zoom=lerp(.035,5.8,p);
   kingZoom.style.transform='scale('+zoom+')';
@@ -154,9 +292,12 @@ function updateTransition(){
 }
 
 function updateHero(){
-  const hero=$('#hero');
   const p=sectionProgress(hero);
   const title=$('[data-hero-title]');
+
+  // The frame sequence occupies the whole hero scroll scene.
+  setHeroFrame(Math.round(p*(HERO_FRAME_COUNT-1)));
+
   if(title){
     title.style.opacity=p<.12?1:clamp((1-p)/.15,0,1);
     title.style.transform='translateY('+(p*45)+'px)';
@@ -178,6 +319,7 @@ function highlightEvent(eventName,root){
 }
 
 function bindEvents(root){
+  if(!root)return;
   $$('.event-label',root).forEach(label=>{
     label.addEventListener('mouseenter',()=>highlightEvent(label.dataset.event,root));
     label.addEventListener('mouseleave',()=>highlightEvent('',root));
@@ -212,4 +354,4 @@ document.querySelectorAll('[data-scene]').forEach(scene=>{
   });
 });
 
-console.log('Kalashnikov.magic — scenes 01–04 base initialized.');
+console.log('Kalashnikov.magic — hero sequence 01–87 initialized.');
