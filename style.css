@@ -21,9 +21,11 @@ button{font:inherit;color:inherit}
 
 .hero{height:700vh;position:relative}
 .hero__sticky,.facts__sticky,.transition__sticky,.events__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
-.hero__media{position:absolute;inset:0;background:#080808}
-.hero__placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#555;font-family:var(--mono);letter-spacing:.16em;font-size:10px}
+.hero__media{position:absolute;inset:0;background:#080808;overflow:hidden}
+.hero__canvas{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.hero__placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#555;font-family:var(--mono);letter-spacing:.16em;font-size:10px;transition:opacity 500ms ease}
 .hero__placeholder small{display:block;margin-top:8px;color:#333;letter-spacing:.08em}
+.hero.is-loaded .hero__placeholder{opacity:0;pointer-events:none}
 .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.45) 65%,#050505)}
 .hero__title{position:absolute;left:7vw;bottom:11vh;z-index:2}
 .hero__title p{margin:0 0 10px;font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--lime)}
@@ -199,4 +201,5 @@ button{font:inherit;color:inherit}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .hero{height:auto;min-height:100vh}
 }
