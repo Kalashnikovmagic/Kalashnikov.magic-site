@@ -99,10 +99,17 @@
               </span>
             </span>
           </button>
+        </div>
 
-          <button class="playing-card playing-card--wallet" type="button" aria-label="Открыть сюрприз">
+        <div class="surprise-card-wrap" id="surpriseCardWrap" aria-hidden="true">
+          <div class="surprise-card__blur"></div>
+          <button class="playing-card playing-card--surprise" id="surpriseCard" type="button" aria-label="Открыть сюрприз">
             <span class="playing-card__inner">
-              <span class="card-face card-face--back"><i>♠</i><b>K</b><small>НАЖМИТЕ</small></span>
+              <span class="card-face card-face--back surprise-card__front">
+                <span class="surprise-card__number">?</span>
+                <strong>ТУТ ЕЩЁ<br>КОЕ-ЧТО</strong>
+                <small>НАЖМИТЕ</small>
+              </span>
               <span class="card-face card-face--front bank-card">
                 <span class="bank-card__chip"></span>
                 <span class="bank-card__mark">K</span>
@@ -113,7 +120,7 @@
           </button>
         </div>
 
-        <p class="facts__hint">НАЖМИТЕ НА КАРТУ</p>
+        <p class="facts__hint" id="factsHint">ОТКРОЙТЕ ВСЕ 4 КАРТЫ</p>
         <div class="scene-index">02 / 04</div>
       </div>
     </section>
