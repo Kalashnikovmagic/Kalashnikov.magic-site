@@ -248,11 +248,19 @@ function updateTransition(){
     );
   }
 
-  // Keep the eyes at the visual center while the card disappears into
-  // an extreme close-up of the king's face.
-  const reveal=1-Math.pow(1-p,3.2);
+  // Start from the visual center, then move the card so the king's eyes
+  // stay on the screen center during the close-up.
+  const reveal=1-Math.pow(1-p,1.8);
   const zoom=lerp(.01,maxZoom,reveal);
-  kingZoom.style.transform='translateZ(0) scale('+zoom+')';
+
+  const eyeX=baseWidth*.578;
+  const eyeY=baseHeight*.233;
+  const cardCenterX=baseWidth*.5;
+  const cardCenterY=baseHeight*.5;
+  const offsetX=(cardCenterX-eyeX)*zoom;
+  const offsetY=(cardCenterY-eyeY)*zoom;
+
+  kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
