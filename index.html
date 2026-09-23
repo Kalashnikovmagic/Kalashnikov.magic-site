@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Иллюзионист Алексей Калашников</title>
+  <meta name="description" content="Иллюзионист Алексей Калашников — современная иллюзия для свадеб, корпоративов, юбилеев, презентаций и других мероприятий.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="loader" id="loader">
+    <div class="loader__center">
+      <div class="loader__brand">KALASHNIKOV<br><span>MAGIC</span></div>
+      <div class="loader__percent" id="loaderPercent">0%</div>
+      <div class="loader__bar"><span id="loaderFill"></span></div>
+    </div>
+    <div class="loader__status" id="loaderStatus">ПОДГОТАВЛИВАЮ РЕКВИЗИТ</div>
+  </div>
+
+  <main>
+    <section class="hero" id="hero" data-scene="hero">
+      <div class="hero__sticky">
+        <div class="hero__media" id="heroMedia" aria-hidden="true">
+          <div class="hero__placeholder">
+            <span>HERO / FRAME SEQUENCE</span>
+            <small>сюда будут добавлены кадры ролика</small>
+          </div>
+        </div>
+        <div class="hero__scrim"></div>
+        <div class="hero__title" data-hero-title>
+          <p>ИЛЛЮЗИОНИСТ</p>
+          <h1>АЛЕКСЕЙ<br>КАЛАШНИКОВ</h1>
+        </div>
+        <div class="scene-index">01 / 04</div>
+      </div>
+    </section>
+
+    <section class="facts" id="facts" data-scene="facts">
+      <div class="facts__sticky">
+        <div class="facts__intro">
+          <span>02</span>
+          <p>НЕСКОЛЬКО ФАКТОВ</p>
+        </div>
+
+        <div class="cards" aria-label="Факты об Алексее Калашникове">
+          <button class="playing-card" type="button" data-fact="15 ЛЕТ|в иллюзионном искусстве" aria-label="15 лет в иллюзионном искусстве">
+            <span class="card-face card-face--back"><i>♠</i><b>K</b></span>
+            <span class="card-face card-face--front"><strong>15</strong><em>ЛЕТ</em><small>в иллюзионном<br>искусстве</small></span>
+          </button>
+
+          <button class="playing-card" type="button" data-fact="500+|выступлений" aria-label="500 плюс выступлений">
+            <span class="card-face card-face--back"><i>♠</i><b>K</b></span>
+            <span class="card-face card-face--front"><strong>500+</strong><em>ВЫСТУПЛЕНИЙ</em></span>
+          </button>
+
+          <button class="playing-card" type="button" data-fact="50 000+|удивлённых людей" aria-label="50 тысяч плюс удивлённых людей">
+            <span class="card-face card-face--back"><i>♠</i><b>K</b></span>
+            <span class="card-face card-face--front"><strong>50 000+</strong><em>УДИВЛЁННЫХ<br>ЛЮДЕЙ</em></span>
+          </button>
+
+          <button class="playing-card" type="button" data-fact="СОВРЕМЕННАЯ|ИЛЛЮЗИЯ" aria-label="Современная иллюзия">
+            <span class="card-face card-face--back"><i>♠</i><b>K</b></span>
+            <span class="card-face card-face--front"><strong>СОВРЕМЕННАЯ</strong><em>ИЛЛЮЗИЯ</em><small>без шариков, платков<br>и летающих столиков</small></span>
+          </button>
+
+          <button class="playing-card playing-card--wallet" type="button" aria-label="Проверить кошелёк">
+            <span class="card-face card-face--back"><i>♠</i><b>K</b></span>
+            <span class="card-face card-face--front bank-card">
+              <span class="bank-card__chip"></span>
+              <span class="bank-card__mark">K</span>
+              <strong>НЕ ВАША<br>БАНКОВСКАЯ КАРТА?</strong>
+              <small>Думаю, стоит проверить кошелёк 😉</small>
+            </span>
+          </button>
+        </div>
+
+        <p class="facts__hint">НАЖМИТЕ НА КАРТУ</p>
+        <div class="scene-index">02 / 04</div>
+      </div>
+    </section>
+
+    <section class="transition" id="transition" data-scene="transition">
+      <div class="transition__sticky">
+        <div class="king-zoom" id="kingZoom">
+          <div class="king-card">
+            <div class="king-card__corner king-card__corner--tl">K<br>♠</div>
+            <div class="king-face">
+              <div class="king-face__crown">♠</div>
+              <div class="king-face__head">
+                <div class="king-face__eye king-face__eye--left"><span></span></div>
+                <div class="king-face__eye king-face__eye--right"><span></span></div>
+                <div class="king-face__nose"></div>
+                <div class="king-face__moustache"></div>
+              </div>
+              <div class="king-face__robe"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-labels" id="eventLabels">
+          <button class="event-label event-label--1" data-event="СВАДЬБА">СВАДЬБА</button>
+          <button class="event-label event-label--2" data-event="КОРПОРАТИВ">КОРПОРАТИВ</button>
+          <button class="event-label event-label--3" data-event="ЮБИЛЕЙ">ЮБИЛЕЙ</button>
+          <button class="event-label event-label--4" data-event="ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ">ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ</button>
+          <button class="event-label event-label--5" data-event="ПРЕЗЕНТАЦИЯ">ПРЕЗЕНТАЦИЯ</button>
+          <button class="event-label event-label--6" data-event="ВЫСТАВКА">ВЫСТАВКА</button>
+          <button class="event-label event-label--7" data-event="ЧАСТНОЕ МЕРОПРИЯТИЕ">ЧАСТНОЕ МЕРОПРИЯТИЕ</button>
+        </div>
+
+        <div class="transition__hint">ВЫБЕРИТЕ МЕРОПРИЯТИЕ</div>
+        <div class="scene-index">03 / 04</div>
+      </div>
+    </section>
+
+    <section class="events" id="events" data-scene="events">
+      <div class="events__sticky">
+        <div class="events__card">
+          <div class="king-card king-card--interactive" id="interactiveKing">
+            <div class="king-card__corner king-card__corner--tl">K<br>♠</div>
+            <div class="king-face">
+              <div class="king-face__crown">♠</div>
+              <div class="king-face__head">
+                <div class="king-face__eye king-face__eye--left"><span></span></div>
+                <div class="king-face__eye king-face__eye--right"><span></span></div>
+                <div class="king-face__nose"></div>
+                <div class="king-face__moustache"></div>
+              </div>
+              <div class="king-face__robe"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="events__labels">
+          <button class="event-label event-label--1" data-event="СВАДЬБА">СВАДЬБА</button>
+          <button class="event-label event-label--2" data-event="КОРПОРАТИВ">КОРПОРАТИВ</button>
+          <button class="event-label event-label--3" data-event="ЮБИЛЕЙ">ЮБИЛЕЙ</button>
+          <button class="event-label event-label--4" data-event="ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ">ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ</button>
+          <button class="event-label event-label--5" data-event="ПРЕЗЕНТАЦИЯ">ПРЕЗЕНТАЦИЯ</button>
+          <button class="event-label event-label--6" data-event="ВЫСТАВКА">ВЫСТАВКА</button>
+          <button class="event-label event-label--7" data-event="ЧАСТНОЕ МЕРОПРИЯТИЕ">ЧАСТНОЕ МЕРОПРИЯТИЕ</button>
+        </div>
+
+        <div class="events__copy">
+          <span>НА КАКОЕ МЕРОПРИЯТИЕ?</span>
+          <p>Наведите курсор на формат.<br>Король уже смотрит.</p>
+        </div>
+        <div class="scene-index">04 / 04</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
