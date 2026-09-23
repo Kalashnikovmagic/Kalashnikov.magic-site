@@ -287,9 +287,10 @@ function updateTransition(){
   // Stop when the King card reaches the viewport size instead of zooming
   // far beyond the screen. This is especially important on phones.
   if(card){
-    const rect=card.getBoundingClientRect();
-    const baseWidth=Math.max(1,rect.width);
-    const baseHeight=Math.max(1,rect.height);
+    // Use the untransformed layout size. getBoundingClientRect() includes
+    // the current scale and creates a feedback loop that causes shaking.
+    const baseWidth=Math.max(1,card.offsetWidth);
+    const baseHeight=Math.max(1,card.offsetHeight);
     maxZoom=Math.max(1,Math.max(window.innerWidth/baseWidth,window.innerHeight/baseHeight));
   }
 
