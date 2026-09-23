@@ -20,7 +20,7 @@ button{font:inherit;color:inherit}
 .loader{display:none}
 
 .hero{height:700vh;position:relative}
-.hero__sticky,.facts__sticky,.transition__sticky,.events__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.hero__sticky,.facts__sticky,.transition__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
 .hero__media{position:absolute;inset:0;background:#080808;overflow:hidden}
 .hero__canvas{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
 .hero__placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#555;font-family:var(--mono);letter-spacing:.16em;font-size:10px;transition:opacity 500ms ease}
@@ -134,12 +134,10 @@ button{font:inherit;color:inherit}
 .transition{height:650vh;background:#000}
 .transition__sticky{display:grid;place-items:center;background:#000}
 .king-zoom{width:100%;height:100%;display:grid;place-items:center;transform:translateZ(0) scale(.01);transform-origin:50% 42%;will-change:transform}
-.king-card{position:relative;width:min(43vw,640px);aspect-ratio:2/3;background:transparent;color:#eeeae1;overflow:visible;border:0;box-shadow:none;will-change:transform}
+.king-card{position:relative;width:min(43vw,640px);aspect-ratio:240/336;background:transparent;color:#eeeae1;overflow:visible;border:0;box-shadow:none;will-change:transform}
 .transition .king-card:after{display:none}
 .transition .king-card > *{visibility:visible}
-.king-illustration{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 30px 90px rgba(0,0,0,.72))}
-.king-illustration .king-mark{font:600 34px var(--mono);letter-spacing:.08em;fill:#d8fd3e}
-.king-pupil{will-change:transform}
+.king-illustration{display:block;width:100%;height:100%;overflow:visible;object-fit:contain;filter:drop-shadow(0 30px 90px rgba(0,0,0,.72))}
 .event-labels{position:absolute;inset:4vh 4vw;pointer-events:none;opacity:0;transition:opacity 500ms var(--ease)}
 .event-label{position:absolute;pointer-events:auto;border:0;background:none;color:var(--lime);cursor:pointer;font:700 clamp(22px,2.25vw,36px)/1.05 var(--mono);letter-spacing:.045em;text-shadow:0 3px 24px rgba(0,0,0,.95);transition:color 350ms,transform 350ms,opacity 350ms;text-align:center;white-space:nowrap}
 .event-label:hover,.event-label.is-active{color:var(--lime)}
