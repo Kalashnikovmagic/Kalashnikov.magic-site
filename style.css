@@ -167,7 +167,7 @@ button{font:inherit;color:inherit}
   .event-label--1{top:1%}
   .event-label--2{top:18%;right:0}
   .event-label--3{top:50%;right:0}
-  .event-label--4{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%);max-width:42vw}
+  .event-label--4{bottom:18%;top:auto;right:0;left:auto;transform:none;max-width:42vw}
   .event-label--5{bottom:18%;left:0}
   .event-label--6{top:50%;left:0}
   .event-label--7{top:18%;left:0}
@@ -185,6 +185,7 @@ button{font:inherit;color:inherit}
   .card-face--front em{font-size:2.8vw}
   .card-face--front small{font-size:2.3vw}
   .card-face--front .card-number{font-size:6.5vw}
+  .facts .playing-card:nth-child(3) .card-number + em{transform:translateY(1.2vw)}
   .card-face--standup strong{font-size:4.7vw}
   .card-face--standup em{font-size:2.8vw;transform:translateY(-3.5vw)}
   .playing-card--surprise{width:94vw;height:auto;max-height:none;aspect-ratio:3/2}
