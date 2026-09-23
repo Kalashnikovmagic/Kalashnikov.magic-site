@@ -266,6 +266,13 @@ function updateTransition(){
 
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
+  const kingIllustration=kingZoom.querySelector('.king-illustration');
+  const kingBlur=clamp((.42-p)/.42,0,1);
+  if(kingIllustration){
+    kingIllustration.style.filter=
+      'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
+  }
+
   const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
