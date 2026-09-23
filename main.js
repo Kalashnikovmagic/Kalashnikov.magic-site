@@ -65,6 +65,8 @@ setTimeout(runLoader,8000);
 const factsSection=$('#facts');
 const factCards=$$('.playing-card',factsSection).filter(card=>!card.classList.contains('playing-card--surprise'));
 const surpriseCard=$('#surpriseCard');
+const surpriseCardWrap=$('#surpriseCardWrap');
+const surpriseMessage=$('#surpriseMessage');
 const factsHint=$('#factsHint');
 
 factCards.forEach(card=>{
@@ -76,6 +78,7 @@ factCards.forEach(card=>{
 
 surpriseCard?.addEventListener('click',()=>{
   surpriseCard.classList.toggle('is-flipped');
+  surpriseCardWrap?.classList.toggle('surprise-card--revealed',surpriseCard.classList.contains('is-flipped'));
 });
 
 function allFactsOpened(){
@@ -92,18 +95,20 @@ function updateFacts(){
 
   if(opened){
     const revealStart=.52;
-    const surpriseStart=.67;
+    const surpriseStart=.70;
 
     factsSection.classList.toggle('is-revealing',p>=revealStart);
     factsSection.classList.toggle('is-surprise',p>=surpriseStart);
 
     if(factsHint){
       factsHint.textContent=p>=surpriseStart
-        ? 'ТУТ ЕЩЁ КОЕ-ЧТО'
+        ? 'КАЖЕТСЯ, ТУТ ЕСТЬ КОЕ-ЧТО ЕЩЁ'
         : 'ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
     }
   }else{
     factsSection.classList.remove('is-revealing','is-surprise');
+    surpriseCard?.classList.remove('is-flipped');
+    surpriseCardWrap?.classList.remove('surprise-card--revealed');
     if(factsHint)factsHint.textContent='ОТКРОЙТЕ ВСЕ 4 КАРТЫ';
   }
 }
