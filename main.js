@@ -290,11 +290,10 @@ function updateTransition(){
     maxZoom=Math.max(1,Math.max(window.innerWidth/baseWidth,window.innerHeight/baseHeight));
   }
 
-  // Invisible at the beginning: the King emerges from the black center.
-  // The first part is deliberately fast; the final approach slows down.
-  const revealProgress=1-Math.pow(1-p,3.8);
-  const zoom=lerp(.01,maxZoom,revealProgress);
-
+  // Start completely invisible, then emerge rapidly from the center.
+  // Ease out makes the approach progressively slower near the end.
+  const reveal=1-Math.pow(1-p,3.2);
+  const zoom=lerp(.01,maxZoom,reveal);
   kingZoom.style.transform='translateZ(0) scale('+zoom+')';
 
   const labelsP=clamp((p-.72)/.22,0,1);
@@ -318,7 +317,6 @@ function updateHero(){
 function updateEyes(){
   const dx=(pointerX-.5)*2;
   const dy=(pointerY-.5)*2;
-
   transitionEyes.forEach(eye=>{
     eye.style.transform='translate('+(dx*14)+'px,'+(dy*8.5)+'px)';
   });
