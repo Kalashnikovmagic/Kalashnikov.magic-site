@@ -82,7 +82,7 @@ button{font:inherit;color:inherit}
 .card-face--front .card-number{font-size:clamp(29px,3.8vw,58px);letter-spacing:-.065em;white-space:nowrap}
 .card-face--front .card-number + em{top:47%}
 .card-face--standup strong{font-size:clamp(22px,2.7vw,42px);letter-spacing:-.055em;white-space:nowrap}
-.card-face--standup em{top:51%;font:600 clamp(12px,1.2vw,18px)/1.2 var(--mono);letter-spacing:.07em;max-width:82%}
+.card-face--standup em{top:51%;font:500 clamp(12px,1.2vw,18px)/1.2 var(--mono);letter-spacing:.07em;max-width:82%}
 .card-corner{position:absolute;top:15px;left:17px;font:500 9px var(--mono);letter-spacing:.1em;color:#8a857b}
 .card-suit{position:absolute;right:17px;bottom:12px;font:27px Georgia,serif;color:#111}
 
