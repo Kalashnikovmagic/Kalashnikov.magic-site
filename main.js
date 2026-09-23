@@ -231,10 +231,12 @@ function updateTransition(){
   const p=sectionProgress(transition);
   const card=kingZoom.querySelector('.king-card');
   let maxZoom=12;
+  let baseWidth=1;
+  let baseHeight=1;
 
   if(card){
-    const baseWidth=Math.max(1,card.offsetWidth);
-    const baseHeight=Math.max(1,card.offsetHeight);
+    baseWidth=Math.max(1,card.offsetWidth);
+    baseHeight=Math.max(1,card.offsetHeight);
 
     // KS.svg is a full K♠ card. The king's eyes sit around the upper
     // quarter of the card, so the final zoom is calculated from the
