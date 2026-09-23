@@ -92,7 +92,6 @@ function updateFacts(){
 
   if(opened){
     const revealStart=.52;
-    const revealEnd=.66;
     const surpriseStart=.67;
 
     factsSection.classList.toggle('is-revealing',p>=revealStart);
@@ -112,10 +111,7 @@ function updateFacts(){
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
-const transitionEvents=$$('.event-label',transition);
-const interactiveKing=$('#interactiveKing');
 const eventsSection=$('#events');
-const eventLabels=$$('.event-label',eventsSection);
 const eyes=$$('.king-face__eye span');
 
 let targetScroll=window.scrollY;
@@ -137,7 +133,7 @@ function updateTransition(){
   kingZoom.style.transform='scale('+zoom+')';
   const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
-  transitionLabels.style.filter='blur('+(1-labelsP)*18+'px';
+  transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
   transition.classList.toggle('is-ready',p>.91);
 }
 
