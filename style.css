@@ -204,6 +204,13 @@ button{font:inherit;color:inherit}
   .hero{height:250vh}
   .facts{height:180vh}
   .transition{height:350vh}
+
+  /* Desktop typography: larger UI labels for readability at monitor distance. */
+  .hero__title p{font-size:16px}
+  .scene-index{font-size:13px;letter-spacing:.18em}
+  .facts__intro{font-size:14px}
+  .facts__hint{font-size:14px;letter-spacing:.18em}
+  .transition__hint{font-size:13px;letter-spacing:.18em}
 }
 
 @media(prefers-reduced-motion:reduce){
