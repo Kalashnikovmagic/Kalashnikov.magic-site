@@ -260,6 +260,7 @@ function updateFacts(){
 
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
+const kingCard=$('#kingCard');
 const transitionLabels=$('#eventLabels');
 const transitionEyes=$$('.transition .king-face__eye span');
 
@@ -295,6 +296,14 @@ function updateTransition(){
 
   const zoom=lerp(.035,maxZoom,p);
   kingZoom.style.transform='scale('+zoom+')';
+
+  // The card starts with the red back and turns over as it approaches.
+  // The flip finishes before the final zoom, so the King is fully revealed.
+  if(kingCard){
+    const flipP=clamp(p/.62,0,1);
+    const flipEase=flipP*flipP*(3-2*flipP);
+    kingCard.style.transform='rotateY('+(flipEase*180)+'deg)';
+  }
 
   // The zoom and the gaze are one continuous scene:
   // first the card approaches, then the same King starts following the cursor.
