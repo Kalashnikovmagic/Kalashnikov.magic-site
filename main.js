@@ -59,8 +59,8 @@ function runLoader(){
   requestAnimationFrame(tick);
 }
 
-window.addEventListener('load',runLoader,{once:true});
-setTimeout(runLoader,8000);
+// Loader temporarily disabled during development.
+
 
 const factsSection=$('#facts');
 const factCards=$$('.playing-card',factsSection).filter(card=>!card.classList.contains('playing-card--surprise'));
