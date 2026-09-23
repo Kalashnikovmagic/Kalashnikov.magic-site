@@ -17,15 +17,7 @@ button{font:inherit;color:inherit}
 .vignette{position:fixed;inset:0;z-index:49;pointer-events:none;background:radial-gradient(circle at center,transparent 40%,rgba(0,0,0,.62) 100%)}
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(2%,-1%)}50%{transform:translate(-1%,2%)}75%{transform:translate(1%,1%)}100%{transform:translate(-2%,-1%)}}
 
-.loader{position:fixed;inset:0;z-index:100;background:#050505;display:grid;place-items:center;transition:opacity 900ms var(--ease),visibility 900ms;overflow:hidden}
-.loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
-.loader__center{width:min(460px,72vw);text-align:center}
-.loader__brand{font-family:var(--mono);font-size:clamp(14px,1.5vw,20px);font-weight:600;letter-spacing:.28em;line-height:1.3}
-.loader__brand span{color:var(--lime)}
-.loader__percent{margin:30px 0 13px;font-family:var(--mono);font-size:clamp(44px,7vw,86px);letter-spacing:-.06em;font-weight:400}
-.loader__bar{height:1px;background:rgba(255,255,255,.14);overflow:hidden}
-.loader__bar span{display:block;height:100%;width:0;background:var(--lime);box-shadow:0 0 20px rgba(216,253,62,.6)}
-.loader__status{position:absolute;bottom:7vh;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:#aaa;white-space:nowrap}
+.loader{display:none}
 
 .hero{height:700vh;position:relative}
 .hero__sticky,.facts__sticky,.transition__sticky,.events__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
