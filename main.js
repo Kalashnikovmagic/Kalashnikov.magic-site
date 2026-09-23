@@ -126,9 +126,7 @@ function updateFacts(){
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
-const eventsSection=$('#events');
 const transitionEyes=$('.transition .king-face__eye span');
-const eventEyes=$('.events .king-face__eye span');
 
 let targetScroll=window.scrollY;
 let smoothScroll=window.scrollY;
@@ -150,12 +148,9 @@ function updateTransition(){
 
   // The zoom and the gaze are one continuous scene:
   // first the card approaches, then the same King starts following the cursor.
-  const gazeP=clamp((p-.91)/.09,0,1);
   const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
-  transition.classList.toggle('is-ready',p>.91);
-  transition.style.setProperty('--gaze-progress',gazeP);
 }
 
 function updateHero(){
@@ -174,12 +169,6 @@ function updateEyes(){
 
   transitionEyes.forEach((eye,i)=>{
     const strength=i%2?18:15;
-    const gaze=Number(getComputedStyle(transition).getPropertyValue('--gaze-progress'))||0;
-    eye.style.transform='translate(calc(-50% + '+(dx*strength*gaze)+'px),calc(-50% + '+(dy*strength*.55*gaze)+'px))';
-  });
-
-  eventEyes.forEach((eye,i)=>{
-    const strength=i%2?18:15;
     eye.style.transform='translate(calc(-50% + '+(dx*strength)+'px),calc(-50% + '+(dy*strength*.55)+'px))';
   });
 }
@@ -195,7 +184,6 @@ function bindEvents(root){
   });
 }
 bindEvents(transition);
-bindEvents(eventsSection);
 
 window.addEventListener('pointermove',e=>{
   pointerX=e.clientX/window.innerWidth;
