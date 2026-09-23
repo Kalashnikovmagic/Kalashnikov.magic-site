@@ -158,7 +158,7 @@ function updateHero(){
   const p=sectionProgress(hero);
   const title=$('[data-hero-title]');
   if(title){
-    title.style.opacity=clamp((p-.12)/.15,0,1)*clamp((1-p)/.15,0,1);
+    title.style.opacity=p<.12?1:clamp((1-p)/.15,0,1);
     title.style.transform='translateY('+(p*45)+'px)';
   }
 }
