@@ -240,7 +240,7 @@ button{font:inherit;color:inherit}
   .facts .playing-card:nth-child(3) .card-number{font-size:clamp(31px,4.05vw,61px)}
   .facts .playing-card:nth-child(3) .card-copy{top:39.8%}
   .facts .playing-card:nth-child(4) .card-copy{left:-2%;right:14%;top:39.8%}
-  .facts .playing-card:nth-child(4) .card-copy > em{transform:translate(2%, -3px)}
+  .facts .playing-card:nth-child(4) .card-copy > em{transform:translate(5%, -3px)}
 
   /* Desktop typography: larger UI labels for readability at monitor distance. */
   .event-label--1{top:18%;right:2%;left:auto;transform:none}
@@ -248,7 +248,7 @@ button{font:inherit;color:inherit}
   .event-label--4{top:18%;left:2%;right:auto;bottom:auto;transform:none}
   .event-label--7{top:auto;left:auto;right:2%;bottom:16%;transform:none}
 
-  .card-face--back small{font-size:12px;letter-spacing:.2em}
+  .card-face--back small{font-size:15px;letter-spacing:.2em}
   .hero__title p{font-size:16px}
   .scene-index{font-size:13px;letter-spacing:.18em}
   .facts__intro{font-size:14px}
