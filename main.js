@@ -261,7 +261,7 @@ function updateFacts(){
 const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
-const transitionEyes=$$('.transition .king-face__eye span');
+const transitionEyes=$('.transition .king-pupil');
 
 let targetScroll=window.scrollY;
 let smoothScroll=window.scrollY;
@@ -284,26 +284,19 @@ function updateTransition(){
   const card=kingZoom.querySelector('.king-card');
   let maxZoom=5.8;
 
-  // Stop when the King card reaches the viewport size instead of zooming
-  // far beyond the screen. This is especially important on phones.
   if(card){
-    // Use the untransformed layout size. getBoundingClientRect() includes
-    // the current scale and creates a feedback loop that causes shaking.
     const baseWidth=Math.max(1,card.offsetWidth);
     const baseHeight=Math.max(1,card.offsetHeight);
     maxZoom=Math.max(1,Math.max(window.innerWidth/baseWidth,window.innerHeight/baseHeight));
   }
 
-  const zoom=lerp(.035,maxZoom,p);
+  // Invisible at the beginning: the King emerges from the black center.
+  // The first part is deliberately fast; the final approach slows down.
+  const revealProgress=1-Math.pow(1-p,3.8);
+  const zoom=lerp(.01,maxZoom,revealProgress);
 
-  // The King card enters from the left and grows continuously toward the eyes.
-  // The final scale is calculated from the untransformed card size so the
-  // image stops exactly when it fills the viewport instead of overshooting.
-  const x=lerp(-18,0,p);
-  kingZoom.style.transform='translateX('+x+'vw) scale('+zoom+')';
+  kingZoom.style.transform='translateZ(0) scale('+zoom+')';
 
-  // The zoom and the gaze are one continuous scene:
-  // first the card approaches, then the same King starts following the cursor.
   const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
@@ -326,9 +319,8 @@ function updateEyes(){
   const dx=(pointerX-.5)*2;
   const dy=(pointerY-.5)*2;
 
-  transitionEyes.forEach((eye,i)=>{
-    const strength=i%2?18:15;
-    eye.style.transform='translate(calc(-50% + '+(dx*strength)+'px),calc(-50% + '+(dy*strength*.55)+'px))';
+  transitionEyes.forEach(eye=>{
+    eye.style.transform='translate('+(dx*14)+'px,'+(dy*8.5)+'px)';
   });
 }
 
