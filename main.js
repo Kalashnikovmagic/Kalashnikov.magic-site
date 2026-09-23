@@ -214,7 +214,6 @@ const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
 const transitionHint=$('.transition__hint');
-let pointerX=.5,pointerY=.5;
 
 function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
 function lerp(a,b,t){return a+(b-a)*t}
@@ -231,16 +230,26 @@ function updateTransition(){
 
   const p=sectionProgress(transition);
   const card=kingZoom.querySelector('.king-card');
-  let maxZoom=5.8;
+  let maxZoom=12;
 
   if(card){
     const baseWidth=Math.max(1,card.offsetWidth);
     const baseHeight=Math.max(1,card.offsetHeight);
-    maxZoom=Math.max(1,Math.max(window.innerWidth/baseWidth,window.innerHeight/baseHeight));
+
+    // KS.svg is a full K♠ card. The king's eyes sit around the upper
+    // quarter of the card, so the final zoom is calculated from the
+    // portrait area rather than from the full card.
+    const eyeRegionWidth=baseWidth*.14;
+    const eyeRegionHeight=baseHeight*.20;
+    maxZoom=Math.max(
+      8,
+      window.innerWidth/Math.max(1,eyeRegionWidth),
+      window.innerHeight/Math.max(1,eyeRegionHeight)
+    );
   }
 
-  // Start completely invisible, then emerge rapidly from the center.
-  // Ease out makes the approach progressively slower near the end.
+  // Keep the eyes at the visual center while the card disappears into
+  // an extreme close-up of the king's face.
   const reveal=1-Math.pow(1-p,3.2);
   const zoom=lerp(.01,maxZoom,reveal);
   kingZoom.style.transform='translateZ(0) scale('+zoom+')';
@@ -275,8 +284,6 @@ function bindEvents(root){
   });
 }
 bindEvents(transition);
-
-
 
 function updateAll(){
   updateHero();
