@@ -218,7 +218,7 @@ const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
-const kingPupilMotion={left:{x:0.0325,y:0.005},right:{x:0.026,y:0.005}};
+const kingPupilMotion={left:{x:0.016,y:0.0025},right:{x:0.013,y:0.0025}};
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
 let kingPupilsFollowPointer=false;
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
@@ -281,7 +281,12 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.42-p)/.42,0,1);
+  // Smooth the King's blur so it eases between states instead of snapping.
+  const blurTarget=clamp((.44-p)/.44,0,1);
+  const currentBlur=window.__kingBlurCurrent??1;
+  const smoothedBlur=currentBlur+(blurTarget-currentBlur)*.14;
+  window.__kingBlurCurrent=smoothedBlur;
+  const kingBlur=smoothedBlur;
   window.__kingPupilBlur=kingBlur*18;
   if(kingIllustration){
     kingIllustration.style.filter=
