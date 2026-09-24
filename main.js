@@ -200,7 +200,7 @@ const kingPupilMotion={x:0.028,y:0.018};
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
 function kingAnchorToCard(a,rect){const useX=(a.x/1300)*164.8-82.4;const useY=(a.y/2000)*260.8-130.4;return{x:((useX+120)/240)*rect.width,y:((useY+168)/336)*rect.height}}
-function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side],rect);const dx=(kingPupilState.targetX-.5)*rect.width*kingPupilMotion.x;const dy=(kingPupilState.targetY-.5)*rect.height*kingPupilMotion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)'}}}requestAnimationFrame(animateKingPupils)}
+function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){const blur=window.__kingPupilBlur||0;for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side],rect);const dx=(kingPupilState.targetX-.5)*rect.width*kingPupilMotion.x;const dy=(kingPupilState.targetY-.5)*rect.height*kingPupilMotion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)';kingPupils[side].style.filter='blur('+blur+'px)'}}}requestAnimationFrame(animateKingPupils)}
 window.addEventListener('pointermove',event=>updateKingPupils(event.clientX,event.clientY),{passive:true});
 animateKingPupils();
 
@@ -265,7 +265,7 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.22-p)/.22,0,1);
+  const kingBlur=clamp((.22-p)/.22,0,1); window.__kingPupilBlur=kingBlur*18;
   if(kingIllustration){
     kingIllustration.style.filter=
       'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
