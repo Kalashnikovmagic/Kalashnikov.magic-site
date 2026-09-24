@@ -199,6 +199,14 @@ function lerp(a,b,t){return a+(b-a)*t}
 function sectionProgress(section){
   if(!section)return 0;
   const rect=section.getBoundingClientRect();
+
+  // For the King scene, drive the animation from the moment the sticky
+  // scene reaches the viewport instead of spreading it across the whole
+  // multi-screen section. This makes the zoom start immediately.
+  if(section===transition){
+    return clamp(-rect.top/Math.max(1,window.innerHeight*.9),0,1);
+  }
+
   const distance=section.offsetHeight-window.innerHeight;
   return clamp(-rect.top/Math.max(1,distance),0,1);
 }
