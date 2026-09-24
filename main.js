@@ -10,8 +10,13 @@ const heroCanvas=$('#heroCanvas');
 const heroContext=heroCanvas?.getContext('2d',{alpha:false});
 const heroPlaceholder=$('#heroPlaceholder');
 
-const HERO_FRAME_COUNT=87;
-const HERO_FRAME_PATH='assets/hero/frame_';
+const HERO_FRAME_COUNT_MOBILE=87;
+const HERO_FRAME_COUNT_DESKTOP=142;
+const HERO_FRAME_PATH_MOBILE='assets/hero/frame_';
+const HERO_FRAME_PATH_DESKTOP='assets/hero-desktop/frame_';
+const heroIsDesktop=window.matchMedia('(min-width:821px)').matches;
+const HERO_FRAME_COUNT=heroIsDesktop?HERO_FRAME_COUNT_DESKTOP:HERO_FRAME_COUNT_MOBILE;
+const HERO_FRAME_PATH=heroIsDesktop?HERO_FRAME_PATH_DESKTOP:HERO_FRAME_PATH_MOBILE;
 const heroFrames=new Array(HERO_FRAME_COUNT);
 let heroFrameWidth=0;
 let heroFrameHeight=0;
