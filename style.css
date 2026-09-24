@@ -395,3 +395,4 @@ button{font:inherit;color:inherit}
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
   .hero{height:auto;min-height:100vh}
 }
+body.format-modal-open{overflow:hidden}
