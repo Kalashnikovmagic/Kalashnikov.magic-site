@@ -220,11 +220,11 @@ function animateKingPupils(){
   kingPupilState.y += (kingPupilState.targetY-kingPupilState.y)*0.16;
   const top=(kingPupilState.y*100)+'%';
   if(kingPupils.left){
-    kingPupils.left.style.left=(46.6 + (kingPupilState.x-0.5)*100)+'%';
+    kingPupils.left.style.left=(47.7 + (kingPupilState.x-0.5)*100)+'%';
     kingPupils.left.style.top=top;
   }
   if(kingPupils.right){
-    kingPupils.right.style.left=(60.2 + (kingPupilState.x-0.5)*100)+'%';
+    kingPupils.right.style.left=(58.8 + (kingPupilState.x-0.5)*100)+'%';
     kingPupils.right.style.top=top;
   }
   requestAnimationFrame(animateKingPupils);
