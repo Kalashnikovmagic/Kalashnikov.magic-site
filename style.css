@@ -429,3 +429,9 @@ body.format-modal-open{overflow:hidden}
   .format-modal[data-format="ВЫПУСКНОЙ ВЕЧЕР"] .format-modal__photo img{object-position:center 65%;}
   .format-modal[data-format="ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ"] .format-modal__photo img{object-position:center 52%;}
 }
+
+@media(max-width:820px){
+  .event-label{font-size:clamp(24px,5.2vw,42px);font-weight:800;}
+  .format-modal[data-format="ЧАСТНОЕ МЕРОПРИЯТИЕ"] .format-modal__photo img{object-position:center 54%;}
+  .format-modal[data-format="КОРПОРАТИВ"] .format-modal__photo img{object-position:center 46%;}
+}
