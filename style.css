@@ -406,3 +406,11 @@ body.format-modal-open{overflow:hidden}
   .hero__title h1{display:none;}
   .hero__title{left:50%;top:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center;}
 }
+
+.format-modal__photo img{object-position:center top;}
+.format-modal[data-format="КОРПОРАТИВ"] .format-modal__photo img{object-position:center 56%;}
+.format-modal[data-format="СВАДЬБА"] .format-modal__photo img,
+.format-modal[data-format="ЮБИЛЕЙ"] .format-modal__photo img,
+.format-modal[data-format="ЧАСТНОЕ МЕРОПРИЯТИЕ"] .format-modal__photo img,
+.format-modal[data-format="ВЫПУСКНОЙ ВЕЧЕР"] .format-modal__photo img,
+.format-modal[data-format="ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ"] .format-modal__photo img{object-position:center top;}
