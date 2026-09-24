@@ -203,6 +203,8 @@ button{font:inherit;color:inherit}
 
 }
 @media(min-width:821px){
+  .king-pupil{width:10px;height:10px}
+
   .facts .cards{
     grid-template-columns:repeat(4,minmax(0,1fr));
     grid-template-rows:1fr;
@@ -221,7 +223,7 @@ button{font:inherit;color:inherit}
   /* Desktop: keep each cinematic scene compact so the page moves faster. */
   .hero{height:250vh}
   .facts{height:180vh}
-  .transition{height:350vh}
+  .transition{height:250vh}
 
   .facts .card-copy{
     position:absolute;
@@ -287,8 +289,6 @@ button{font:inherit;color:inherit}
   position:absolute;
   inset:0;
   background:rgba(0,0,0,.62);
-  -webkit-backdrop-filter:blur(14px);
-  backdrop-filter:blur(14px);
 }
 .format-modal__window{
   position:relative;
