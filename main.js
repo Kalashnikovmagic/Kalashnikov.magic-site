@@ -201,7 +201,7 @@ let kingLookY=0;
 function updateKingLook(){
   kingLookX=lerp(kingLookX,kingLookTargetX,.14);
   kingLookY=lerp(kingLookY,kingLookTargetY,.14);
-  kingPupils.forEach(pupil=>{pupil.style.transform='translate3d('+(kingLookX*5)+'px,'+(kingLookY*4)+'px,0)'});
+  kingPupils.forEach(pupil=>{pupil.style.transform='translate3d('+(kingLookX*1.8)+'px,'+(kingLookY*1.4)+'px,0)'});
   requestAnimationFrame(updateKingLook);
 }
 window.addEventListener('pointermove',event=>{
