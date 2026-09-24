@@ -399,3 +399,10 @@ button{font:inherit;color:inherit}
   .hero{height:auto;min-height:100vh}
 }
 body.format-modal-open{overflow:hidden}
+
+@media(min-width:821px){
+  .hero__title p{font-size:0;}
+  .hero__title p::after{content:"СВАЙПАЙ ВНИЗ";font-size:11px;}
+  .hero__title h1{display:none;}
+  .hero__title{left:50%;top:50%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center;}
+}
