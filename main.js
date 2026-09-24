@@ -281,6 +281,7 @@ function updateTransition(){
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
   const kingBlur=clamp((.42-p)/.42,0,1);
+  window.__kingPupilBlur=kingBlur*18;
   if(kingIllustration){
     kingIllustration.style.filter=
       'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
@@ -406,9 +407,19 @@ function closeFormatModal(){
   document.body.classList.remove('format-modal-open');
 }
 $('.event-label',transition).forEach(label=>{
-  label.addEventListener('click',()=>openFormatModal(label.dataset.event||label.textContent.trim()));
+  label.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    openFormatModal(label.dataset.event||label.textContent.trim());
+  });
 });
-$('[data-format-close]').forEach(button=>button.addEventListener('click',closeFormatModal));
+$('[data-format-close]').forEach(button=>{
+  button.addEventListener('click',event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    closeFormatModal();
+  });
+});
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&formatModal?.classList.contains('is-open'))closeFormatModal();
 });
