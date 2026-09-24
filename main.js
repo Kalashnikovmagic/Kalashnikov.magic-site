@@ -195,8 +195,8 @@ const transitionLabels=$('#eventLabels');
 const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
-const kingPupilAnchors={left:{x:797.083,y:324.5},right:{x:939.437,y:327.35}};
-const kingPupilMotion={x:0.034,y:0.007};
+const kingPupilAnchors={left:{x:797.083,y:322.5},right:{x:939.437,y:325.35}};
+const kingPupilMotion={x:0.045,y:0.007};
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
 function kingAnchorToCard(a){const width=kingCard?.clientWidth||0;const height=kingCard?.clientHeight||0;const useX=(a.x/1300)*164.8-82.4;const useY=(a.y/2000)*260.8-130.4;return{x:((useX+120)/240)*width,y:((useY+168)/336)*height}}
