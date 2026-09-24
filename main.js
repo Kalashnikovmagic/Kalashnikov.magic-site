@@ -218,7 +218,9 @@ const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
-const kingPupilMotion={left:{x:0.021,y:0.008},right:{x:0.017,y:0.008}};
+const kingPupilMotionDesktop={left:{x:0.0325,y:0.005},right:{x:0.026,y:0.005}};
+const kingPupilMotionMobile={left:{x:0.065,y:0.009},right:{x:0.052,y:0.009}};
+const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
 let kingPupilsFollowPointer=false;
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
@@ -284,7 +286,8 @@ function updateTransition(){
   // Keep the King's portrait blur separate from the modal: the modal itself must never inherit it.
   const blurTarget=clamp((.44-p)/.44,0,1);
   const currentBlur=window.__kingBlurCurrent??1;
-  const smoothedBlur=currentBlur+(blurTarget-currentBlur)*.14;
+  const smoothingFactor=window.matchMedia('(max-width:820px)').matches?.22:.14;
+  const smoothedBlur=currentBlur+(blurTarget-currentBlur)*smoothingFactor;
   window.__kingBlurCurrent=smoothedBlur;
   const kingBlur=smoothedBlur;
   window.__kingPupilBlur=kingBlur*18;
