@@ -194,6 +194,46 @@ const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
 const kingCard=$('#kingCard');
 
+const kingPupils={
+  left:document.querySelector('.king-pupil--left'),
+  right:document.querySelector('.king-pupil--right')
+};
+const kingPupilState={
+  x:0.5,
+  y:0.32,
+  targetX:0.5,
+  targetY:0.32
+};
+
+function updateKingPupils(clientX,clientY){
+  if(!kingCard || !kingPupils.left || !kingPupils.right)return;
+  const rect=kingCard.getBoundingClientRect();
+  if(rect.width<=0 || rect.height<=0)return;
+
+  const nx=clamp((clientX-rect.left)/rect.width,0,1);
+  const ny=clamp((clientY-rect.top)/rect.height,0,1);
+  kingPupilState.targetX=0.5+(nx-0.5)*0.14;
+  kingPupilState.targetY=0.315+(ny-0.315)*0.10;
+}
+function animateKingPupils(){
+  kingPupilState.x += (kingPupilState.targetX-kingPupilState.x)*0.16;
+  kingPupilState.y += (kingPupilState.targetY-kingPupilState.y)*0.16;
+  const top=(kingPupilState.y*100)+'%';
+  if(kingPupils.left){
+    kingPupils.left.style.left=(46.6 + (kingPupilState.x-0.5)*100)+'%';
+    kingPupils.left.style.top=top;
+  }
+  if(kingPupils.right){
+    kingPupils.right.style.left=(60.2 + (kingPupilState.x-0.5)*100)+'%';
+    kingPupils.right.style.top=top;
+  }
+  requestAnimationFrame(animateKingPupils);
+}
+window.addEventListener('pointermove',event=>updateKingPupils(event.clientX,event.clientY),{passive:true});
+window.addEventListener('pointerleave',()=>{}, {passive:true});
+animateKingPupils();
+
+
 function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
 function lerp(a,b,t){return a+(b-a)*t}
 
