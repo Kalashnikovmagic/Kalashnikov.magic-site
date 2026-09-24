@@ -193,22 +193,6 @@ const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
 const kingCard=$('#kingCard');
-const kingPupils=$$('.king-pupil',kingCard);
-let kingLookTargetX=0;
-let kingLookTargetY=0;
-let kingLookX=0;
-let kingLookY=0;
-function updateKingLook(){
-  kingLookX=lerp(kingLookX,kingLookTargetX,.14);
-  kingLookY=lerp(kingLookY,kingLookTargetY,.14);
-  kingPupils.forEach(pupil=>{pupil.style.transform='translate3d('+(kingLookX*1.8)+'px,'+(kingLookY*1.4)+'px,0)'});
-  requestAnimationFrame(updateKingLook);
-}
-window.addEventListener('pointermove',event=>{
-  kingLookTargetX=clamp((event.clientX-window.innerWidth*.5)/(window.innerWidth*.5),-1,1);
-  kingLookTargetY=clamp((event.clientY-window.innerHeight*.5)/(window.innerHeight*.5),-1,1);
-},{passive:true});
-updateKingLook();
 
 function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
 function lerp(a,b,t){return a+(b-a)*t}
