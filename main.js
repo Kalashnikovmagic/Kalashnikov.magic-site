@@ -220,9 +220,10 @@ const kingPupils={left:document.querySelector('.king-pupil--left'),right:documen
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
 const kingPupilMotion={left:{x:0.065,y:0.009},right:{x:0.052,y:0.009}};
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
+let kingPupilsFollowPointer=false;
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
 function kingAnchorToCard(a){const width=kingCard?.clientWidth||0;const height=kingCard?.clientHeight||0;const useX=(a.x/1300)*164.8-82.4;const useY=(a.y/2000)*260.8-130.4;return{x:((useX+120)/240)*width,y:((useY+168)/336)*height}}
-function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){const blur=window.__kingPupilBlur||0;for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side]);const motion=kingPupilMotion[side];const dx=(kingPupilState.targetX-.5)*(kingCard.clientWidth||0)*motion.x;const dy=(kingPupilState.targetY-.5)*(kingCard.clientHeight||0)*motion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)';kingPupils[side].style.filter='blur('+blur+'px)'}}}requestAnimationFrame(animateKingPupils)}
+function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){const blur=window.__kingPupilBlur||0;for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side]);const motion=kingPupilMotion[side];const inputX=kingPupilsFollowPointer?kingPupilState.targetX:.5;const inputY=kingPupilsFollowPointer?kingPupilState.targetY:.5;const dx=(inputX-.5)*(kingCard.clientWidth||0)*motion.x;const dy=(inputY-.5)*(kingCard.clientHeight||0)*motion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)';kingPupils[side].style.filter='blur('+blur+'px)'}}}requestAnimationFrame(animateKingPupils)}
 window.addEventListener('pointermove',event=>updateKingPupils(event.clientX,event.clientY),{passive:true});
 animateKingPupils();
 
@@ -251,9 +252,8 @@ function updateTransition(){
     baseWidth=Math.max(1,card.offsetWidth);
     baseHeight=Math.max(1,card.offsetHeight);
 
-    // KS.svg is a full K♠ card. The king's eyes sit around the upper
-    // quarter of the card, so the final zoom is calculated from the
-    // portrait area rather than from the full card.
+    // KS.svg is a full K♠ card. The final zoom is calculated from
+    // the portrait area so the eyes remain the visual focal point.
     const eyeRegionWidth=baseWidth*.14;
     const eyeRegionHeight=baseHeight*.20;
     const calculatedZoom=Math.max(
@@ -261,13 +261,14 @@ function updateTransition(){
       window.innerWidth/Math.max(1,eyeRegionWidth),
       window.innerHeight/Math.max(1,eyeRegionHeight)
     );
-    // Keep a wider portrait close-up so the face is not over-cropped.
     maxZoom=Math.min(calculatedZoom,4.5);
   }
 
-  // Start from the visual center, then move the card so the king's eyes
-  // stay on the screen center during the close-up.
-  const reveal=1-Math.pow(1-p,3.6);
+  // Start the zoom before the transition block reaches the middle
+  // of the viewport. The earlier 0.12 → 1.00 trigger point gives the
+  // card room to enter already moving rather than waiting for center.
+  const zoomProgress=clamp((p-.12)/.88,0,1);
+  const reveal=.12+.88*(1-Math.pow(1-zoomProgress,3.6));
   const zoom=lerp(.01,maxZoom,reveal);
 
   const eyeX=baseWidth*.578;
@@ -288,6 +289,7 @@ function updateTransition(){
   }
 
   const labelsP=clamp((p-.72)/.22,0,1);
+  kingPupilsFollowPointer=labelsP>0;
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
@@ -406,19 +408,19 @@ function closeFormatModal(){
   formatModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('format-modal-open');
 }
-$('.event-label',transition).forEach(label=>{
-  label.addEventListener('click',event=>{
-    event.preventDefault();
-    event.stopPropagation();
-    openFormatModal(label.dataset.event||label.textContent.trim());
-  });
+transition?.addEventListener('click',event=>{
+  const label=event.target.closest('.event-label');
+  if(!label)return;
+  event.preventDefault();
+  event.stopPropagation();
+  openFormatModal(label.dataset.event||label.textContent.trim());
 });
-$('[data-format-close]').forEach(button=>{
-  button.addEventListener('click',event=>{
+formatModal?.addEventListener('click',event=>{
+  if(event.target.matches('[data-format-close]')){
     event.preventDefault();
     event.stopPropagation();
     closeFormatModal();
-  });
+  }
 });
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&formatModal?.classList.contains('is-open'))closeFormatModal();
