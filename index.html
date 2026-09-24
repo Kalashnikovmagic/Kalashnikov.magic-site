@@ -124,7 +124,7 @@
       <div class="transition__sticky">
         <div class="king-zoom" id="kingZoom">
           <div class="king-card" id="kingCard">
-            <img class="king-illustration" src="KS.svg" alt="Король пик"><span class="king-pupil king-pupil--left" aria-hidden="true"></span><span class="king-pupil king-pupil--right" aria-hidden="true"></span>
+            <img class="king-illustration" src="KS.svg" alt="Король пик"><span class="king-pupil king-pupil--left" aria-hidden="true"></span><span class="king-pupil king-pupil--right" aria-hidden="true"></span><span class="king-pupil king-pupil--left" aria-hidden="true"></span><span class="king-pupil king-pupil--right" aria-hidden="true"></span>
           </div>
         </div>
 
@@ -156,5 +156,14 @@
     </div>
   </div>
 
+
+  <div class="format-modal" id="formatModal" aria-hidden="true">
+    <div class="format-modal__backdrop" data-format-close></div>
+    <div class="format-modal__window" role="dialog" aria-modal="true" aria-labelledby="formatModalTitle">
+      <button class="format-modal__close" type="button" aria-label="Закрыть" data-format-close>×</button>
+      <div class="format-modal__photo"><img id="formatModalImage" src="" alt=""></div>
+      <div class="format-modal__copy"><h2 id="formatModalTitle">ФОРМАТ МЕРОПРИЯТИЯ</h2><p id="formatModalText">Здесь появится продающий текст о выступлении на этом типе мероприятия.</p></div>
+    </div>
+  </div>
 </body>
 </html>
