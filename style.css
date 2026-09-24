@@ -169,6 +169,7 @@ button{font:inherit;color:inherit}
   .surprise-card__blur{width:90vw;height:auto;aspect-ratio:3/2}
   .transition{height:500vh}
   .king-card{width:62vw}
+  .king-illustration{transition:filter 120ms linear}
   .event-labels{inset:3vh 2vw}
   .event-label{font-size:clamp(13px,3.4vw,19px);letter-spacing:.025em;white-space:normal;max-width:30vw;text-shadow:0 2px 16px rgba(0,0,0,.98)}
   .event-label--1{top:1%}
