@@ -283,21 +283,31 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  // Keep the King's portrait blur separate from the modal: the modal itself must never inherit it.
-  const blurTarget=clamp((.44-p)/.44,0,1);
-  const currentBlur=window.__kingBlurCurrent??1;
-  const smoothingFactor=window.matchMedia('(max-width:820px)').matches?.22:.14;
+
+  // Mobile: use a deterministic blur curve driven by scene progress.
+  // It starts strong, fades continuously, and is fully sharp before labels appear.
+  const mobile=window.matchMedia('(max-width:820px)').matches;
+  const mobileBlurTarget=clamp((.72-p)/.60,0,1);
+  const blurTarget=mobile ? mobileBlurTarget : clamp((.44-p)/.44,0,1);
+  const currentBlur=window.__kingBlurCurrent??(mobile?0:1);
+  const smoothingFactor=mobile?.32:.14;
   const smoothedBlur=currentBlur+(blurTarget-currentBlur)*smoothingFactor;
   window.__kingBlurCurrent=smoothedBlur;
   const kingBlur=smoothedBlur;
   window.__kingPupilBlur=kingBlur*18;
+
   if(kingIllustration){
     kingIllustration.style.filter=
       'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
   const labelsP=clamp((p-.72)/.22,0,1);
+  const pupilLockPhase=.72;
   kingPupilsFollowPointer=labelsP>0;
+  if(p<pupilLockPhase){
+    kingPupilState.targetX=.5;
+    kingPupilState.targetY=.5;
+  }
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
