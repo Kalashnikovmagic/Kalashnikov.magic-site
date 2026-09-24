@@ -232,7 +232,7 @@ function updateTransition(){
 
   // Start from the visual center, then move the card so the king's eyes
   // stay on the screen center during the close-up.
-  const reveal=1-Math.pow(1-p,3.6);
+  const reveal=0.12+0.88*(1-Math.pow(1-p,3.6));
   const zoom=lerp(.01,maxZoom,reveal);
 
   const eyeX=baseWidth*.578;
@@ -245,7 +245,7 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.42-p)/.42,0,1);
+  const kingBlur=clamp((.22-p)/.22,0,1);
   if(kingIllustration){
     kingIllustration.style.filter=
       'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
