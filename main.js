@@ -194,43 +194,14 @@ const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
 const kingCard=$('#kingCard');
 
-const kingPupils={
-  left:document.querySelector('.king-pupil--left'),
-  right:document.querySelector('.king-pupil--right')
-};
-const kingPupilState={
-  x:0.5,
-  y:0.32,
-  targetX:0.5,
-  targetY:0.32
-};
-
-function updateKingPupils(clientX,clientY){
-  if(!kingCard || !kingPupils.left || !kingPupils.right)return;
-  const rect=kingCard.getBoundingClientRect();
-  if(rect.width<=0 || rect.height<=0)return;
-
-  const nx=clamp((clientX-rect.left)/rect.width,0,1);
-  const ny=clamp((clientY-rect.top)/rect.height,0,1);
-  kingPupilState.targetX=0.5+(nx-0.5)*0.04;
-  kingPupilState.targetY=0.285+(ny-0.285)*0.018;
-}
-function animateKingPupils(){
-  kingPupilState.x += (kingPupilState.targetX-kingPupilState.x)*0.16;
-  kingPupilState.y += (kingPupilState.targetY-kingPupilState.y)*0.16;
-  const top=(kingPupilState.y*100)+'%';
-  if(kingPupils.left){
-    kingPupils.left.style.left=(47.7 + (kingPupilState.x-0.5)*100)+'%';
-    kingPupils.left.style.top=top;
-  }
-  if(kingPupils.right){
-    kingPupils.right.style.left=(58.8 + (kingPupilState.x-0.5)*100)+'%';
-    kingPupils.right.style.top=top;
-  }
-  requestAnimationFrame(animateKingPupils);
-}
+const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
+const kingPupilAnchors={left:{x:797.083,y:309.305},right:{x:939.437,y:312.155}};
+const kingPupilMotion={x:0.028,y:0.018};
+const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
+function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
+function kingAnchorToCard(a,rect){const useX=(a.x/1300)*164.8-82.4;const useY=(a.y/2000)*260.8-130.4;return{x:((useX+120)/240)*rect.width,y:((useY+168)/336)*rect.height}}
+function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side],rect);const dx=(kingPupilState.targetX-.5)*rect.width*kingPupilMotion.x;const dy=(kingPupilState.targetY-.5)*rect.height*kingPupilMotion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)'}}}requestAnimationFrame(animateKingPupils)}
 window.addEventListener('pointermove',event=>updateKingPupils(event.clientX,event.clientY),{passive:true});
-window.addEventListener('pointerleave',()=>{}, {passive:true});
 animateKingPupils();
 
 
