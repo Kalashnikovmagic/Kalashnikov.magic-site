@@ -212,8 +212,8 @@ function updateKingPupils(clientX,clientY){
 
   const nx=clamp((clientX-rect.left)/rect.width,0,1);
   const ny=clamp((clientY-rect.top)/rect.height,0,1);
-  kingPupilState.targetX=0.5+(nx-0.5)*0.14;
-  kingPupilState.targetY=0.315+(ny-0.315)*0.10;
+  kingPupilState.targetX=0.5+(nx-0.5)*0.055;
+  kingPupilState.targetY=0.300+(ny-0.300)*0.045;
 }
 function animateKingPupils(){
   kingPupilState.x += (kingPupilState.targetX-kingPupilState.x)*0.16;
