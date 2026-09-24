@@ -434,6 +434,7 @@ const formatModalDefaults={
 function openFormatModal(label){
   if(!formatModal)return;
   const data=formatModalDefaults[label]||{title:label,image:'',text:'Здесь будет продающий текст о моём выступлении на этом типе мероприятия.'};
+  formatModal.dataset.format=label;
   formatModalTitle.textContent=data.title;
   formatModalText.textContent=data.text;
   formatModalImage.alt=data.title;
