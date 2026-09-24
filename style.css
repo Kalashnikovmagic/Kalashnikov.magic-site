@@ -140,7 +140,7 @@ button{font:inherit;color:inherit}
 .transition .king-card > *{visibility:visible}
 
 /* Interactive King pupils */
-.king-pupil{position:absolute;width:7px;height:7px;border-radius:50%;background:#000;pointer-events:none;z-index:12;left:0;top:0;box-shadow:none;will-change:transform,filter;filter:blur(0);}
+.king-pupil{position:absolute;width:10px;height:10px;border-radius:50%;background:#000;pointer-events:none;z-index:12;left:0;top:0;box-shadow:none;will-change:transform,filter;filter:blur(0);}
 .king-pupil--left,.king-pupil--right{left:0;top:0;}
 .king-illustration{display:block;width:100%;height:100%;overflow:visible;object-fit:contain;filter:brightness(.72) drop-shadow(0 30px 90px rgba(0,0,0,.78))}
 
@@ -272,9 +272,7 @@ button{font:inherit;color:inherit}
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  filter:blur(18px);
-  transform:scale(1.02);
-  transition:opacity 600ms var(--ease),filter 600ms var(--ease),transform 600ms var(--ease),visibility 0s linear 600ms;
+  transition:opacity 600ms var(--ease),visibility 0s linear 600ms;
 }
 .format-modal.is-open{
   opacity:1;
@@ -301,7 +299,8 @@ button{font:inherit;color:inherit}
   overflow:hidden;
   transform:translateY(24px) scale(.94);
   opacity:0;
-  transition:transform 420ms var(--ease),opacity 320ms var(--ease);
+  filter:blur(14px);
+  transition:transform 600ms var(--ease),opacity 600ms var(--ease),filter 600ms var(--ease);
 }
 .format-modal.is-open .format-modal__window{
   transform:translateY(0) scale(1);
