@@ -214,22 +214,6 @@ const transition=$('#transition');
 const kingZoom=$('#kingZoom');
 const transitionLabels=$('#eventLabels');
 const transitionHint=$('.transition__hint');
-const kingCard=$('#kingCard');
-
-const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
-const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
-const kingPupilMotionDesktop={left:{x:0.06,y:0.007},right:{x:0.048,y:0.007}};
-const kingPupilMotionMobile={left:{x:0.065,y:0.009},right:{x:0.052,y:0.009}};
-const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
-const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
-let kingPupilsFollowPointer=false;
-function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
-function kingAnchorToCard(a){const width=kingCard?.clientWidth||0;const height=kingCard?.clientHeight||0;const useX=(a.x/1300)*164.8-82.4;const useY=(a.y/2000)*260.8-130.4;return{x:((useX+120)/240)*width,y:((useY+168)/336)*height}}
-function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){const blur=window.__kingPupilBlur||0;for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side]);const motion=kingPupilMotion[side];const inputX=kingPupilsFollowPointer?kingPupilState.targetX:.5;const inputY=kingPupilsFollowPointer?kingPupilState.targetY:.5;const dx=(inputX-.5)*(kingCard.clientWidth||0)*motion.x;const dy=(inputY-.5)*(kingCard.clientHeight||0)*motion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)';kingPupils[side].style.filter='blur('+blur+'px)'}}}requestAnimationFrame(animateKingPupils)}
-window.addEventListener('pointermove',event=>updateKingPupils(event.clientX,event.clientY),{passive:true});
-animateKingPupils();
-
-
 
 function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
 function lerp(a,b,t){return a+(b-a)*t}
@@ -254,8 +238,9 @@ function updateTransition(){
     baseWidth=Math.max(1,card.offsetWidth);
     baseHeight=Math.max(1,card.offsetHeight);
 
-    // KS.svg is a full K♠ card. The final zoom is calculated from
-    // the portrait area so the eyes remain the visual focal point.
+    // KS.svg is a full K♠ card. The king's eyes sit around the upper
+    // quarter of the card, so the final zoom is calculated from the
+    // portrait area rather than from the full card.
     const eyeRegionWidth=baseWidth*.14;
     const eyeRegionHeight=baseHeight*.20;
     const calculatedZoom=Math.max(
@@ -263,14 +248,13 @@ function updateTransition(){
       window.innerWidth/Math.max(1,eyeRegionWidth),
       window.innerHeight/Math.max(1,eyeRegionHeight)
     );
+    // Keep a wider portrait close-up so the face is not over-cropped.
     maxZoom=Math.min(calculatedZoom,4.5);
   }
 
-  // Start the zoom before the transition block reaches the middle
-  // of the viewport. The earlier 0.12 → 1.00 trigger point gives the
-  // card room to enter already moving rather than waiting for center.
-  const zoomProgress=clamp((p-.12)/.88,0,1);
-  const reveal=.12+.88*(1-Math.pow(1-zoomProgress,3.6));
+  // Start from the visual center, then move the card so the king's eyes
+  // stay on the screen center during the close-up.
+  const reveal=1-Math.pow(1-p,3.6);
   const zoom=lerp(.01,maxZoom,reveal);
 
   const eyeX=baseWidth*.578;
@@ -283,31 +267,13 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-
-  // Mobile: use a deterministic blur curve driven by scene progress.
-  // It starts strong, fades continuously, and is fully sharp before labels appear.
-  const mobile=window.matchMedia('(max-width:820px)').matches;
-  const mobileBlurTarget=clamp((.72-p)/.60,0,1);
-  const blurTarget=mobile ? mobileBlurTarget : clamp((.32-p)/.32,0,1);
-  const currentBlur=window.__kingBlurCurrent??(mobile?0:1);
-  const smoothingFactor=mobile?.32:.14;
-  const smoothedBlur=currentBlur+(blurTarget-currentBlur)*smoothingFactor;
-  window.__kingBlurCurrent=smoothedBlur;
-  const kingBlur=smoothedBlur;
-  window.__kingPupilBlur=kingBlur*18;
-
+  const kingBlur=clamp((.42-p)/.42,0,1);
   if(kingIllustration){
     kingIllustration.style.filter=
       'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
-  const labelsP=clamp((p-(window.matchMedia('(max-width:820px)').matches?.72:.62))/(window.matchMedia('(max-width:820px)').matches?.22:.16),0,1);
-  const pupilLockPhase=.72;
-  kingPupilsFollowPointer=labelsP>0;
-  if(p<pupilLockPhase){
-    kingPupilState.targetX=.5;
-    kingPupilState.targetY=.5;
-  }
+  const labelsP=clamp((p-.72)/.22,0,1);
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
