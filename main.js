@@ -218,7 +218,7 @@ const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
-const kingPupilMotion={left:{x:0.016,y:0.0025},right:{x:0.013,y:0.0025}};
+const kingPupilMotion={left:{x:0.021,y:0.0045},right:{x:0.017,y:0.0045}};
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
 let kingPupilsFollowPointer=false;
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
