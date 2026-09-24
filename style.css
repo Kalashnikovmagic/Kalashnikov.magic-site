@@ -431,7 +431,6 @@ body.format-modal-open{overflow:hidden}
 }
 
 @media(max-width:820px){
-  .event-label{font-size:clamp(24px,5.2vw,42px);font-weight:800;}
   .format-modal[data-format="ЧАСТНОЕ МЕРОПРИЯТИЕ"] .format-modal__photo img{object-position:center 54%;}
   .format-modal[data-format="КОРПОРАТИВ"] .format-modal__photo img{object-position:center 46%;}
 }
