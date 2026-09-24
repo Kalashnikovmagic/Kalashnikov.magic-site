@@ -291,7 +291,14 @@ function updateTransition(){
   }
 
   const labelsP=clamp((p-.72)/.22,0,1);
-  kingPupilsFollowPointer=labelsP>0;
+  // На мобильном держим зрачки строго в центре допустимой амплитуды
+  // до полного снятия блюра и появления подписей форматов.
+  const isMobile=window.matchMedia('(max-width:820px)').matches;
+  kingPupilsFollowPointer=isMobile ? labelsP>0 : false;
+  if(isMobile && labelsP===0){
+    kingPupilState.targetX=.5;
+    kingPupilState.targetY=.5;
+  }
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
