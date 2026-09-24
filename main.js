@@ -218,7 +218,7 @@ const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
-const kingPupilMotionDesktop={left:{x:0.0325,y:0.005},right:{x:0.026,y:0.005}};
+const kingPupilMotionDesktop={left:{x:0.06,y:0.007},right:{x:0.048,y:0.007}};
 const kingPupilMotionMobile={left:{x:0.065,y:0.009},right:{x:0.052,y:0.009}};
 const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
@@ -288,7 +288,7 @@ function updateTransition(){
   // It starts strong, fades continuously, and is fully sharp before labels appear.
   const mobile=window.matchMedia('(max-width:820px)').matches;
   const mobileBlurTarget=clamp((.72-p)/.60,0,1);
-  const blurTarget=mobile ? mobileBlurTarget : clamp((.44-p)/.44,0,1);
+  const blurTarget=mobile ? mobileBlurTarget : clamp((.32-p)/.32,0,1);
   const currentBlur=window.__kingBlurCurrent??(mobile?0:1);
   const smoothingFactor=mobile?.32:.14;
   const smoothedBlur=currentBlur+(blurTarget-currentBlur)*smoothingFactor;
@@ -301,7 +301,7 @@ function updateTransition(){
       'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
-  const labelsP=clamp((p-.72)/.22,0,1);
+  const labelsP=clamp((p-(window.matchMedia('(max-width:820px)').matches?.72:.62))/(window.matchMedia('(max-width:820px)').matches?.22:.16),0,1);
   const pupilLockPhase=.72;
   kingPupilsFollowPointer=labelsP>0;
   if(p<pupilLockPhase){
