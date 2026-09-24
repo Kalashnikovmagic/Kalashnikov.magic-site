@@ -224,11 +224,11 @@ function sectionProgress(section){
 }
 
 
+
 const formatModal=$('#formatModal');
 const formatModalImage=$('#formatModalImage');
 const formatModalTitle=$('#formatModalTitle');
 const formatModalText=$('#formatModalText');
-const formatModalClose=$('[data-format-close]',formatModal);
 const formatModalDefaults={
   'СВАДЬБА':{title:'СВАДЬБА',image:'',text:'Здесь будет текст о выступлении на свадьбе.'},
   'КОРПОРАТИВ':{title:'КОРПОРАТИВ',image:'',text:'Здесь будет текст о выступлении на корпоративном мероприятии.'},
@@ -238,189 +238,55 @@ const formatModalDefaults={
   'ВЫСТАВКА':{title:'ВЫСТАВКА',image:'',text:'Здесь будет текст о выступлении на выставке.'},
   'ЧАСТНОЕ МЕРОПРИЯТИЕ':{title:'ЧАСТНОЕ МЕРОПРИЯТИЕ',image:'',text:'Здесь будет текст о выступлении на частном мероприятии.'}
 };
+
 function openFormatModal(label){
   if(!formatModal)return;
-  const data=formatModalDefaults[label]||{title:label,image:'',text:'Здесь будет продающий текст о моём выступлении на этом типе мероприятия.'};
+  const data=formatModalDefaults[label]||{
+    title:label,
+    image:'',
+    text:'Здесь будет продающий текст о моём выступлении на этом типе мероприятия.'
+  };
+
   if(formatModalTitle)formatModalTitle.textContent=data.title;
   if(formatModalText)formatModalText.textContent=data.text;
+
   if(formatModalImage){
+    formatModalImage.alt=data.title;
     if(data.image){
       formatModalImage.src=data.image;
-      formatModalImage.alt=data.title;
       formatModalImage.style.display='block';
     }else{
       formatModalImage.removeAttribute('src');
-      formatModalImage.alt='';
       formatModalImage.style.display='none';
     }
   }
-  formatModal.classList.add('is-open');
-  formatModal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-}
-function closeFormatModal(){
-  if(!formatModal)return;
-  formatModal.classList.remove('is-open');
-  formatModal.setAttribute('aria-hidden','true');
-  document.body.style.overflow='';
-}
-$('.event-label',transition).forEach(label=>{
-  label.addEventListener('click',()=>{
-    openFormatModal(label.dataset.event||label.textContent.trim());
-  });
-});
-formatModalClose.forEach(button=>button.addEventListener('click',closeFormatModal));
-document.addEventListener('keydown',event=>{
-  if(event.key==='Escape'&&formatModal?.classList.contains('is-open'))closeFormatModal();
-});
 
-function updateTransition(){
-  if(!transition || !kingZoom)return;
-
-  const p=sectionProgress(transition);
-  const card=kingZoom.querySelector('.king-card');
-  let maxZoom=12;
-  let baseWidth=1;
-  let baseHeight=1;
-
-  if(card){
-    baseWidth=Math.max(1,card.offsetWidth);
-    baseHeight=Math.max(1,card.offsetHeight);
-
-    // KS.svg is a full K♠ card. The king's eyes sit around the upper
-    // quarter of the card, so the final zoom is calculated from the
-    // portrait area rather than from the full card.
-    const eyeRegionWidth=baseWidth*.14;
-    const eyeRegionHeight=baseHeight*.20;
-    const calculatedZoom=Math.max(
-      4,
-      window.innerWidth/Math.max(1,eyeRegionWidth),
-      window.innerHeight/Math.max(1,eyeRegionHeight)
-    );
-    // Keep a wider portrait close-up so the face is not over-cropped.
-    maxZoom=Math.min(calculatedZoom,4.5);
-  }
-
-  // Start from the visual center, then move the card so the king's eyes
-  // stay on the screen center during the close-up.
-  const reveal=0.12+0.88*(1-Math.pow(1-p,3.6));
-  const zoom=lerp(.01,maxZoom,reveal);
-
-  const eyeX=baseWidth*.578;
-  const eyeY=baseHeight*.315;
-  const cardCenterX=baseWidth*.5;
-  const cardCenterY=baseHeight*.5;
-  const offsetX=(cardCenterX-eyeX)*zoom;
-  const offsetY=(cardCenterY-eyeY)*zoom;
-
-  kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
-
-  const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.22-p)/.22,0,1); window.__kingPupilBlur=kingBlur*18;
-  if(kingIllustration){
-    kingIllustration.style.filter=
-      'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
-  }
-
-  const labelsP=clamp((p-.72)/.22,0,1);
-  transitionLabels.style.opacity=labelsP;
-  transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
-}
-
-function updateHero(){
-  const p=sectionProgress(hero);
-  const title=$('[data-hero-title]');
-
-  // The frame sequence occupies the whole hero scroll scene.
-  setHeroFrame(Math.round(p*(HERO_FRAME_COUNT-1)));
-
-  if(title){
-    title.style.opacity=p<.12?1:clamp((1-p)/.15,0,1);
-    title.style.transform='translateY('+(p*45)+'px)';
-  }
-}
-
-function updateAll(){
-  updateHero();
-  updateFacts();
-  updateTransition();
-}
-
-let scrollVelocity=0;
-let scrollAnimationFrame=null;
-let lastWheelTime=0;
-
-function animateScrollInertia(){
-  scrollVelocity*=0.88;
-
-  if(Math.abs(scrollVelocity)<0.35){
-    scrollVelocity=0;
-    scrollAnimationFrame=null;
-    updateAll();
-    return;
-  }
-
-  window.scrollBy(0,scrollVelocity);
-  updateAll();
-  scrollAnimationFrame=requestAnimationFrame(animateScrollInertia);
-}
-
-window.addEventListener('wheel',event=>{
-  const now=performance.now();
-  const dt=now-lastWheelTime;
-  lastWheelTime=now;
-
-  // Keep the browser's native scrolling, but add a short visual tail
-  // after the wheel input stops.
-  if(dt>80){
-    scrollVelocity=0;
-  }
-
-  scrollVelocity+=event.deltaY*0.08;
-  scrollVelocity=clamp(scrollVelocity,-28,28);
-
-  if(scrollAnimationFrame===null){
-    scrollAnimationFrame=requestAnimationFrame(animateScrollInertia);
-  }
-},{passive:true});
-
-window.addEventListener('scroll',updateAll,{passive:true});
-updateAll();
-
-
-const formatModal=$('#formatModal');
-const formatModalImage=$('#formatModalImage');
-const formatModalTitle=$('#formatModalTitle');
-const formatModalText=$('#formatModalText');
-const formatModalDefaults={
-  'СВАДЬБА':{title:'СВАДЬБА',image:'',text:'Здесь будет текст о выступлении на свадьбе.'},
-  'КОРПОРАТИВ':{title:'КОРПОРАТИВ',image:'',text:'Здесь будет текст о выступлении на корпоративном мероприятии.'},
-  'ЮБИЛЕЙ':{title:'ЮБИЛЕЙ',image:'',text:'Здесь будет текст о выступлении на юбилее.'},
-  'ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ':{title:'ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ',image:'',text:'Здесь будет текст о выступлении на детском празднике.'},
-  'ПРЕЗЕНТАЦИЯ':{title:'ПРЕЗЕНТАЦИЯ',image:'',text:'Здесь будет текст о выступлении на презентации.'},
-  'ВЫСТАВКА':{title:'ВЫСТАВКА',image:'',text:'Здесь будет текст о выступлении на выставке.'},
-  'ЧАСТНОЕ МЕРОПРИЯТИЕ':{title:'ЧАСТНОЕ МЕРОПРИЯТИЕ',image:'',text:'Здесь будет текст о выступлении на частном мероприятии.'}
-};
-function openFormatModal(label){
-  if(!formatModal)return;
-  const data=formatModalDefaults[label]||{title:label,image:'',text:'Здесь будет продающий текст о моём выступлении на этом типе мероприятия.'};
-  formatModalTitle.textContent=data.title;
-  formatModalText.textContent=data.text;
-  formatModalImage.alt=data.title;
-  if(data.image){formatModalImage.src=data.image;formatModalImage.style.display='block'}
-  else{formatModalImage.removeAttribute('src');formatModalImage.style.display='none'}
   formatModal.classList.add('is-open');
   formatModal.setAttribute('aria-hidden','false');
   document.body.classList.add('format-modal-open');
 }
+
 function closeFormatModal(){
   if(!formatModal)return;
   formatModal.classList.remove('is-open');
   formatModal.setAttribute('aria-hidden','true');
   document.body.classList.remove('format-modal-open');
 }
-$('.event-label',transition).forEach(label=>label.addEventListener('click',()=>openFormatModal(label.dataset.event||label.textContent.trim())));
-$('[data-format-close]').forEach(button=>button.addEventListener('click',closeFormatModal));
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&formatModal?.classList.contains('is-open'))closeFormatModal()});
+
+$$('.event-label',transition).forEach(label=>{
+  label.addEventListener('click',()=>{
+    openFormatModal(label.dataset.event||label.textContent.trim());
+  });
+});
+
+$$('[data-format-close]').forEach(button=>{
+  button.addEventListener('click',closeFormatModal);
+});
+
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&formatModal?.classList.contains('is-open')){
+    closeFormatModal();
+  }
+});
 
 console.log('Kalashnikov.magic — hero sequence 01–87 initialized.');
