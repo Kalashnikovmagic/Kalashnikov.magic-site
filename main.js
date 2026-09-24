@@ -223,6 +223,57 @@ function sectionProgress(section){
   return clamp(-rect.top/Math.max(1,distance),0,1);
 }
 
+
+const formatModal=$('#formatModal');
+const formatModalImage=$('#formatModalImage');
+const formatModalTitle=$('#formatModalTitle');
+const formatModalText=$('#formatModalText');
+const formatModalClose=$('[data-format-close]',formatModal);
+const formatModalDefaults={
+  'СВАДЬБА':{title:'СВАДЬБА',image:'',text:'Здесь будет текст о выступлении на свадьбе.'},
+  'КОРПОРАТИВ':{title:'КОРПОРАТИВ',image:'',text:'Здесь будет текст о выступлении на корпоративном мероприятии.'},
+  'ЮБИЛЕЙ':{title:'ЮБИЛЕЙ',image:'',text:'Здесь будет текст о выступлении на юбилее.'},
+  'ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ':{title:'ДЕТСКИЙ ДЕНЬ РОЖДЕНИЯ',image:'',text:'Здесь будет текст о выступлении на детском празднике.'},
+  'ПРЕЗЕНТАЦИЯ':{title:'ПРЕЗЕНТАЦИЯ',image:'',text:'Здесь будет текст о выступлении на презентации.'},
+  'ВЫСТАВКА':{title:'ВЫСТАВКА',image:'',text:'Здесь будет текст о выступлении на выставке.'},
+  'ЧАСТНОЕ МЕРОПРИЯТИЕ':{title:'ЧАСТНОЕ МЕРОПРИЯТИЕ',image:'',text:'Здесь будет текст о выступлении на частном мероприятии.'}
+};
+function openFormatModal(label){
+  if(!formatModal)return;
+  const data=formatModalDefaults[label]||{title:label,image:'',text:'Здесь будет продающий текст о моём выступлении на этом типе мероприятия.'};
+  if(formatModalTitle)formatModalTitle.textContent=data.title;
+  if(formatModalText)formatModalText.textContent=data.text;
+  if(formatModalImage){
+    if(data.image){
+      formatModalImage.src=data.image;
+      formatModalImage.alt=data.title;
+      formatModalImage.style.display='block';
+    }else{
+      formatModalImage.removeAttribute('src');
+      formatModalImage.alt='';
+      formatModalImage.style.display='none';
+    }
+  }
+  formatModal.classList.add('is-open');
+  formatModal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeFormatModal(){
+  if(!formatModal)return;
+  formatModal.classList.remove('is-open');
+  formatModal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+$('.event-label',transition).forEach(label=>{
+  label.addEventListener('click',()=>{
+    openFormatModal(label.dataset.event||label.textContent.trim());
+  });
+});
+formatModalClose.forEach(button=>button.addEventListener('click',closeFormatModal));
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&formatModal?.classList.contains('is-open'))closeFormatModal();
+});
+
 function updateTransition(){
   if(!transition || !kingZoom)return;
 
