@@ -578,34 +578,21 @@ body.format-modal-open{overflow:hidden}
   background-size:cover !important;
   background-position:center !important;
 }
-.surprise-card__front{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
 .card-face--back.scene2-card-back i,
 .card-face--back.scene2-card-back small,
 .surprise-card__front i,
 .surprise-card__front small{display:none !important}
 
-/* Bank card back: same construction as the four fact cards, with the artwork rotated 90deg. */
+/* Bank card back: no artwork. */
 .playing-card--surprise .surprise-card__front{
-  transform:rotateY(0deg) !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   overflow:hidden;
   background-image:none !important;
 }
 .playing-card--surprise .surprise-card__front::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.png');
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:100% 100%;
-  transform:rotate(90deg) scaleY(1.5);
-  transform-origin:center;
-  z-index:0;
-  pointer-events:none;
+  display:none !important;
 }
 
 /* Scene 2 facts heading: centered horizontally, same vertical position. */
