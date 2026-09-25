@@ -606,3 +606,348 @@ body.format-modal-open{overflow:hidden}
     text-align:center;
   }
 }
+
+
+/* =========================================================
+   DESKTOP EXPERIENCE — mirrors the current mobile build
+   without changing the mobile rules.
+   ========================================================= */
+@media(min-width:821px){
+  /* Scene 1 — full desktop hero title, restored from the current HTML structure. */
+  .hero__title h1{
+    display:block;
+    font-size:clamp(72px,8.2vw,142px);
+    line-height:.84;
+    letter-spacing:-.065em;
+    font-weight:600;
+  }
+  .hero__title{
+    left:6vw;
+    top:auto;
+    right:auto;
+    bottom:9vh;
+    transform:none;
+    text-align:left;
+  }
+  .hero__eyebrow{
+    font-size:24px;
+    margin-bottom:12px;
+  }
+
+  /* Scene 2 — four-card cinematic layout. */
+  .facts{
+    height:210vh;
+  }
+  .facts__sticky{
+    place-items:center;
+  }
+  .facts__intro{
+    top:7vh;
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
+    width:min(90vw,1200px);
+    justify-content:center;
+    text-align:center;
+    font-size:18px;
+    letter-spacing:.14em;
+  }
+  .facts__intro p{margin:0}
+
+  .facts .cards{
+    width:min(90vw,1440px);
+    height:min(68vh,720px);
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    grid-template-rows:1fr;
+    grid-template-areas:"card1 card2 card3 card4";
+    gap:clamp(18px,2vw,34px);
+    perspective:1800px;
+  }
+  .facts .cards > .playing-card{
+    height:auto;
+    aspect-ratio:240 / 336;
+    align-self:center;
+  }
+  .facts .card-face--back{
+    box-shadow:inset 0 0 0 9px #080808,inset 0 0 0 11px var(--lime);
+  }
+  .facts .card-face--back i,
+  .facts .card-face--back small,
+  .facts .surprise-card__front i,
+  .facts .surprise-card__front small{
+    display:none;
+  }
+  .facts .card-face--front strong{font-size:clamp(32px,3.3vw,58px)}
+  .facts .card-face--front em{font-size:clamp(11px,.95vw,16px)}
+  .facts .card-face--standup strong{font-size:clamp(20px,2.2vw,34px)}
+
+  /* Scene 2 intro: visible on desktop as well. */
+  .facts .playing-card__inner{
+    transition:transform 900ms var(--ease);
+  }
+
+  .playing-card--surprise{
+    width:min(56vw,720px);
+    height:auto;
+    aspect-ratio:3/2;
+  }
+
+  /* Scene 3 — desktop equivalent of the current King + event labels. */
+  .transition{
+    height:300vh;
+  }
+  .transition__sticky{
+    display:grid;
+    place-items:center;
+    background:#000;
+  }
+  .king-card{
+    width:min(31vw,520px);
+  }
+  .king-zoom{
+    transform:translate3d(var(--king-x,0px),var(--king-y,0px)) scale(var(--king-scale,4.1));
+  }
+  .event-labels{
+    inset:5vh 5vw;
+  }
+  .event-label{
+    font-size:clamp(19px,1.65vw,30px);
+  }
+  .event-label--1{top:15%;right:4%;left:auto;transform:none}
+  .event-label--2{top:3%;left:50%;right:auto;transform:translateX(-50%)}
+  .event-label--3{top:50%;right:1%;transform:translateY(-50%)}
+  .event-label--4{top:15%;left:4%;right:auto;bottom:auto;transform:none}
+  .event-label--5{bottom:15%;left:4%;transform:none}
+  .event-label--6{top:50%;left:1%;transform:translateY(-50%)}
+  .event-label--7{bottom:15%;right:4%;left:auto;top:auto;transform:none}
+
+  /* Scene 4 — desktop morph with the same three current source images. */
+  .scene4{
+    display:block !important;
+    height:320vh;
+    position:relative;
+    background:#050505;
+  }
+  .scene4__sticky{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:hidden;
+    background:#050505;
+  }
+  .scene4__layers{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:#050505;
+  }
+  .scene4__layer{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+    object-position:center;
+  }
+  .scene4__layer--base{z-index:1}
+  .scene4__layer--mid,
+  .scene4__layer--top{
+    z-index:2;
+    clip-path:polygon(0 0,100% 0,100% 0,0 0);
+  }
+  .scene4__layer--top{z-index:3}
+  .scene4__tint{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.2) 62%,rgba(0,0,0,.58));
+    pointer-events:none;
+  }
+  .scene4__vig{
+    position:absolute;
+    inset:-12%;
+    z-index:5;
+    background:radial-gradient(circle at 50% 46%,transparent 27%,rgba(0,0,0,.72) 100%);
+    pointer-events:none;
+  }
+  .scene4__flash{
+    position:absolute;
+    inset:0;
+    z-index:6;
+    background:#fff;
+    opacity:0;
+    mix-blend-mode:screen;
+    pointer-events:none;
+  }
+  .scene4__title{
+    position:absolute;
+    top:4.5vh;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+    width:90vw;
+    text-align:center;
+    color:var(--lime);
+    font:800 clamp(18px,1.75vw,28px)/1 var(--mono);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    pointer-events:none;
+  }
+  .scene4__headline{
+    position:absolute;
+    left:10vw;
+    right:10vw;
+    bottom:10vh;
+    height:28vh;
+    z-index:10;
+    pointer-events:none;
+    text-align:center;
+  }
+  .scene4__headline-line{
+    position:absolute;
+    left:0;
+    right:0;
+    top:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transform:translateY(calc(-50% + 24px)) scale(.985);
+    color:var(--bone);
+    text-transform:uppercase;
+    opacity:0;
+    filter:blur(12px);
+    transition:opacity .38s var(--ease),transform .7s var(--ease),filter .7s var(--ease);
+  }
+  .scene4__headline-line.is-active{
+    opacity:1;
+    transform:translateY(-50%) scale(1);
+    filter:blur(0);
+  }
+  .scene4__headline-title{
+    display:block;
+    font-family:Inter,Arial,sans-serif;
+    font-size:clamp(64px,7.4vw,120px);
+    line-height:.88;
+    font-weight:900;
+    letter-spacing:-.075em;
+    text-align:center;
+  }
+  .scene4__headline-subtitle{
+    display:block;
+    max-width:min(72vw,1050px);
+    margin-top:2.2vh;
+    color:var(--lime);
+    font:600 clamp(12px,1.1vw,18px)/1.18 var(--mono);
+    letter-spacing:.03em;
+    text-align:center;
+  }
+  .scene4__next-prompt{
+    position:absolute;
+    left:20vw;
+    right:20vw;
+    bottom:3.5vh;
+    z-index:11;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    color:#eeeae1;
+    text-align:center;
+    opacity:0;
+    transform:translateY(18px);
+    pointer-events:none;
+    transition:opacity .5s var(--ease);
+  }
+  .scene4__next-text{
+    font:700 clamp(12px,1vw,16px)/1 var(--mono);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+  .scene4__next-arrows{
+    display:flex;
+    gap:14px;
+    font:700 26px/1 var(--sans);
+  }
+  .scene4__next-prompt.is-visible{
+    opacity:1;
+    animation:scene4NextFloatDesktop 1.65s ease-in-out infinite;
+  }
+  @keyframes scene4NextFloatDesktop{
+    0%,100%{transform:translateY(3px)}
+    50%{transform:translateY(-7px)}
+  }
+
+  /* Scene 5 — desktop two-column video showcase using today's preview posters. */
+  .scene5{
+    display:block !important;
+    position:relative;
+    background:#050505;
+    padding:0;
+  }
+  .scene5__inner{
+    width:min(92vw,1500px);
+    margin:0 auto;
+    padding:11vh 0 14vh;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:clamp(32px,4vw,72px);
+  }
+  .scene5__card{
+    position:relative;
+  }
+  .scene5__header{
+    text-align:left;
+    margin-bottom:24px;
+  }
+  .scene5__eyebrow{
+    display:block;
+    color:var(--lime);
+    font:600 11px var(--mono);
+    letter-spacing:.18em;
+    margin-bottom:12px;
+  }
+  .scene5__header h2{
+    margin:0;
+    color:var(--bone);
+    font:900 clamp(36px,3.6vw,64px)/.9 var(--sans);
+    letter-spacing:-.07em;
+    text-transform:uppercase;
+  }
+  .scene5__video-wrap{
+    position:relative;
+    width:100%;
+    border-radius:18px;
+    overflow:hidden;
+    background:#101010;
+    box-shadow:0 26px 80px rgba(0,0,0,.45);
+  }
+  .scene5__video{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:9/16;
+    object-fit:cover;
+    background:#101010;
+  }
+  .scene5__description{
+    margin:18px 0 0;
+    max-width:42ch;
+    color:#8d8d87;
+    text-align:left;
+    font:500 clamp(12px,1vw,15px)/1.45 var(--mono);
+    letter-spacing:.04em;
+  }
+}
+
+/* Desktop-only poster treatment for Scene 5. */
+@media(min-width:821px){
+  .scene5__video-wrap{
+    transition:transform 500ms var(--ease),box-shadow 500ms var(--ease);
+  }
+  .scene5__video-wrap:hover{
+    transform:translateY(-6px);
+    box-shadow:0 34px 95px rgba(0,0,0,.58);
+  }
+}
