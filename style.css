@@ -397,13 +397,12 @@ button{font:inherit;color:inherit}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
-  .hero{height:auto;min-height:100vh}
 }
 body.format-modal-open{overflow:hidden}
 
 @media(min-width:821px){
   .hero__title p{font-size:0;}
-  .hero__title p::after{content:"ИЛЛЮЗИОНИСТ";font-size:52px;font-weight:900;letter-spacing:.07em;}
+  .hero__title p::after{content:"ИЛЛЮЗИОНИСТ";font-size:72px;font-weight:900;letter-spacing:.045em;}
   .hero__title h1{display:none;}
   .hero__title{left:50%;top:88%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center;}
 }
