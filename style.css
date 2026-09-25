@@ -607,8 +607,11 @@ body.format-modal-open{overflow:hidden}
   }
 }
 
-/* Scene 2 intro: one slow 360deg turn; the normal is-flipped interaction remains independent. */
+/* Scene 2 intro: temporary 360deg turn; after it ends, normal card flipping takes over. */
 .playing-card.is-intro-spinning .playing-card__inner{
   transform:rotateY(360deg);
   transition:transform 1100ms ease-in-out !important;
+}
+.playing-card.is-intro-spinning.is-flipped .playing-card__inner{
+  transform:rotateY(180deg);
 }
