@@ -544,3 +544,13 @@ function updateScene4(){
 }
 window.addEventListener('scroll',updateScene4,{passive:true});
 updateScene4();
+
+
+/* SCENE 5 — mobile stacked video formats */
+const scene5=$('#scene5');
+const scene5Videos=$$('.scene5__video',scene5);
+scene5Videos.forEach(video=>{
+  video.addEventListener('play',()=>{
+    scene5Videos.forEach(other=>{if(other!==video)other.pause();});
+  });
+});
