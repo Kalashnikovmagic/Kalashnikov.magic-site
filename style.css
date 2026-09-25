@@ -568,9 +568,13 @@ body.format-modal-open{overflow:hidden}
 }
 
 
+
 /* Scene 2 card backs: artwork only, without prompt overlays. */
 .card-face--back.scene2-card-back,
 .surprise-card__front{
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.png') !important;
   background-size:cover !important;
   background-position:center !important;
@@ -579,27 +583,22 @@ body.format-modal-open{overflow:hidden}
 .card-face--back.scene2-card-back small,
 .surprise-card__front i,
 .surprise-card__front small{display:none !important}
-.surprise-card__front{transform:rotateY(0deg) !important}
-.surprise-card__front{direction:ltr}
-.playing-card--surprise .surprise-card__front{transform:rotateY(0deg) !important; background-size:cover !important; background-position:center !important; position:absolute;}
 
-
-/* Bank card: rotate only the back artwork, not the card plane. */
+/* Bank card back: same construction as the four fact cards, with the artwork rotated 90deg. */
 .playing-card--surprise .surprise-card__front{
+  transform:rotateY(0deg) !important;
   overflow:hidden;
+  background-image:none !important;
 }
 .playing-card--surprise .surprise-card__front::before{
   content:"";
   position:absolute;
-  left:50%;
-  top:50%;
-  width:100%;
-  height:100%;
+  inset:0;
   background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.png');
   background-repeat:no-repeat;
-  background-size:100% 100%;
   background-position:center;
-  transform:translate(-50%,-50%) rotate(90deg);
+  background-size:100% 100%;
+  transform:rotate(90deg) scaleY(1.5);
   transform-origin:center;
   z-index:0;
   pointer-events:none;
