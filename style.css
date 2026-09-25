@@ -607,11 +607,12 @@ body.format-modal-open{overflow:hidden}
   }
 }
 
-/* Scene 2 intro: temporary 360deg turn; after it ends, normal card flipping takes over. */
+/* Scene 2 intro: one slow full 360deg turn per card, with no overlap. */
 .playing-card.is-intro-spinning .playing-card__inner{
   transform:rotateY(360deg);
   transition:transform 1100ms ease-in-out !important;
 }
 .playing-card.is-intro-spinning.is-flipped .playing-card__inner{
   transform:rotateY(180deg);
+  transition:transform 900ms var(--ease) !important;
 }
