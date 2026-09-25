@@ -179,6 +179,7 @@ function playFactsIntro(){
       card.classList.add('is-intro-spinning');
       setTimeout(()=>{
         card.classList.remove('is-intro-spinning');
+        card.classList.add('is-intro-complete');
       },spinDuration);
     },index*delay);
   });
