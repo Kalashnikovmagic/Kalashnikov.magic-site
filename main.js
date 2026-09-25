@@ -10,12 +10,12 @@ const heroCanvas=$('#heroCanvas');
 const heroContext=heroCanvas?.getContext('2d',{alpha:false});
 
 const HERO_FRAME_COUNT_MOBILE=87;
-const HERO_FRAME_COUNT_DESKTOP=142;
+const HERO_FRAME_COUNT_DESKTOP=87;
 const HERO_FRAME_PATH_MOBILE='assets/hero/frame_';
-const HERO_FRAME_PATH_DESKTOP='assets/hero-desktop/frame_';
+const HERO_FRAME_PATH_DESKTOP='assets/hero/frame_';
 const heroIsDesktop=window.matchMedia('(min-width:821px)').matches;
-const HERO_FRAME_COUNT=heroIsDesktop?HERO_FRAME_COUNT_DESKTOP:HERO_FRAME_COUNT_MOBILE;
-const HERO_FRAME_PATH=heroIsDesktop?HERO_FRAME_PATH_DESKTOP:HERO_FRAME_PATH_MOBILE;
+const HERO_FRAME_COUNT=HERO_FRAME_COUNT_MOBILE;
+const HERO_FRAME_PATH=HERO_FRAME_PATH_MOBILE;
 const heroFrames=new Array(HERO_FRAME_COUNT);
 let heroFrameWidth=0;
 let heroFrameHeight=0;
@@ -264,7 +264,7 @@ const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right'),lowerLeft:document.querySelector('.king-pupil--lower-left'),lowerRight:document.querySelector('.king-pupil--lower-right')};
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85},lowerLeft:{x:513.917,y:1679.5},lowerRight:{x:364.563,y:1681.15}};
-const kingPupilMotionDesktop={left:{x:0.004,y:0.009},right:{x:0.0032,y:0.009},lowerLeft:{x:0.0035,y:0.007},lowerRight:{x:0.003,y:0.007}};
+const kingPupilMotionDesktop={left:{x:0.018,y:0.009},right:{x:0.015,y:0.009},lowerLeft:{x:0.014,y:0.007},lowerRight:{x:0.012,y:0.007}};
 const kingPupilMotionMobile={left:{x:0.022,y:0.009},right:{x:0.018,y:0.009},lowerLeft:{x:0.018,y:0.007},lowerRight:{x:0.016,y:0.007}};
 const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0},lowerLeft:{x:0,y:0},lowerRight:{x:0,y:0}};
@@ -349,8 +349,8 @@ function updateTransition(){
 
   const labelsP=clamp(p/.16,0,1);
   const isMobile=window.matchMedia('(max-width:820px)').matches;
-  kingPupilsFollowPointer=isMobile ? labelsP>0 : false;
-  if(isMobile && labelsP===0){
+  kingPupilsFollowPointer=labelsP>0;
+  if(labelsP===0){
     kingPupilState.targetX=.5;
     kingPupilState.targetY=.5;
   }
