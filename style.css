@@ -538,3 +538,37 @@ body.format-modal-open{overflow:hidden}
 @media(max-width:820px){
   .transition .event-label--1{top:13% !important}
 }
+
+@media(max-width:820px){
+  .transition__king-caption{
+    position:absolute;
+    top:calc(50% + 29vw);
+    left:50%;
+    transform:translateX(-50%);
+    z-index:210;
+    width:80vw;
+    text-align:center;
+    color:#777;
+    font:500 2.7vw/1.2 var(--mono);
+    letter-spacing:.06em;
+    text-transform:lowercase;
+    pointer-events:none;
+  }
+  .transition__cta{
+    position:absolute;
+    left:50%;
+    bottom:4.5vh;
+    transform:translateX(-50%);
+    z-index:210;
+    width:90vw;
+    text-align:center;
+    color:var(--lime);
+    font:700 3.8vw/1 var(--mono);
+    letter-spacing:.08em;
+    text-transform:lowercase;
+    pointer-events:none;
+  }
+}
+@media(min-width:821px){
+  .transition__king-caption,.transition__cta{display:none}
+}
