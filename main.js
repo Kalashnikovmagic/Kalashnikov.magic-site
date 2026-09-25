@@ -225,7 +225,7 @@ const kingCard=$('#kingCard');
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
 const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
 const kingPupilMotionDesktop={left:{x:0.008,y:0.009},right:{x:0.0065,y:0.009}};
-const kingPupilMotionMobile={left:{x:0.055,y:0.009},right:{x:0.044,y:0.009}};
+const kingPupilMotionMobile={left:{x:0.035,y:0.009},right:{x:0.028,y:0.009}};
 const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
 const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
 let kingPupilsFollowPointer=false;
@@ -282,7 +282,7 @@ function updateTransition(){
       'brightness(.72) blur('+synchronizedBlur+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
-  const labelsP=clamp((p-.72)/.22,0,1);
+  const labelsP=clamp((p-.66)/.16,0,1);
   const isMobile=window.matchMedia('(max-width:820px)').matches;
   kingPupilsFollowPointer=isMobile ? labelsP>0 : false;
   if(isMobile && labelsP===0){
