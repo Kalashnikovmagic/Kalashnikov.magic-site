@@ -610,6 +610,7 @@ body.format-modal-open{overflow:hidden}
 /* Scene 2 intro: each card makes one continuous 360deg turn, with short staggered pauses. */
 .playing-card.is-intro-spinning .playing-card__inner{
   transform:rotateY(360deg);
+  transition-timing-function:linear;
 }
 @media(max-width:820px){
   .playing-card__inner{
