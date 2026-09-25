@@ -542,7 +542,7 @@ body.format-modal-open{overflow:hidden}
 @media(max-width:820px){
   .transition__king-caption{
     position:absolute;
-    top:calc(50% + 42vw);
+    top:calc(50% + 44vw);
     left:50%;
     transform:translateX(-50%);
     z-index:210;
