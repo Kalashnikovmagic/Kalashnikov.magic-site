@@ -960,8 +960,8 @@ body.format-modal-open{overflow:hidden}
   .hero__media .hero__canvas{
     transform:scale(.90);
     transform-origin:center center;
-    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 76%,transparent 100%);
-    mask-image:linear-gradient(90deg,#000 0%,#000 76%,transparent 100%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.28) 4%,#000 19%,#000 81%,rgba(0,0,0,.28) 96%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.28) 4%,#000 19%,#000 81%,rgba(0,0,0,.28) 96%,transparent 100%);
   }
   .hero__media::after{
     content:"";
@@ -970,25 +970,26 @@ body.format-modal-open{overflow:hidden}
     z-index:1;
     pointer-events:none;
     background:
-      linear-gradient(90deg,#050505 0%,rgba(5,5,5,.96) 2%,rgba(5,5,5,0) 18%,rgba(5,5,5,0) 82%,rgba(5,5,5,.96) 98%,#050505 100%);
+      linear-gradient(90deg,#050505 0%,rgba(5,5,5,.98) 3%,rgba(5,5,5,.76) 10%,rgba(5,5,5,0) 22%,rgba(5,5,5,0) 78%,rgba(5,5,5,.76) 90%,rgba(5,5,5,.98) 97%,#050505 100%),
+      linear-gradient(180deg,#050505 0%,rgba(5,5,5,.92) 3%,rgba(5,5,5,0) 19%,rgba(5,5,5,0) 81%,rgba(5,5,5,.92) 97%,#050505 100%);
   }
   .hero__scrim{
     z-index:2;
   }
   .format-modal[data-format="СВАДЬБА"] .format-modal__photo img{
-    object-position:center 40%;
+    object-position:center 32%;
   }
   .format-modal[data-format="ЧАСТНОЕ МЕРОПРИЯТИЕ"] .format-modal__photo img{
-    object-position:center 15%;
+    object-position:center 8%;
   }
   .format-modal[data-format="ВЫПУСКНОЙ ВЕЧЕР"] .format-modal__photo img{
-    object-position:center 35%;
+    object-position:center 22%;
   }
 
   .scene4__layer--base{
-    object-position:center 40%;
+    object-position:center 32%;
   }
   .scene4__layer--mid{
-    object-position:center 40%;
+    object-position:center 32%;
   }
 }
