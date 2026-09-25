@@ -951,3 +951,28 @@ body.format-modal-open{overflow:hidden}
     box-shadow:0 34px 95px rgba(0,0,0,.58);
   }
 }
+
+/* Desktop-only refinements for the current stable desktop build. */
+@media(min-width:821px){
+  .hero__media .hero__canvas{
+    transform:scale(.90);
+    transform-origin:center center;
+  }
+
+  .format-modal[data-format="СВАДЬБА"] .format-modal__photo img{
+    object-position:center 60%;
+  }
+  .format-modal[data-format="ЧАСТНОЕ МЕРОПРИЯТИЕ"] .format-modal__photo img{
+    object-position:center 37%;
+  }
+  .format-modal[data-format="ВЫПУСКНОЙ ВЕЧЕР"] .format-modal__photo img{
+    object-position:center 82%;
+  }
+
+  .scene4__layer--base{
+    object-position:center 58%;
+  }
+  .scene4__layer--mid{
+    object-position:center 58%;
+  }
+}
