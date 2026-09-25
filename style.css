@@ -581,4 +581,4 @@ body.format-modal-open{overflow:hidden}
 .surprise-card__front small{display:none !important}
 .surprise-card__front{transform:rotateY(0deg) !important}
 .surprise-card__front{direction:ltr}
-.playing-card--surprise .surprise-card__front{transform:rotateY(0deg) scaleX(-1) !important}
+.playing-card--surprise .surprise-card__front{transform:rotateY(0deg) scaleX(-1) !important; background-size:100% 100% !important}
