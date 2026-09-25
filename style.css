@@ -607,8 +607,12 @@ body.format-modal-open{overflow:hidden}
   }
 }
 
-/* Scene 2 intro: temporary single 360deg turn. Manual is-flipped remains the only persistent state. */
+/* Scene 2 intro: one 360deg turn only. Manual is-flipped remains the persistent state. */
 .playing-card.is-intro-spinning .playing-card__inner{
   transform:rotateY(360deg);
   transition:transform 1100ms ease-in-out !important;
+}
+/* Prevent the temporary class removal from animating the card back to 0deg. */
+.playing-card:not(.is-intro-spinning) .playing-card__inner{
+  transition:none;
 }
