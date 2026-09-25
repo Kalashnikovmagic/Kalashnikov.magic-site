@@ -173,9 +173,13 @@ function playFactsIntro(){
   });
 
   const delay=300;
+  const spinDuration=1100;
   cards.forEach((card,index)=>{
     setTimeout(()=>{
       card.classList.add('is-intro-spinning');
+      setTimeout(()=>{
+        card.classList.remove('is-intro-spinning');
+      },spinDuration);
     },index*delay);
   });
 }
