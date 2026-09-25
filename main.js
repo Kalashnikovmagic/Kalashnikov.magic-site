@@ -299,9 +299,8 @@ function updateTransition(){
       'brightness(.72) blur('+synchronizedBlur+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
-  // Let the King clear first; the pupils remain blurred a little longer.
-  const pupilBlur=clamp((.60-p)/.60,0,1)*18;
-  window.__kingPupilBlur=pupilBlur;
+  // Keep the pupils synchronized with the King artwork.
+  window.__kingPupilBlur=synchronizedBlur;
 
   const labelsP=clamp((p-.72)/.22,0,1);
   // Labels reveal only after the synchronized deblur is complete.
