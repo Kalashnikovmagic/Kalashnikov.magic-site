@@ -170,16 +170,16 @@ function playFactsIntro(){
   cards.forEach(card=>{
     card.classList.remove('is-flipped');
     card.classList.remove('is-intro-spinning');
+    card.classList.remove('is-intro-complete');
   });
 
-  const delay=1250;
+  const delay=1150;
   const spinDuration=1100;
   cards.forEach((card,index)=>{
     setTimeout(()=>{
       card.classList.add('is-intro-spinning');
       setTimeout(()=>{
         card.classList.remove('is-intro-spinning');
-        card.classList.add('is-intro-complete');
       },spinDuration);
     },index*delay);
   });
