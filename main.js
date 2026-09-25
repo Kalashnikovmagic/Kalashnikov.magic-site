@@ -477,12 +477,6 @@ document.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&formatModal?.classList.contains('is-open'))closeFormatModal();
 });
 
-console.log('Kalashnikov.magic — hero sequence 01–87 initialized.');
-
-
-
-
-
 /* SCENE 4 — isolated mobile morph */
 const scene4=$('#scene4');
 const scene4Mid=$('#scene4Mid');
