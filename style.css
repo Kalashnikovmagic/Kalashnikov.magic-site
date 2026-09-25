@@ -23,12 +23,9 @@ button{font:inherit;color:inherit}
 .hero__sticky,.facts__sticky,.transition__sticky{position:sticky;top:0;height:100vh;overflow:hidden}
 .hero__media{position:absolute;inset:0;background:#080808;overflow:hidden}
 .hero__canvas{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
-.hero__placeholder{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#555;font-family:var(--mono);letter-spacing:.16em;font-size:10px;transition:opacity 500ms ease}
-.hero__placeholder small{display:block;margin-top:8px;color:#333;letter-spacing:.08em}
-.hero.is-loaded .hero__placeholder{opacity:0;pointer-events:none}
 .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.45) 65%,#050505)}
 .hero__title{position:absolute;left:7vw;bottom:11vh;z-index:2}
-.hero__title p{margin:0 0 10px;font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--lime)}
+.hero__eyebrow{margin:0 0 10px;font-family:var(--mono);font-size:72px;font-weight:900;line-height:1;letter-spacing:.045em;color:var(--lime)}
 .hero__title h1{margin:0;font-size:clamp(48px,9vw,150px);line-height:.84;letter-spacing:-.065em;font-weight:600}
 .scene-index{position:absolute;right:4vw;bottom:4vh;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:#666}
 
@@ -222,7 +219,6 @@ button{font:inherit;color:inherit}
   }
 
   /* Desktop: keep each cinematic scene compact so the page moves faster. */
-  .hero{height:180vh}
   .facts{height:180vh}
   .transition{height:250vh}
 
@@ -260,7 +256,6 @@ button{font:inherit;color:inherit}
   .event-label--7{top:auto;left:auto;right:2%;bottom:16%;transform:none}
 
   .card-face--back small{font-size:15px;letter-spacing:.2em}
-  .hero__title p{font-size:16px}
   .scene-index{font-size:13px;letter-spacing:.18em}
   .facts__intro{font-size:14px}
   .facts__hint{font-size:14px;letter-spacing:.18em}
@@ -401,10 +396,9 @@ button{font:inherit;color:inherit}
 body.format-modal-open{overflow:hidden}
 
 @media(min-width:821px){
-  .hero__title p{font-size:0;}
-  .hero__title p::after{content:"ИЛЛЮЗИОНИСТ";font-size:72px;font-weight:900;letter-spacing:.045em;}
   .hero__title h1{display:none;}
-  .hero__title{left:50%;top:88%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center;}
+  .hero__title{left:50%;top:88%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center}
+  .hero__eyebrow{font-size:72px;font-weight:900;letter-spacing:.045em;}
 }
 
 .format-modal__photo img{object-position:center top;}
