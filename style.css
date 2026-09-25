@@ -570,14 +570,18 @@ body.format-modal-open{overflow:hidden}
 
 
 /* Scene 2 card backs: artwork only, without prompt overlays. */
-.card-face--back.scene2-card-back,
-.surprise-card__front{
+.card-face--back.scene2-card-back{
   display:flex;
   align-items:center;
   justify-content:center;
   background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.png') !important;
   background-size:cover !important;
   background-position:center !important;
+}
+.surprise-card__front{
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .card-face--back.scene2-card-back i,
 .card-face--back.scene2-card-back small,
