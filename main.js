@@ -297,8 +297,8 @@ function updateTransition(){
 
 let factsBankHold=null;
 window.addEventListener('scroll',()=>{
-  if(!factsSection || !factsSection.__bankCardHold)return;
-  const hold=factsSection.__bankCardHold;
+  if(!factsSection || !undefined)return;
+  const hold=undefined;
   if(performance.now()-hold.armed<220)return;
   const rect=factsSection.getBoundingClientRect();
   const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
@@ -307,12 +307,12 @@ window.addEventListener('scroll',()=>{
   if(inside && allFactsOpened() && p<.92){
     const d=window.scrollY-hold.top;
     if(Math.abs(d)>holdDistance){
-      factsSection.__bankCardHold=null;
+      undefined=null;
     }else if(Math.abs(d)>2){
       window.scrollTo({top:hold.top+Math.sign(d)*Math.min(Math.abs(d),holdDistance),behavior:'auto'});
     }
   }else if(p>=.92 || !inside){
-    factsSection.__bankCardHold=null;
+    undefined=null;
   }
 },{passive:true});
 
