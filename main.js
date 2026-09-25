@@ -289,18 +289,18 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.42-p)/.42,0,1);
-  // Use the same blur value for the pupils and the King artwork,
-  // keeping their deblur timing perfectly synchronized.
-  window.__kingPupilBlur=kingBlur*18;
+  const kingBlur=clamp((.52-p)/.52,0,1);
+  // One exact blur source controls both the King artwork and pupils.
+  // They therefore reach zero blur on the same scroll frame.
+  const synchronizedBlur=kingBlur*18;
+  window.__kingPupilBlur=synchronizedBlur;
   if(kingIllustration){
     kingIllustration.style.filter=
-      'brightness(.72) blur('+(kingBlur*18)+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
+      'brightness(.72) blur('+synchronizedBlur+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
   const labelsP=clamp((p-.72)/.22,0,1);
-  // На мобильном держим зрачки строго в центре допустимой амплитуды
-  // до полного снятия блюра и появления подписей форматов.
+  // Labels reveal only after the synchronized deblur is complete.
   const isMobile=window.matchMedia('(max-width:820px)').matches;
   kingPupilsFollowPointer=isMobile ? labelsP>0 : false;
   if(isMobile && labelsP===0){
