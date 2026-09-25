@@ -993,3 +993,22 @@ body.format-modal-open{overflow:hidden}
     object-position:center 24%;
   }
 }
+
+
+
+/* Custom mobile heading font */
+@font-face{
+  font-family:'KalashnikovHead';
+  src:url('e7fa3e0f70e1466b2f73ee1ac39c8c30.woff') format('woff');
+  font-style:normal;
+  font-weight:100 900;
+  font-display:swap;
+}
+@media(max-width:820px){
+  .hero__title h1,
+  .scene4__headline-title,
+  .scene5__header h2,
+  .transition__title{
+    font-family:'KalashnikovHead',Inter,Arial,sans-serif;
+  }
+}
