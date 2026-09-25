@@ -583,17 +583,17 @@ body.format-modal-open{overflow:hidden}
 .surprise-card__front i,
 .surprise-card__front small{display:none !important}
 
-/* Bank card back: no artwork. */
+/* Bank card back: use the JPEG from the repository root. */
 .playing-card--surprise .surprise-card__front{
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  background-image:none !important;
+  background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.jpeg') !important;
+  background-size:cover !important;
+  background-position:center !important;
 }
-.playing-card--surprise .surprise-card__front::before{
-  display:none !important;
-}
+.playing-card--surprise .surprise-card__front::before{display:none !important}
 
 /* Scene 2 facts heading: centered horizontally, same vertical position. */
 @media(max-width:820px){
