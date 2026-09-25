@@ -603,3 +603,15 @@ body.format-modal-open{overflow:hidden}
   z-index:0;
   pointer-events:none;
 }
+
+/* Scene 2 facts heading: centered horizontally, same vertical position. */
+@media(max-width:820px){
+  .facts__intro{
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
+    justify-content:center;
+    width:90vw;
+    text-align:center;
+  }
+}
