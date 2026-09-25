@@ -173,8 +173,8 @@ function playFactsIntro(){
     card.classList.remove('is-intro-complete');
   });
 
-  const delay=1150;
-  const spinDuration=1100;
+  const delay=950;
+  const spinDuration=1350;
   cards.forEach((card,index)=>{
     setTimeout(()=>{
       card.classList.add('is-intro-spinning');
