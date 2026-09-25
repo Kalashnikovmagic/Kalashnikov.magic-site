@@ -274,8 +274,8 @@ function updateTransition(){
   kingZoom.style.setProperty('--king-scale',zoom);
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.48-p)/.48,0,1);
-  const synchronizedBlur=kingBlur*18.75;
+  const kingBlur=0;
+  const synchronizedBlur=0;
   window.__kingPupilBlur=synchronizedBlur;
   if(kingIllustration){
     kingIllustration.style.filter=
