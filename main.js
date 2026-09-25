@@ -307,7 +307,7 @@ function updateTransition(){
       'brightness(.72) blur('+synchronizedBlur+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
-  const labelsP=clamp((p-.66)/.16,0,1);
+  const labelsP=clamp((p-.66)/.10,0,1);
   const isMobile=window.matchMedia('(max-width:820px)').matches;
   kingPupilsFollowPointer=isMobile ? labelsP>0 : false;
   if(isMobile && labelsP===0){
