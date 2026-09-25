@@ -1028,3 +1028,10 @@ body.format-modal-open{overflow:hidden}
     font-size:clamp(38px,7vw,58px);
   }
 }
+
+/* Mobile Scene 3 — slightly smaller event format labels. */
+@media(max-width:820px){
+  .event-label{
+    font-size:clamp(11px,2.9vw,16px);
+  }
+}
