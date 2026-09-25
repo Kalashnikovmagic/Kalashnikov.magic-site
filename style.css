@@ -167,18 +167,19 @@ button{font:inherit;color:inherit}
   .card-face--back{box-shadow:inset 0 0 0 6px #080808,inset 0 0 0 8px var(--lime)}
   .playing-card--surprise{width:88vw;height:auto;max-height:none;aspect-ratio:3/2}
   .surprise-card__blur{width:90vw;height:auto;aspect-ratio:3/2}
-  .transition{height:300vh}
+  .transition{height:300vh;position:relative;z-index:10}
+  .transition__sticky{z-index:10}
   .king-card{width:62vw}
   .king-illustration{transition:filter 120ms linear}
   .event-labels{inset:3vh 2vw}
   .event-label{font-size:clamp(13px,3.4vw,19px);letter-spacing:.025em;white-space:normal;max-width:30vw;text-shadow:0 2px 16px rgba(0,0,0,.98)}
-  .event-label--1{top:1%}
-  .event-label--2{top:18%;right:0}
-  .event-label--3{top:50%;right:0}
-  .event-label--4{bottom:18%;top:auto;right:-2vw;left:auto;transform:none;max-width:42vw}
-  .event-label--5{bottom:18%;left:0}
-  .event-label--6{top:50%;left:0}
-  .event-label--7{top:18%;left:0}
+  .event-label--1{top:8%}
+  .event-label--2{top:25%;right:0}
+  .event-label--3{top:57%;right:0}
+  .event-label--4{bottom:10%;top:auto;right:-2vw;left:auto;transform:none;max-width:42vw}
+  .event-label--5{bottom:10%;left:0}
+  .event-label--6{top:57%;left:0}
+  .event-label--7{top:25%;left:0}
 
 }
 @media(max-width:560px){
@@ -475,7 +476,7 @@ body.format-modal-open{overflow:hidden}
   .card-face--back small{font-size:18px;font-weight:700;color:var(--lime);letter-spacing:.16em}
   .facts__hint{font-size:17px;font-weight:700;letter-spacing:.12em;color:var(--lime)!important}
   .surprise-card__front small{font-size:18px;font-weight:700;color:var(--lime);letter-spacing:.16em}
-  .transition__title{position:absolute;top:5vh;left:50%;z-index:65;transform:translateX(-50%);width:90vw;text-align:center;color:var(--bone);font:800 5vw/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;pointer-events:none}
+  .transition__title{position:absolute;top:5vh;left:50%;z-index:200;transform:translateX(-50%);width:90vw;text-align:center;color:#fff;font:800 5vw/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;pointer-events:none}
   .event-label{animation:scene3Float 8s ease-in-out infinite}
   .event-label--2{animation-delay:-2s}.event-label--3{animation-delay:-4s}.event-label--4{animation-delay:-6s}
   .event-label--5{animation-delay:-1s}.event-label--6{animation-delay:-3s}.event-label--7{animation-delay:-5s}
