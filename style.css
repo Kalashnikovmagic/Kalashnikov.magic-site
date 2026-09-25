@@ -581,4 +581,22 @@ body.format-modal-open{overflow:hidden}
 .surprise-card__front small{display:none !important}
 .surprise-card__front{transform:rotateY(0deg) !important}
 .surprise-card__front{direction:ltr}
-.playing-card--surprise .surprise-card__front{transform:rotateY(90deg) !important; background-size:cover !important; background-position:center !important}
+.playing-card--surprise .surprise-card__front{transform:rotateY(0deg) !important; background-size:cover !important; background-position:center !important; position:absolute;}
+
+
+/* Bank card: rotate only the back artwork, not the card plane. */
+.playing-card--surprise .surprise-card__front{
+  overflow:hidden;
+}
+.playing-card--surprise .surprise-card__front::before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.png');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  transform:rotate(90deg);
+  z-index:0;
+  pointer-events:none;
+}
