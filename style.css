@@ -134,7 +134,7 @@ button{font:inherit;color:inherit}
 
 .transition{height:750vh;background:#000}
 .transition__sticky{display:grid;place-items:center;background:#000}
-.king-zoom{width:100%;height:100%;display:grid;place-items:center;transform:translate3d(0,0,0) scale(.01);transform-origin:50% 50%}
+.king-zoom{width:100%;height:100%;display:grid;place-items:center;transform:translate3d(var(--king-x,0px),var(--king-y,0px)) scale(var(--king-scale,4.5));transform-origin:50% 50%}
 .king-card{position:relative;width:min(43vw,640px);aspect-ratio:240/336;background:transparent;color:#eeeae1;overflow:visible;border:0;box-shadow:none}
 .transition .king-card:after{display:none}
 .transition .king-card > *{visibility:visible}
@@ -170,7 +170,7 @@ button{font:inherit;color:inherit}
   .transition{height:220vh;position:relative;z-index:10}
   .transition__sticky{z-index:10}
   .king-card{width:62vw}
-  .king-illustration{transition:filter 120ms linear}
+  .king-illustration{transition:none}
   .event-labels{inset:3vh 2vw}
   .event-label{font-size:clamp(13px,3.4vw,19px);letter-spacing:.025em;white-space:normal;max-width:30vw;text-shadow:0 2px 16px rgba(0,0,0,.98)}
   .event-label--1{top:8%}
