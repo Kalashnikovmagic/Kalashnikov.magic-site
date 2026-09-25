@@ -172,7 +172,7 @@ function playFactsIntro(){
     card.classList.remove('is-intro-spinning');
   });
 
-  const delay=300;
+  const delay=1250;
   const spinDuration=1100;
   cards.forEach((card,index)=>{
     setTimeout(()=>{
