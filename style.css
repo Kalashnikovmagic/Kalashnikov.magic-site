@@ -1025,6 +1025,6 @@ body.format-modal-open{overflow:hidden}
     font-family:'KalashnikovHead',Inter,Arial,sans-serif;
   }
   .scene4__headline-title{
-    font-size:clamp(48px,9vw,76px);
+    font-size:clamp(38px,7vw,58px);
   }
 }
