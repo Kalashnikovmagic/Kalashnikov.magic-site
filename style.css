@@ -402,7 +402,7 @@ body.format-modal-open{overflow:hidden}
 
 @media(min-width:821px){
   .hero__title p{font-size:0;}
-  .hero__title p::after{content:"СВАЙПАЙ ВНИЗ";font-size:24px;font-weight:700;letter-spacing:.16em;}
+  .hero__title p::after{content:"ИЛЛЮЗИОНИСТ";font-size:30px;font-weight:900;letter-spacing:.12em;}
   .hero__title h1{display:none;}
   .hero__title{left:50%;top:88%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center;}
 }
