@@ -483,6 +483,7 @@ const scene4=$('#scene4');
 const scene4Mid=$('#scene4Mid');
 const scene4Top=$('#scene4Top');
 const scene4Flash=$('#scene4Flash');
+const scene4NextPrompt=$('#scene4NextPrompt');
 const scene4Caps=[$('#scene4Cap0'),$('#scene4Cap1'),$('#scene4Cap2')];
 const scene4Headlines=[$('#scene4Headline0'),$('#scene4Headline1'),$('#scene4Headline2')];
 let scene4LastPhase=-1;
@@ -535,6 +536,9 @@ function updateScene4(){
     }
   }
 
+  // Show the next-step prompt only near the end of Scene 4, after the final image has settled.
+  const promptProgress=clamp((p-.90)/.07,0,1);
+  scene4NextPrompt?.classList.toggle('is-visible',promptProgress>0);
   const shake=second>0?Math.sin(second*Math.PI*10)*(1-second)*3:0;
   scene4Top.style.transform='translate3d('+shake+'px,0,0)';
 }
