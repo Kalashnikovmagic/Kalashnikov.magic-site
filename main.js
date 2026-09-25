@@ -252,32 +252,17 @@ function updateTransition(){
 
   const p=sectionProgress(transition);
   const card=kingZoom.querySelector('.king-card');
-  let maxZoom=12;
   let baseWidth=1;
   let baseHeight=1;
 
   if(card){
     baseWidth=Math.max(1,card.offsetWidth);
     baseHeight=Math.max(1,card.offsetHeight);
-
-    // KS.svg is a full K♠ card. The final zoom is calculated from
-    // the portrait area so the eyes remain the visual focal point.
-    const eyeRegionWidth=baseWidth*.14;
-    const eyeRegionHeight=baseHeight*.20;
-    const calculatedZoom=Math.max(
-      4,
-      window.innerWidth/Math.max(1,eyeRegionWidth),
-      window.innerHeight/Math.max(1,eyeRegionHeight)
-    );
-    maxZoom=Math.min(calculatedZoom,4.5);
   }
 
-  // Start the zoom before the transition block reaches the middle
-  // of the viewport. The earlier 0.12 → 1.00 trigger point gives the
-  // card room to enter already moving rather than waiting for center.
-  const zoomProgress=clamp((p-.12)/.88,0,1);
-  const reveal=.12+.88*(1-Math.pow(1-zoomProgress,3.6));
-  const zoom=lerp(.01,maxZoom,reveal);
+  // No zoom animation: keep the King immediately in its final focal position.
+  const maxZoom=4.5;
+  const zoom=maxZoom;
 
   const eyeX=baseWidth*.578;
   const eyeY=baseHeight*.315;
@@ -290,8 +275,6 @@ function updateTransition(){
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
   const kingBlur=clamp((.52-p)/.52,0,1);
-  // One exact blur source controls both the King artwork and pupils.
-  // They therefore reach zero blur on the same scroll frame.
   const synchronizedBlur=kingBlur*18.75;
   window.__kingPupilBlur=synchronizedBlur;
   if(kingIllustration){
@@ -299,11 +282,9 @@ function updateTransition(){
       'brightness(.72) blur('+synchronizedBlur+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
 
-  // Keep the pupils synchronized with the King artwork.
   window.__kingPupilBlur=synchronizedBlur;
 
   const labelsP=clamp((p-.72)/.22,0,1);
-  // Labels reveal only after the synchronized deblur is complete.
   const isMobile=window.matchMedia('(max-width:820px)').matches;
   kingPupilsFollowPointer=isMobile ? labelsP>0 : false;
   if(isMobile && labelsP===0){
@@ -313,25 +294,6 @@ function updateTransition(){
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
-
-let scene3WheelLock=0;
-window.addEventListener('wheel',(e)=>{
-  if(!transition || window.matchMedia('(min-width:821px)').matches)return;
-  const rect=transition.getBoundingClientRect();
-  const p=sectionProgress(transition);
-  const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
-  if(!inside || p<=0.02 || p>=0.78 || Math.abs(e.deltaY)<2)return;
-  const now=performance.now();
-  if(now-scene3WheelLock<120){
-    e.preventDefault();
-    return;
-  }
-  scene3WheelLock=now;
-  e.preventDefault();
-  const direction=e.deltaY>0?1:-1;
-  const step=Math.min(Math.abs(e.deltaY),65);
-  window.scrollTo({top:window.scrollY+direction*step,behavior:'smooth'});
-},{passive:false});
 
 function updateHero(){
   const p=sectionProgress(hero);
