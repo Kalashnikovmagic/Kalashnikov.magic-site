@@ -223,7 +223,7 @@ const transitionHint=$('.transition__hint');
 const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right'),lowerLeft:document.querySelector('.king-pupil--lower-left'),lowerRight:document.querySelector('.king-pupil--lower-right')};
-const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85},lowerLeft:{x:690,y:510},lowerRight:{x:805,y:470}};
+const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85},lowerLeft:{x:513.917,y:1679.5},lowerRight:{x:364.563,y:1681.15}};
 const kingPupilMotionDesktop={left:{x:0.004,y:0.009},right:{x:0.0032,y:0.009},lowerLeft:{x:0.0035,y:0.007},lowerRight:{x:0.003,y:0.007}};
 const kingPupilMotionMobile={left:{x:0.022,y:0.009},right:{x:0.018,y:0.009},lowerLeft:{x:0.018,y:0.007},lowerRight:{x:0.016,y:0.007}};
 const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
