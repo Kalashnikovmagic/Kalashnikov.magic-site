@@ -260,10 +260,8 @@ function updateTransition(){
     baseHeight=Math.max(1,card.offsetHeight);
   }
 
-  // No zoom animation: keep the King immediately in its final focal position.
-  const maxZoom=4.5;
-  const zoom=maxZoom;
-
+  // King is always rendered in its final focal position. No reveal/zoom animation.
+  const zoom=4.5;
   const eyeX=baseWidth*.578;
   const eyeY=baseHeight*.315;
   const cardCenterX=baseWidth*.5;
@@ -271,7 +269,9 @@ function updateTransition(){
   const offsetX=(cardCenterX-eyeX)*zoom;
   const offsetY=(cardCenterY-eyeY)*zoom;
 
-  kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
+  kingZoom.style.setProperty('--king-x',offsetX+'px');
+  kingZoom.style.setProperty('--king-y',offsetY+'px');
+  kingZoom.style.setProperty('--king-scale',zoom);
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
   const kingBlur=clamp((.48-p)/.48,0,1);
@@ -281,8 +281,6 @@ function updateTransition(){
     kingIllustration.style.filter=
       'brightness(.72) blur('+synchronizedBlur+'px) drop-shadow(0 30px 90px rgba(0,0,0,.78))';
   }
-
-  window.__kingPupilBlur=synchronizedBlur;
 
   const labelsP=clamp((p-.72)/.22,0,1);
   const isMobile=window.matchMedia('(max-width:820px)').matches;
@@ -294,27 +292,6 @@ function updateTransition(){
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
-
-let factsBankHold=null;
-window.addEventListener('scroll',()=>{
-  if(!factsSection || !undefined)return;
-  const hold=undefined;
-  if(performance.now()-hold.armed<220)return;
-  const rect=factsSection.getBoundingClientRect();
-  const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
-  const p=sectionProgress(factsSection);
-  const holdDistance=window.innerHeight*0.22;
-  if(inside && allFactsOpened() && p<.92){
-    const d=window.scrollY-hold.top;
-    if(Math.abs(d)>holdDistance){
-      undefined=null;
-    }else if(Math.abs(d)>2){
-      window.scrollTo({top:hold.top+Math.sign(d)*Math.min(Math.abs(d),holdDistance),behavior:'auto'});
-    }
-  }else if(p>=.92 || !inside){
-    undefined=null;
-  }
-},{passive:true});
 
 function updateHero(){
   const p=sectionProgress(hero);
