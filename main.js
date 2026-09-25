@@ -167,17 +167,17 @@ function playFactsIntro(){
   factsIntroPlayed=true;
 
   const cards=factCards;
-  cards.forEach(card=>{
-    card.classList.remove('is-flipped');
-    card.classList.remove('is-intro-spinning');
-    card.classList.remove('is-intro-complete');
-  });
-
   const delay=950;
   const spinDuration=1350;
+
   cards.forEach((card,index)=>{
+    card.classList.remove('is-intro-complete');
+    card.classList.remove('is-intro-spinning');
+    card.classList.remove('is-flipped');
+
     setTimeout(()=>{
       card.classList.add('is-intro-spinning');
+
       setTimeout(()=>{
         card.classList.remove('is-intro-spinning');
       },spinDuration);
