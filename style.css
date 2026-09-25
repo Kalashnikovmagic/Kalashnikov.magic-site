@@ -403,7 +403,7 @@ body.format-modal-open{overflow:hidden}
 
 @media(min-width:821px){
   .hero__title p{font-size:0;}
-  .hero__title p::after{content:"ИЛЛЮЗИОНИСТ";font-size:40px;font-weight:900;letter-spacing:.09em;}
+  .hero__title p::after{content:"ИЛЛЮЗИОНИСТ";font-size:52px;font-weight:900;letter-spacing:.07em;}
   .hero__title h1{display:none;}
   .hero__title{left:50%;top:88%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center;}
 }
@@ -476,7 +476,7 @@ body.format-modal-open{overflow:hidden}
   .card-face--back small{font-size:18px;font-weight:700;color:var(--lime);letter-spacing:.16em}
   .facts__hint{font-size:17px;font-weight:700;letter-spacing:.12em;color:var(--lime)!important}
   .surprise-card__front small{font-size:18px;font-weight:700;color:var(--lime);letter-spacing:.16em}
-  .transition__title{position:absolute;top:5vh;left:50%;z-index:200;transform:translateX(-50%);width:90vw;text-align:center;color:#fff;font:800 5vw/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;pointer-events:none}
+  .transition__title{position:absolute;top:calc(5vh - 2px);left:50%;z-index:200;transform:translateX(-50%);width:90vw;text-align:center;color:#fff;font:800 6.2vw/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;pointer-events:none}
   .event-label{animation:scene3Float 8s ease-in-out infinite}
   .event-label--2{animation-delay:-2s}.event-label--3{animation-delay:-4s}.event-label--4{animation-delay:-6s}
   .event-label--5{animation-delay:-1s}.event-label--6{animation-delay:-3s}.event-label--7{animation-delay:-5s}
