@@ -607,16 +607,8 @@ body.format-modal-open{overflow:hidden}
   }
 }
 
-/* Scene 2 intro: one slow 360deg turn, then freeze on the back without rewinding. */
+/* Scene 2 intro: temporary single 360deg turn. Manual is-flipped remains the only persistent state. */
 .playing-card.is-intro-spinning .playing-card__inner{
   transform:rotateY(360deg);
   transition:transform 1100ms ease-in-out !important;
-}
-.playing-card.is-intro-complete .playing-card__inner{
-  transform:rotateY(360deg);
-  transition:none !important;
-}
-.playing-card.is-intro-spinning.is-flipped .playing-card__inner{
-  transform:rotateY(180deg);
-  transition:transform 900ms var(--ease) !important;
 }
