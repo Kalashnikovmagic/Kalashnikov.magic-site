@@ -289,6 +289,8 @@ function updateTransition(){
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
   const kingBlur=clamp((.42-p)/.42,0,1);
+  // Use the same blur value for the pupils and the King artwork,
+  // keeping their deblur timing perfectly synchronized.
   window.__kingPupilBlur=kingBlur*18;
   if(kingIllustration){
     kingIllustration.style.filter=
