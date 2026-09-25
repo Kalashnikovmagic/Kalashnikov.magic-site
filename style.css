@@ -566,3 +566,19 @@ body.format-modal-open{overflow:hidden}
 @media(min-width:821px){
   .transition__king-caption,.transition__cta{display:none}
 }
+
+
+/* Scene 2 card backs: artwork only, without prompt overlays. */
+.card-face--back.scene2-card-back,
+.surprise-card__front{
+  background-image:url('3534258F-1C89-4927-B469-1847B963B4BF.png') !important;
+  background-size:cover !important;
+  background-position:center !important;
+}
+.card-face--back.scene2-card-back i,
+.card-face--back.scene2-card-back small,
+.surprise-card__front i,
+.surprise-card__front small{display:none !important}
+.surprise-card__front{transform:rotateY(0deg) !important}
+.surprise-card__front{direction:ltr}
+.playing-card--surprise .surprise-card__front{transform:rotateY(0deg) scaleX(-1) !important}
