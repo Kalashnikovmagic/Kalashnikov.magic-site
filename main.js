@@ -171,16 +171,33 @@ function playFactsIntro(){
   const spinDuration=1350;
 
   cards.forEach((card,index)=>{
-    card.classList.remove('is-intro-complete');
-    card.classList.remove('is-intro-spinning');
     card.classList.remove('is-flipped');
+    card.classList.remove('is-intro-spinning');
+    card.classList.remove('is-intro-complete');
 
     setTimeout(()=>{
+      const inner=card.querySelector('.playing-card__inner');
+      if(!inner)return;
+
       card.classList.add('is-intro-spinning');
 
-      setTimeout(()=>{
+      const animation=inner.animate(
+        [
+          {transform:'rotateY(0deg)'},
+          {transform:'rotateY(360deg)'}
+        ],
+        {
+          duration:spinDuration,
+          easing:'ease-in-out',
+          fill:'forwards'
+        }
+      );
+
+      animation.finished.then(()=>{
         card.classList.remove('is-intro-spinning');
-      },spinDuration);
+        inner.style.transform='rotateY(360deg)';
+        inner.style.transition='none';
+      });
     },index*delay);
   });
 }
