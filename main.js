@@ -204,11 +204,6 @@ function updateFacts(){
     factsSection.classList.toggle('is-revealing',scrollAfterUnlock>=revealStart);
     factsSection.classList.toggle('is-surprise',scrollAfterUnlock>=surpriseStart);
 
-    // Hold the user on the surprise bank-card moment until it has been visible.
-    if(scrollAfterUnlock>=surpriseStart && !factsSection.__bankCardHold){
-      factsSection.__bankCardHold={top:window.scrollY,armed:performance.now()};
-    }
-
     if(factsHint){
       factsHint.textContent='ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
     }
@@ -279,7 +274,7 @@ function updateTransition(){
   kingZoom.style.transform='translate3d('+offsetX+'px,'+offsetY+'px,0) scale('+zoom+')';
 
   const kingIllustration=kingZoom.querySelector('.king-illustration');
-  const kingBlur=clamp((.52-p)/.52,0,1);
+  const kingBlur=clamp((.48-p)/.48,0,1);
   const synchronizedBlur=kingBlur*18.75;
   window.__kingPupilBlur=synchronizedBlur;
   if(kingIllustration){
@@ -318,42 +313,6 @@ window.addEventListener('scroll',()=>{
     }
   }else if(p>=.92 || !inside){
     factsSection.__bankCardHold=null;
-  }
-},{passive:true});
-
-let scene3LockTarget=null;
-let scene3LockActive=false;
-let scene3LockArmedAt=0;
-
-function setScene3Hold(){
-  if(!transition || window.matchMedia('(min-width:821px)').matches)return;
-  scene3LockTarget=window.scrollY;
-  scene3LockActive=true;
-  scene3LockArmedAt=performance.now();
-}
-
-function updateScene3Hold(){
-  if(!transition || window.matchMedia('(min-width:821px)').matches)return;
-  const p=sectionProgress(transition);
-  const rect=transition.getBoundingClientRect();
-  const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
-  const labelsVisible=p>=.72;
-  if(inside && labelsVisible && !scene3LockActive){
-    setScene3Hold();
-  }
-  if((!inside || p>=.92 || p<=.02) && scene3LockActive){
-    scene3LockActive=false;
-    scene3LockTarget=null;
-  }
-}
-
-window.addEventListener('scroll',()=>{
-  updateScene3Hold();
-  if(!scene3LockActive || scene3LockTarget===null)return;
-  if(performance.now()-scene3LockArmedAt<180)return;
-  const delta=window.scrollY-scene3LockTarget;
-  if(Math.abs(delta)>2){
-    window.scrollTo({top:scene3LockTarget,behavior:'auto'});
   }
 },{passive:true});
 
