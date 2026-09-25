@@ -625,7 +625,7 @@ body.format-modal-open{overflow:hidden}
     left:6vw;
     top:auto;
     right:auto;
-    bottom:9vh;
+    bottom:14vh;
     transform:none;
     text-align:left;
   }
@@ -987,9 +987,9 @@ body.format-modal-open{overflow:hidden}
   }
 
   .scene4__layer--base{
-    object-position:center 32%;
+    object-position:center 24%;
   }
   .scene4__layer--mid{
-    object-position:center 32%;
+    object-position:center 24%;
   }
 }
