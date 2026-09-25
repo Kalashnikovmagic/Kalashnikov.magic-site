@@ -8,7 +8,6 @@ const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const hero=$('#hero');
 const heroCanvas=$('#heroCanvas');
 const heroContext=heroCanvas?.getContext('2d',{alpha:false});
-const heroPlaceholder=$('#heroPlaceholder');
 
 const HERO_FRAME_COUNT_MOBILE=87;
 const HERO_FRAME_COUNT_DESKTOP=142;
@@ -111,8 +110,7 @@ function loadHeroFrame(index){
 
       if(index===0){
         heroLoaded=true;
-        hero?.classList.add('is-loaded');
-        setHeroFrame(0);
+                setHeroFrame(0);
       }
 
       resolve(image);
