@@ -162,17 +162,20 @@ const factsHint=$('#factsHint');
 let factsUnlockedAtScroll=null;
 
 let factsIntroPlayed=false;
-let factsIntroTimer=null;
 function playFactsIntro(){
   if(factsIntroPlayed)return;
   factsIntroPlayed=true;
+
   const cards=factCards;
-  cards.forEach(card=>card.classList.remove('is-flipped'));
-  const delay=650;
+  cards.forEach(card=>{
+    card.classList.remove('is-flipped');
+    card.classList.remove('is-intro-spinning');
+  });
+
+  const delay=360;
   cards.forEach((card,index)=>{
     setTimeout(()=>{
-      card.classList.add('is-flipped');
-      setTimeout(()=>card.classList.remove('is-flipped'),520);
+      card.classList.add('is-intro-spinning');
     },index*delay);
   });
 }
