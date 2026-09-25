@@ -503,14 +503,29 @@ function scene4CrackReveal(progress,seed){
 function updateScene4(){
   if(!scene4||!scene4Mid||!scene4Top||window.matchMedia('(min-width:821px)').matches)return;
   const p=sectionProgress(scene4);
-  // Same timing windows as the supplied reference: 0.08→0.42 and 0.56→0.92.
+
+  // Background transitions happen first. The headline changes only
+  // after the corresponding wipe is almost completely finished.
   const first=clamp((p-.08)/.34,0,1);
   const second=clamp((p-.56)/.36,0,1);
+
   scene4Mid.style.clipPath=scene4CrackReveal(first,1.7);
   scene4Top.style.clipPath=scene4CrackReveal(second,4.2);
-  const phase=second>0?2:(first>0?1:0);
-  scene4Caps.forEach((el,i)=>el?.classList.toggle('is-active',i===phase));
+
+  // Delay the title switch until the end of each background animation.
+  // 0 → 1 switches at ~92% of the first wipe.
+  // 1 → 2 switches at ~92% of the second wipe.
+  const firstFinished=first>=.92;
+  const secondFinished=second>=.92;
+  let phase=0;
+  if(secondFinished){
+    phase=2;
+  }else if(firstFinished){
+    phase=1;
+  }
+
   scene4Headlines.forEach((el,i)=>el?.classList.toggle('is-active',i===phase));
+
   if(phase!==scene4LastPhase){
     scene4LastPhase=phase;
     if(scene4Flash){
@@ -519,6 +534,7 @@ function updateScene4(){
       requestAnimationFrame(()=>{scene4Flash.style.transition='opacity 420ms ease-out';scene4Flash.style.opacity='0'});
     }
   }
+
   const shake=second>0?Math.sin(second*Math.PI*10)*(1-second)*3:0;
   scene4Top.style.transform='translate3d('+shake+'px,0,0)';
 }
