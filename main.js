@@ -292,7 +292,7 @@ function updateTransition(){
   const kingBlur=clamp((.52-p)/.52,0,1);
   // One exact blur source controls both the King artwork and pupils.
   // They therefore reach zero blur on the same scroll frame.
-  const synchronizedBlur=kingBlur*18;
+  const synchronizedBlur=kingBlur*18.75;
   window.__kingPupilBlur=synchronizedBlur;
   if(kingIllustration){
     kingIllustration.style.filter=
