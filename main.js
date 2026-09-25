@@ -161,6 +161,21 @@ const surpriseMessage=$('#surpriseMessage');
 const factsHint=$('#factsHint');
 let factsUnlockedAtScroll=null;
 
+let factsIntroPlayed=false;
+let factsIntroTimer=null;
+function playFactsIntro(){
+  if(factsIntroPlayed)return;
+  factsIntroPlayed=true;
+  const cards=factCards;
+  cards.forEach(card=>card.classList.remove('is-flipped'));
+  const delay=650;
+  cards.forEach((card,index)=>{
+    setTimeout(()=>{
+      card.classList.add('is-flipped');
+      setTimeout(()=>card.classList.remove('is-flipped'),520);
+    },index*delay);
+  });
+}
 factCards.forEach(card=>{
   card.addEventListener('click',()=>{
     card.classList.toggle('is-flipped');
@@ -346,6 +361,12 @@ function updateAll(){
   updateHero();
   updateFacts();
   updateTransition();
+
+  if(factsSection){
+    const rect=factsSection.getBoundingClientRect();
+    const entered=rect.top<=window.innerHeight*0.7 && rect.bottom>=window.innerHeight*0.3;
+    if(entered) playFactsIntro();
+  }
 }
 
 let scrollVelocity=0;
