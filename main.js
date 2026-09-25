@@ -549,7 +549,7 @@ function scene4CrackReveal(progress,seed){
   return 'polygon('+points.join(',')+')';
 }
 function updateScene4(){
-  if(!scene4||!scene4Mid||!scene4Top||window.matchMedia('(min-width:821px)').matches)return;
+  if(!scene4||!scene4Mid||!scene4Top)return;
   const p=sectionProgress(scene4);
 
   // Background transitions happen first. The headline changes only
