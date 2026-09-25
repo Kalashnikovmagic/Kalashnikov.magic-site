@@ -223,15 +223,40 @@ const transitionHint=$('.transition__hint');
 const kingCard=$('#kingCard');
 
 const kingPupils={left:document.querySelector('.king-pupil--left'),right:document.querySelector('.king-pupil--right')};
-const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85}};
+const kingPupilAnchors={left:{x:786.083,y:320.5},right:{x:935.437,y:318.85},lowerLeft:{x:745.518,y:332.838},lowerRight:{x:891.437,y:316.773}};
 const kingPupilMotionDesktop={left:{x:0.008,y:0.009},right:{x:0.0065,y:0.009}};
-const kingPupilMotionMobile={left:{x:0.035,y:0.009},right:{x:0.028,y:0.009}};
+const kingPupilMotionMobile={left:{x:0.022,y:0.009},right:{x:0.018,y:0.009},lowerLeft:{x:0.018,y:0.007},lowerRight:{x:0.016,y:0.007}};
 const kingPupilMotion=window.matchMedia('(max-width:820px)').matches?kingPupilMotionMobile:kingPupilMotionDesktop;
-const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0}};
+const kingPupilState={targetX:.5,targetY:.5,left:{x:0,y:0},right:{x:0,y:0},lowerLeft:{x:0,y:0},lowerRight:{x:0,y:0}};
 let kingPupilsFollowPointer=false;
 function updateKingPupils(clientX,clientY){if(!kingCard)return;const rect=kingCard.getBoundingClientRect();if(rect.width<=0||rect.height<=0)return;kingPupilState.targetX=clamp((clientX-rect.left)/rect.width,0,1);kingPupilState.targetY=clamp((clientY-rect.top)/rect.height,0,1)}
 function kingAnchorToCard(a){const width=kingCard?.clientWidth||0;const height=kingCard?.clientHeight||0;const useX=(a.x/1300)*164.8-82.4;const useY=(a.y/2000)*260.8-130.4;return{x:((useX+120)/240)*width,y:((useY+168)/336)*height}}
-function animateKingPupils(){if(kingCard&&kingPupils.left&&kingPupils.right){const rect=kingCard.getBoundingClientRect();if(rect.width>0&&rect.height>0){const blur=window.__kingPupilBlur||0;for(const side of ['left','right']){const a=kingAnchorToCard(kingPupilAnchors[side]);const motion=kingPupilMotion[side];const inputX=kingPupilsFollowPointer?kingPupilState.targetX:.5;const inputY=kingPupilsFollowPointer?kingPupilState.targetY:.5;const dx=(inputX-.5)*(kingCard.clientWidth||0)*motion.x;const dy=(inputY-.5)*(kingCard.clientHeight||0)*motion.y;const state=kingPupilState[side];state.x+=(a.x+dx-state.x)*.22;state.y+=(a.y+dy-state.y)*.22;kingPupils[side].style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)';kingPupils[side].style.filter='blur('+blur+'px)'}}}requestAnimationFrame(animateKingPupils)}
+function animateKingPupils(){
+  if(kingCard){
+    const rect=kingCard.getBoundingClientRect();
+    if(rect.width>0&&rect.height>0){
+      const blur=window.__kingPupilBlur||0;
+      const sides=['left','right','lowerLeft','lowerRight'];
+      for(const side of sides){
+        const pupil=kingPupils[side];
+        const anchor=kingPupilAnchors[side];
+        const motion=kingPupilMotion[side];
+        if(!pupil||!anchor||!motion)continue;
+        const a=kingAnchorToCard(anchor);
+        const inputX=kingPupilsFollowPointer?kingPupilState.targetX:.5;
+        const inputY=kingPupilsFollowPointer?kingPupilState.targetY:.5;
+        const dx=(inputX-.5)*(kingCard.clientWidth||0)*motion.x;
+        const dy=(inputY-.5)*(kingCard.clientHeight||0)*motion.y;
+        const state=kingPupilState[side];
+        state.x+=(a.x+dx-state.x)*.22;
+        state.y+=(a.y+dy-state.y)*.22;
+        pupil.style.transform='translate3d('+state.x+'px,'+state.y+'px,0) translate(-50%,-50%)';
+        pupil.style.filter='blur('+blur+'px)';
+      }
+    }
+  }
+  requestAnimationFrame(animateKingPupils);
+}
 window.addEventListener('pointermove',event=>updateKingPupils(event.clientX,event.clientY),{passive:true});
 animateKingPupils();
 
