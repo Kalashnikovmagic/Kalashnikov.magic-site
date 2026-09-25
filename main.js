@@ -484,6 +484,7 @@ const scene4Mid=$('#scene4Mid');
 const scene4Top=$('#scene4Top');
 const scene4Flash=$('#scene4Flash');
 const scene4Caps=[$('#scene4Cap0'),$('#scene4Cap1'),$('#scene4Cap2')];
+const scene4Headlines=[$('#scene4Headline0'),$('#scene4Headline1'),$('#scene4Headline2')];
 let scene4LastPhase=-1;
 function scene4CrackReveal(progress,seed){
   const p=clamp(progress,0,1);
@@ -509,6 +510,7 @@ function updateScene4(){
   scene4Top.style.clipPath=scene4CrackReveal(second,4.2);
   const phase=second>0?2:(first>0?1:0);
   scene4Caps.forEach((el,i)=>el?.classList.toggle('is-active',i===phase));
+  scene4Headlines.forEach((el,i)=>el?.classList.toggle('is-active',i===phase));
   if(phase!==scene4LastPhase){
     scene4LastPhase=phase;
     if(scene4Flash){
