@@ -167,7 +167,7 @@ function playFactsIntro(){
   factsIntroPlayed=true;
 
   const cards=factCards;
-  const delay=950;
+  const delay=800;
   const spinDuration=1350;
 
   cards.forEach((card,index)=>{
@@ -175,12 +175,15 @@ function playFactsIntro(){
     card.classList.remove('is-intro-spinning');
     card.classList.remove('is-intro-complete');
 
-    setTimeout(()=>{
-      const inner=card.querySelector('.playing-card__inner');
-      if(!inner)return;
+    const inner=card.querySelector('.playing-card__inner');
+    if(!inner)return;
 
+    setTimeout(()=>{
       card.classList.add('is-intro-spinning');
 
+      // The Web Animation owns the intro rotation. Keep it out of the
+      // persistent inline transform so the normal CSS is-flipped rule
+      // remains the only source of truth for manual interaction.
       const animation=inner.animate(
         [
           {transform:'rotateY(0deg)'},
@@ -189,14 +192,13 @@ function playFactsIntro(){
         {
           duration:spinDuration,
           easing:'ease-in-out',
-          fill:'forwards'
+          fill:'both'
         }
       );
 
       animation.finished.then(()=>{
+        animation.cancel();
         card.classList.remove('is-intro-spinning');
-        inner.style.transform='rotateY(360deg)';
-        inner.style.transition='none';
       });
     },index*delay);
   });
