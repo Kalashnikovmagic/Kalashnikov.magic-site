@@ -476,41 +476,44 @@ console.log('Kalashnikov.magic — hero sequence 01–87 initialized.');
 
 
 
-/* SCENE 4 — mobile-only crack morph */
+
+
+/* SCENE 4 — isolated mobile morph */
 const scene4=$('#scene4');
-const scene4Base=$('#scene4Base');
 const scene4Mid=$('#scene4Mid');
 const scene4Top=$('#scene4Top');
 const scene4Flash=$('#scene4Flash');
 const scene4Caps=[$('#scene4Cap0'),$('#scene4Cap1'),$('#scene4Cap2')];
 let scene4LastPhase=-1;
-function scene4Clip(p,seed){
-  p=clamp(p,0,1);
+function scene4CrackReveal(progress,seed){
+  const p=clamp(progress,0,1);
   if(p<=0)return 'polygon(0 0,100% 0,100% 0,0 0)';
   if(p>=1)return 'polygon(0 0,100% 0,100% 100%,0 100%)';
-  const n=22,pts=['0% 0%','100% 0%'];
-  for(let i=n;i>=0;i--){
-    const x=(i/n)*100;
-    const wave=Math.sin(i*2.17+seed)*4.8;
-    const y=clamp(p*100+wave*(1-Math.abs(.5-p)*1.6),0,100);
-    pts.push(x.toFixed(2)+'% '+y.toFixed(2)+'%');
+  const teeth=20;
+  const points=['0% 0%','100% 0%'];
+  for(let i=teeth;i>=0;i--){
+    const x=100*i/teeth;
+    const wave=Math.sin(i*2.25+seed)*5.5;
+    const y=clamp(p*100+wave*(1-Math.abs(p-.5)),0,100);
+    points.push(x.toFixed(2)+'% '+y.toFixed(2)+'%');
   }
-  return 'polygon('+pts.join(',')+')';
+  return 'polygon('+points.join(',')+')';
 }
 function updateScene4(){
   if(!scene4||!scene4Mid||!scene4Top||window.matchMedia('(min-width:821px)').matches)return;
   const p=sectionProgress(scene4);
+  // Same timing windows as the supplied reference: 0.08→0.42 and 0.56→0.92.
   const first=clamp((p-.08)/.34,0,1);
   const second=clamp((p-.56)/.36,0,1);
-  scene4Mid.style.clipPath=scene4Clip(first,1.7);
-  scene4Top.style.clipPath=scene4Clip(second,4.2);
-  const phase=second>0?2:first>0?1:0;
+  scene4Mid.style.clipPath=scene4CrackReveal(first,1.7);
+  scene4Top.style.clipPath=scene4CrackReveal(second,4.2);
+  const phase=second>0?2:(first>0?1:0);
   scene4Caps.forEach((el,i)=>el?.classList.toggle('is-active',i===phase));
   if(phase!==scene4LastPhase){
     scene4LastPhase=phase;
     if(scene4Flash){
       scene4Flash.style.transition='none';
-      scene4Flash.style.opacity=phase===2?'0.3':'0.16';
+      scene4Flash.style.opacity=phase===2?'0.30':'0.16';
       requestAnimationFrame(()=>{scene4Flash.style.transition='opacity 420ms ease-out';scene4Flash.style.opacity='0'});
     }
   }
@@ -518,3 +521,4 @@ function updateScene4(){
   scene4Top.style.transform='translate3d('+shake+'px,0,0)';
 }
 window.addEventListener('scroll',updateScene4,{passive:true});
+updateScene4();
