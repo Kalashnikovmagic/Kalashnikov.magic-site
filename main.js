@@ -314,6 +314,25 @@ function updateTransition(){
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
 
+let scene3WheelLock=0;
+window.addEventListener('wheel',(e)=>{
+  if(!transition || window.matchMedia('(min-width:821px)').matches)return;
+  const rect=transition.getBoundingClientRect();
+  const p=sectionProgress(transition);
+  const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
+  if(!inside || p<=0.02 || p>=0.78 || Math.abs(e.deltaY)<2)return;
+  const now=performance.now();
+  if(now-scene3WheelLock<120){
+    e.preventDefault();
+    return;
+  }
+  scene3WheelLock=now;
+  e.preventDefault();
+  const direction=e.deltaY>0?1:-1;
+  const step=Math.min(Math.abs(e.deltaY),65);
+  window.scrollTo({top:window.scrollY+direction*step,behavior:'smooth'});
+},{passive:false});
+
 function updateHero(){
   const p=sectionProgress(hero);
   const title=$('[data-hero-title]');
