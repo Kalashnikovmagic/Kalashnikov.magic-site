@@ -268,6 +268,7 @@ button{font:inherit;color:inherit}
   position:fixed;
   inset:0;
   z-index:80;
+  display:none;
   display:grid;
   place-items:center;
   opacity:0;
@@ -276,6 +277,7 @@ button{font:inherit;color:inherit}
   transition:opacity 600ms var(--ease),visibility 0s linear 600ms;
 }
 .format-modal.is-open{
+  display:grid;
   opacity:1;
   visibility:visible;
   pointer-events:auto;
