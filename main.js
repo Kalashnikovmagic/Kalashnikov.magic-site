@@ -198,11 +198,16 @@ function updateFacts(){
     if(factsUnlockedAtScroll===null) factsUnlockedAtScroll=window.scrollY;
 
     const scrollAfterUnlock=Math.max(0,window.scrollY-factsUnlockedAtScroll);
-    const revealStart=140;
-    const surpriseStart=360;
+    const revealStart=80;
+    const surpriseStart=160;
 
     factsSection.classList.toggle('is-revealing',scrollAfterUnlock>=revealStart);
     factsSection.classList.toggle('is-surprise',scrollAfterUnlock>=surpriseStart);
+
+    // Hold the user on the surprise bank-card moment until it has been visible.
+    if(scrollAfterUnlock>=surpriseStart && !factsSection.__bankCardHold){
+      factsSection.__bankCardHold={top:window.scrollY,armed:performance.now()};
+    }
 
     if(factsHint){
       factsHint.textContent='ПРОДОЛЖАЙТЕ СКРОЛЛИТЬ';
@@ -294,6 +299,58 @@ function updateTransition(){
   transitionLabels.style.opacity=labelsP;
   transitionLabels.style.filter='blur('+(1-labelsP)*18+'px)';
 }
+
+let factsBankHold=null;
+window.addEventListener('scroll',()=>{
+  if(!factsSection || !factsSection.__bankCardHold)return;
+  const hold=factsSection.__bankCardHold;
+  if(performance.now()-hold.armed<220)return;
+  const rect=factsSection.getBoundingClientRect();
+  const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
+  const p=sectionProgress(factsSection);
+  if(inside && allFactsOpened() && p<.92){
+    const d=window.scrollY-hold.top;
+    if(Math.abs(d)>2)window.scrollTo({top:hold.top,behavior:'auto'});
+  }else if(p>=.92 || !inside){
+    factsSection.__bankCardHold=null;
+  }
+},{passive:true});
+
+let scene3LockTarget=null;
+let scene3LockActive=false;
+let scene3LockArmedAt=0;
+
+function setScene3Hold(){
+  if(!transition || window.matchMedia('(min-width:821px)').matches)return;
+  scene3LockTarget=window.scrollY;
+  scene3LockActive=true;
+  scene3LockArmedAt=performance.now();
+}
+
+function updateScene3Hold(){
+  if(!transition || window.matchMedia('(min-width:821px)').matches)return;
+  const p=sectionProgress(transition);
+  const rect=transition.getBoundingClientRect();
+  const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
+  const labelsVisible=p>=.72;
+  if(inside && labelsVisible && !scene3LockActive){
+    setScene3Hold();
+  }
+  if((!inside || p>=.92 || p<=.02) && scene3LockActive){
+    scene3LockActive=false;
+    scene3LockTarget=null;
+  }
+}
+
+window.addEventListener('scroll',()=>{
+  updateScene3Hold();
+  if(!scene3LockActive || scene3LockTarget===null)return;
+  if(performance.now()-scene3LockArmedAt<180)return;
+  const delta=window.scrollY-scene3LockTarget;
+  if(Math.abs(delta)>2){
+    window.scrollTo({top:scene3LockTarget,behavior:'auto'});
+  }
+},{passive:true});
 
 function updateHero(){
   const p=sectionProgress(hero);
