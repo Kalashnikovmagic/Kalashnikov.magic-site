@@ -542,7 +542,7 @@ body.format-modal-open{overflow:hidden}
 @media(max-width:820px){
   .transition__king-caption{
     position:absolute;
-    top:calc(50% + 29vw);
+    top:calc(50% + 35vw);
     left:50%;
     transform:translateX(-50%);
     z-index:210;
@@ -562,10 +562,10 @@ body.format-modal-open{overflow:hidden}
     z-index:210;
     width:90vw;
     text-align:center;
-    color:var(--lime);
-    font:700 3.8vw/1 var(--mono);
+    color:#fff;
+    font:800 5.2vw/1 var(--mono);
     letter-spacing:.08em;
-    text-transform:lowercase;
+    text-transform:uppercase;
     pointer-events:none;
   }
 }
