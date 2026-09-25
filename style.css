@@ -954,25 +954,41 @@ body.format-modal-open{overflow:hidden}
 
 /* Desktop-only refinements for the current stable desktop build. */
 @media(min-width:821px){
+  .hero__media{
+    background:#000;
+  }
   .hero__media .hero__canvas{
     transform:scale(.90);
     transform-origin:center center;
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 76%,transparent 100%);
+    mask-image:linear-gradient(90deg,#000 0%,#000 76%,transparent 100%);
   }
-
+  .hero__media::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg,#050505 0%,rgba(5,5,5,.96) 2%,rgba(5,5,5,0) 18%,rgba(5,5,5,0) 82%,rgba(5,5,5,.96) 98%,#050505 100%);
+  }
+  .hero__scrim{
+    z-index:2;
+  }
   .format-modal[data-format="СВАДЬБА"] .format-modal__photo img{
-    object-position:center 60%;
+    object-position:center 40%;
   }
   .format-modal[data-format="ЧАСТНОЕ МЕРОПРИЯТИЕ"] .format-modal__photo img{
-    object-position:center 37%;
+    object-position:center 15%;
   }
   .format-modal[data-format="ВЫПУСКНОЙ ВЕЧЕР"] .format-modal__photo img{
-    object-position:center 82%;
+    object-position:center 35%;
   }
 
   .scene4__layer--base{
-    object-position:center 58%;
+    object-position:center 40%;
   }
   .scene4__layer--mid{
-    object-position:center 58%;
+    object-position:center 40%;
   }
 }
