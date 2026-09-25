@@ -308,9 +308,14 @@ window.addEventListener('scroll',()=>{
   const rect=factsSection.getBoundingClientRect();
   const inside=rect.top<=0 && rect.bottom>=window.innerHeight;
   const p=sectionProgress(factsSection);
+  const holdDistance=window.innerHeight*0.22;
   if(inside && allFactsOpened() && p<.92){
     const d=window.scrollY-hold.top;
-    if(Math.abs(d)>2)window.scrollTo({top:hold.top,behavior:'auto'});
+    if(Math.abs(d)>holdDistance){
+      factsSection.__bankCardHold=null;
+    }else if(Math.abs(d)>2){
+      window.scrollTo({top:hold.top+Math.sign(d)*Math.min(Math.abs(d),holdDistance),behavior:'auto'});
+    }
   }else if(p>=.92 || !inside){
     factsSection.__bankCardHold=null;
   }
