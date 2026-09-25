@@ -606,13 +606,3 @@ body.format-modal-open{overflow:hidden}
     text-align:center;
   }
 }
-
-/* Scene 2 intro: one slow 360deg turn. Remove the class without animating a return. */
-.playing-card.is-intro-spinning .playing-card__inner{
-  transform:rotateY(360deg);
-  transition:transform 1350ms ease-in-out !important;
-}
-/* Manual flip stays animated; only the intro class removal is made instantaneous by JS. */
-.playing-card:not(.is-intro-spinning) .playing-card__inner{
-  transition:transform 900ms var(--ease);
-}
