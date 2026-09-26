@@ -654,7 +654,7 @@ function updateScene6Content(nextStep){
     scene6WithoutNote.textContent=item.withoutNote;
     scene6WithNote.textContent=item.withNote;
 
-    [scene6Without,scene6With,scene6WithoutNote,scene6WithNote,scene6Caption].forEach(el=>{
+    [scene6Without,scene6With,scene6WithoutNote,scene6WithNote].forEach(el=>{
       el?.classList.remove('is-changing');
     });
   },220);
