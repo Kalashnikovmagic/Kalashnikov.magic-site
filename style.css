@@ -1115,7 +1115,7 @@ body.format-modal-open{overflow:hidden}
   transition:opacity .4s var(--ease),transform .6s var(--ease),filter .6s var(--ease);
 }
 .scene6__side--without .scene6__scene-main{color:#777}
-.scene6__side--with .scene6__scene-main{color:var(--bone)}
+.scene6__side--with .scene6__scene-main{color:var(--bone);bottom:18vh}
 .scene6__scene-note{
   position:absolute;
   left:0;
@@ -1127,7 +1127,7 @@ body.format-modal-open{overflow:hidden}
   letter-spacing:.04em;
   transition:opacity .4s var(--ease),transform .6s var(--ease),filter .6s var(--ease);
 }
-.scene6__side--with .scene6__scene-note{color:var(--lime)}
+.scene6__side--with .scene6__scene-note{color:var(--lime);bottom:12.5vh}
 .scene6__progress{
   position:absolute;
   right:5vw;
@@ -1155,9 +1155,9 @@ body.format-modal-open{overflow:hidden}
   .scene6__scene{padding-bottom:7vh}
   .scene6__scene-title{bottom:20vh;font-size:8px}
   .scene6__scene-main{
-    bottom:8.5vh;
+    bottom:15vh;
     font-size:clamp(22px,5.8vw,36px);
   }
-  .scene6__scene-note{bottom:3vh;font-size:8px;max-width:80vw}
+  .scene6__scene-note{bottom:9.5vh;font-size:8px;max-width:80vw}
   .scene6__progress{right:6vw;top:4.5vh;font-size:9px}
 }
