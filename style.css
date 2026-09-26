@@ -1114,7 +1114,7 @@ body.format-modal-open{overflow:hidden}
   text-transform:uppercase;
   transition:opacity .4s var(--ease),transform .6s var(--ease),filter .6s var(--ease);
 }
-.scene6__side--without .scene6__scene-main{color:#777;transform:translateY(-2vh)}
+.scene6__side--without .scene6__scene-main{color:#777}
 .scene6__side--with .scene6__scene-main{color:var(--bone);bottom:14vh}
 .scene6__scene-note{
   position:absolute;
