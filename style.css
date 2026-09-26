@@ -1061,33 +1061,12 @@ body.format-modal-open{overflow:hidden}
   overflow:hidden;
   background:#050505;
 }
-.scene6__head{
-  position:absolute;
-  top:5.5vh;
-  left:6vw;
-  right:6vw;
-  z-index:20;
-  pointer-events:none;
-}
-.scene6__eyebrow{
-  display:block;
-  margin-bottom:1.2vh;
-  color:var(--lime);
-  font:700 11px/1 var(--mono);
-  letter-spacing:.16em;
-}
-.scene6__head h2{
-  margin:0;
-  color:var(--bone);
-  font:900 clamp(30px,4.2vw,68px)/.9 'KalashnikovHead',Inter,Arial,sans-serif;
-  letter-spacing:-.07em;
-  text-transform:uppercase;
-}
 .scene6__split{
   position:absolute;
   inset:0;
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:1fr;
+  grid-template-rows:1fr 1fr;
 }
 .scene6__side{
   position:relative;
@@ -1102,7 +1081,7 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   top:4.2vh;
   z-index:15;
-  font:700 11px/1 var(--mono);
+  font:700 9px/1 var(--mono);
   letter-spacing:.12em;
   color:#6a6a66;
 }
@@ -1125,12 +1104,12 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   left:0;
   right:0;
-  bottom:11vh;
+  bottom:8vh;
   min-height:8vh;
   display:flex;
   align-items:flex-end;
   color:#d5d0c8;
-  font:900 clamp(42px,5.2vw,86px)/.92 'KalashnikovHead',Inter,Arial,sans-serif;
+  font:900 clamp(30px,3.6vw,58px)/.92 'KalashnikovHead',Inter,Arial,sans-serif;
   letter-spacing:-.065em;
   text-transform:uppercase;
   transition:opacity .4s var(--ease),transform .6s var(--ease),filter .6s var(--ease);
@@ -1141,7 +1120,7 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   left:0;
   right:0;
-  bottom:5.5vh;
+  bottom:3vh;
   min-height:3vh;
   color:#5f5f5b;
   font:500 clamp(10px,.9vw,13px)/1.35 var(--mono);
@@ -1149,19 +1128,10 @@ body.format-modal-open{overflow:hidden}
   transition:opacity .4s var(--ease),transform .6s var(--ease),filter .6s var(--ease);
 }
 .scene6__side--with .scene6__scene-note{color:var(--lime)}
-.scene6__divider{
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:50%;
-  z-index:10;
-  width:1px;
-  background:rgba(255,255,255,.12);
-}
 .scene6__progress{
   position:absolute;
   right:5vw;
-  top:5vh;
+  top:4vh;
   z-index:20;
   display:flex;
   gap:7px;
@@ -1195,19 +1165,15 @@ body.format-modal-open{overflow:hidden}
 
 @media(max-width:820px){
   .scene6{height:360vh}
-  .scene6__head{top:4.5vh;left:6vw;right:6vw}
-  .scene6__eyebrow{font-size:9px}
-  .scene6__head h2{font-size:clamp(24px,7vw,42px)}
   .scene6__side{padding:0 6vw}
-  .scene6__side-label{top:20vh;font-size:8px}
-  .scene6__scene{padding-bottom:9vh}
-  .scene6__scene-title{bottom:25vh;font-size:9px}
+  .scene6__side-label{top:4vh;font-size:8px}
+  .scene6__scene{padding-bottom:7vh}
+  .scene6__scene-title{bottom:20vh;font-size:8px}
   .scene6__scene-main{
-    bottom:11vh;
-    font-size:clamp(26px,7.4vw,46px);
+    bottom:8vh;
+    font-size:clamp(22px,5.8vw,36px);
   }
-  .scene6__scene-note{bottom:5vh;font-size:8px;max-width:38vw}
-  .scene6__divider{background:rgba(255,255,255,.16)}
+  .scene6__scene-note{bottom:2.6vh;font-size:8px;max-width:80vw}
   .scene6__progress{right:6vw;top:4.5vh;font-size:9px}
-  .scene6__caption{bottom:2vh;left:6vw;right:6vw;font-size:8px}
+  .scene6__caption{bottom:1.8vh;left:6vw;right:6vw;font-size:8px}
 }
