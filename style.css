@@ -1081,7 +1081,7 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   top:4.2vh;
   z-index:15;
-  font:700 12px/1 var(--mono);
+  font:700 clamp(15px,1.35vw,21px)/1 var(--mono);
   letter-spacing:.12em;
   color:#6a6a66;
 }
@@ -1166,7 +1166,7 @@ body.format-modal-open{overflow:hidden}
 @media(max-width:820px){
   .scene6{height:360vh}
   .scene6__side{padding:0 6vw}
-  .scene6__side-label{top:4vh;font-size:10px}
+  .scene6__side-label{top:4vh;font-size:12px}
   .scene6__scene{padding-bottom:7vh}
   .scene6__scene-title{bottom:20vh;font-size:8px}
   .scene6__scene-main{
