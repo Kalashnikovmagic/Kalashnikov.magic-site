@@ -1155,6 +1155,11 @@ body.format-modal-open{overflow:hidden}
   .scene6__side--without .scene6__scene-note.scene6-step-3{bottom:5vh}
 }
 @media(max-width:820px){
+  .scene6__side--without .scene6__scene-note{bottom:5.5vh}
+  .scene6__side--without .scene6__scene-note.scene6-step-2{bottom:9vh}
+  .scene6__side--without .scene6__scene-note.scene6-step-3{bottom:5.5vh}
+}
+@media(max-width:820px){
   .scene6{height:360vh}
   .scene6__side{padding:0 6vw}
   .scene6__side-label{top:2vh;font-size:14px}
