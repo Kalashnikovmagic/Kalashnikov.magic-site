@@ -611,29 +611,25 @@ const scene6With = scene6?.querySelector('[data-scene6-with]');
 const scene6WithoutNote = scene6?.querySelector('[data-scene6-without-note]');
 const scene6WithNote = scene6?.querySelector('[data-scene6-with-note]');
 const scene6Progress = scene6?.querySelector('[data-scene6-progress]');
-const scene6Caption = scene6?.querySelector('[data-scene6-caption]');
 
 const scene6Steps = [
   {
     without: 'ГОСТИ В ТЕЛЕФОНАХ',
     with: 'ГОСТИ В МОМЕНТЕ',
-    withoutNote: 'Когда между людьми нет общего повода переключить внимание, каждый легко уходит в свой телефон. Кто-то отвечает на сообщения, кто-то листает ленту — и даже за одним столом гости оказываются в разных историях.',
-    withNote: 'Фокусник становится естественным центром внимания, который объединяет людей здесь и сейчас. Телефоны откладываются сами собой, потому что происходящее перед глазами интереснее экрана.',
-    caption: 'Общее внимание вместо разрозненных экранов'
+    withoutNote: 'Когда между людьми нет общего повода переключить внимание, каждый легко уходит в свой телефон. Кто-то отвечает на сообщения, кто-то листает ленту - и даже за одним столом гости оказываются в разных историях.',
+    withNote: 'Фокусник становится естественным центром внимания, который объединяет людей здесь и сейчас. Телефоны откладываются сами собой, потому что происходящее перед глазами интереснее экрана.'
   },
   {
     without: 'ГОСТИ СМОТРЯТ',
     with: 'ГОСТИ УЧАСТВУЮТ В ШОУ',
-    withoutNote: 'Без интерактива гости остаются наблюдателями: посмотрели номер, поаплодировали — и снова вернулись к своему столу и разговорам.',
-    withNote: 'В интерактивной магии зритель не просто смотрит со стороны. Гости становятся частью номера, влияют на происходящее и получают личный опыт, который невозможно повторить для другого человека.',
-    caption: 'Из зрителей — в участников происходящего'
+    withoutNote: 'Без интерактива гости остаются наблюдателями: посмотрели номер, поаплодировали - и снова вернулись к своему столу и разговорам.',
+    withNote: 'В интерактивной магии зритель не просто смотрит со стороны. Гости становятся частью номера, влияют на происходящее и получают личный опыт, который невозможно повторить для другого человека.'
   },
   {
     without: 'НЕЧЕГО ВСПОМНИТЬ',
     with: 'ЕСТЬ ЧТО ВСПОМНИТЬ',
-    withoutNote: 'ещё один вечер за столом',
-    withNote: 'момент, который хочется пересказать',
-    caption: 'Эмоции становятся частью воспоминаний о празднике'
+    withoutNote: 'Когда ничего не выделяет событие среди других, праздник может быстро раствориться в памяти. Остаётся приятный вечер, фотографии и разговоры за столом, но не всегда появляется тот самый момент, который хочется вспоминать отдельно.',
+    withNote: 'Сильная эмоция превращает обычный эпизод в историю, которую хочется пересказать друзьям и повторить в разговоре спустя время. У гостей появляется общий яркий момент, связанный именно с этим мероприятием.'
   }
 ];
 
@@ -648,7 +644,7 @@ function updateScene6Content(nextStep){
   if(!item)return;
   scene6Step=nextStep;
 
-  [scene6Without,scene6With,scene6WithoutNote,scene6WithNote,scene6Caption].forEach(el=>{
+  [scene6Without,scene6With,scene6WithoutNote,scene6WithNote].forEach(el=>{
     el?.classList.add('is-changing');
   });
 
@@ -657,7 +653,6 @@ function updateScene6Content(nextStep){
     scene6With.textContent=item.with;
     scene6WithoutNote.textContent=item.withoutNote;
     scene6WithNote.textContent=item.withNote;
-    if(scene6Caption)scene6Caption.textContent=item.caption;
 
     [scene6Without,scene6With,scene6WithoutNote,scene6WithNote,scene6Caption].forEach(el=>{
       el?.classList.remove('is-changing');
