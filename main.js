@@ -601,3 +601,85 @@ scene5Videos.forEach(video=>{
     scene5Videos.forEach(other=>{if(other!==video)other.pause();});
   });
 });
+
+
+
+/* SCENE 6 — guest experience comparison */
+const scene6 = $('#scene6');
+const scene6Without = scene6?.querySelector('[data-scene6-without]');
+const scene6With = scene6?.querySelector('[data-scene6-with]');
+const scene6WithoutNote = scene6?.querySelector('[data-scene6-without-note]');
+const scene6WithNote = scene6?.querySelector('[data-scene6-with-note]');
+const scene6Progress = scene6?.querySelector('[data-scene6-progress]');
+const scene6Caption = scene6?.querySelector('[data-scene6-caption]');
+
+const scene6Steps = [
+  {
+    without: 'ГОСТИ В ТЕЛЕФОНАХ',
+    with: 'ГОСТИ СМОТРЯТ',
+    withoutNote: 'каждый занят своим экраном',
+    withNote: 'внимание собирается вокруг происходящего',
+    caption: 'Вместо разрозненных разговоров — общее внимание'
+  },
+  {
+    without: 'ГОСТИ СКУЧАЮТ',
+    with: 'ГОСТИ УЧАСТВУЮТ',
+    withoutNote: 'обычный вечер продолжается как обычно',
+    withNote: 'каждый может стать частью номера',
+    caption: 'Интерактив превращает зрителей в участников'
+  },
+  {
+    without: 'НЕЧЕГО ВСПОМНИТЬ',
+    with: 'ЕСТЬ ЧТО ВСПОМНИТЬ',
+    withoutNote: 'ещё один вечер за столом',
+    withNote: 'момент, который хочется пересказать',
+    caption: 'Эмоции становятся частью воспоминаний о празднике'
+  },
+  {
+    without: 'ОБЫЧНЫЕ ФОТО',
+    with: 'ВАУ-МОМЕНТЫ',
+    withoutNote: 'ещё несколько снимков с банкета',
+    withNote: 'видео и сторис, которые хочется сохранить',
+    caption: 'Повод достать телефон — чтобы снять магию, а не просто листать ленту'
+  }
+];
+
+let scene6Step = -1;
+let scene6Animating = false;
+
+function updateScene6Content(nextStep){
+  if(!scene6Without || !scene6With || !scene6WithoutNote || !scene6WithNote)return;
+  if(nextStep===scene6Step)return;
+
+  const item=scene6Steps[nextStep];
+  if(!item)return;
+  scene6Step=nextStep;
+
+  [scene6Without,scene6With,scene6WithoutNote,scene6WithNote,scene6Caption].forEach(el=>{
+    el?.classList.add('is-changing');
+  });
+
+  window.setTimeout(()=>{
+    scene6Without.textContent=item.without;
+    scene6With.textContent=item.with;
+    scene6WithoutNote.textContent=item.withoutNote;
+    scene6WithNote.textContent=item.withNote;
+    if(scene6Caption)scene6Caption.textContent=item.caption;
+
+    [scene6Without,scene6With,scene6WithoutNote,scene6WithNote,scene6Caption].forEach(el=>{
+      el?.classList.remove('is-changing');
+    });
+  },220);
+
+  if(scene6Progress)scene6Progress.textContent=String(nextStep+1).padStart(2,'0');
+}
+
+function updateScene6(){
+  if(!scene6)return;
+  const p=sectionProgress(scene6);
+  const raw=clamp(p*scene6Steps.length,0,scene6Steps.length-.0001);
+  const nextStep=Math.min(scene6Steps.length-1,Math.floor(raw));
+  updateScene6Content(nextStep);
+}
+window.addEventListener('scroll',updateScene6,{passive:true});
+updateScene6();
