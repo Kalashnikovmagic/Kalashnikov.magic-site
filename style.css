@@ -1104,7 +1104,7 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   left:0;
   right:0;
-  bottom:10.5vh;
+  bottom:7vh;
   min-height:8vh;
   display:flex;
   align-items:flex-end;
