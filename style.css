@@ -1088,7 +1088,8 @@ body.format-modal-open{overflow:hidden}
 .scene6__scene{
   position:relative;
   width:100%;
-  padding-bottom:10vh;
+  height:32vh;
+  padding:0;
 }
 .scene6__scene-title{
   position:absolute;
@@ -1103,10 +1104,9 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   left:0;
   right:0;
-  bottom:7vh;
-  min-height:8vh;
-  display:flex;
-  align-items:flex-end;
+  bottom:9vh;
+  min-height:0;
+  display:block;
   color:#d5d0c8;
   font:900 clamp(30px,3.6vw,58px)/.92 'KalashnikovHead',Inter,Arial,sans-serif;
   letter-spacing:-.065em;
@@ -1119,8 +1119,9 @@ body.format-modal-open{overflow:hidden}
   position:absolute;
   left:0;
   right:0;
-  bottom:5vh;
-  min-height:3vh;
+  bottom:4.2vh;
+  min-height:0;
+  margin:0;
   color:#5f5f5b;
   font:500 clamp(10px,.9vw,13px)/1.35 var(--mono);
   letter-spacing:.04em;
@@ -1147,19 +1148,15 @@ body.format-modal-open{overflow:hidden}
   filter:blur(10px);
 }
 
-/* "БЕЗ ФОКУСНИКА": heading + note keep one fixed gap. */
+/* Per-step positioning: each heading and note move together on the same baseline. */
 @media(min-width:821px){
-  .scene6__side--without .scene6__scene-main{
-    bottom:7vh;
-  }
-  .scene6__side--without .scene6__scene-note{
-    bottom:3vh;
-  }
+  .scene6__side--without .scene6__scene-main,
   .scene6__side--without .scene6__scene-main.scene6-step-1,
   .scene6__side--without .scene6__scene-main.scene6-step-2,
   .scene6__side--without .scene6__scene-main.scene6-step-3{
-    bottom:7vh;
+    bottom:9vh;
   }
+  .scene6__side--without .scene6__scene-note,
   .scene6__side--without .scene6__scene-note.scene6-step-1,
   .scene6__side--without .scene6__scene-note.scene6-step-2,
   .scene6__side--without .scene6__scene-note.scene6-step-3{
@@ -1170,26 +1167,30 @@ body.format-modal-open{overflow:hidden}
   .scene6{height:360vh}
   .scene6__side{padding:0 6vw}
   .scene6__side-label{top:2vh;font-size:14px}
-  .scene6__scene{padding-bottom:7vh}
+  .scene6__scene{
+    height:28vh;
+    padding:0;
+  }
   .scene6__scene-title{bottom:20vh;font-size:8px}
   .scene6__scene-main{
-    bottom:11vh;
+    bottom:10vh;
     font-size:clamp(22px,5.8vw,36px);
   }
   .scene6__scene-note{
-    bottom:7vh;
+    bottom:4vh;
     font-size:8px;
     max-width:80vw;
   }
+  .scene6__side--without .scene6__scene-main,
   .scene6__side--without .scene6__scene-main.scene6-step-1,
   .scene6__side--without .scene6__scene-main.scene6-step-2,
   .scene6__side--without .scene6__scene-main.scene6-step-3{
-    bottom:11vh;
+    bottom:10vh;
   }
+  .scene6__side--without .scene6__scene-note,
   .scene6__side--without .scene6__scene-note.scene6-step-1,
   .scene6__side--without .scene6__scene-note.scene6-step-2,
   .scene6__side--without .scene6__scene-note.scene6-step-3{
-    bottom:7vh;
+    bottom:4vh;
   }
-  .scene6__progress{right:5vw;top:4vh}
 }
