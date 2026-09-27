@@ -610,6 +610,7 @@ const scene6Without = scene6?.querySelector('[data-scene6-without]');
 const scene6With = scene6?.querySelector('[data-scene6-with]');
 const scene6WithoutNote = scene6?.querySelector('[data-scene6-without-note]');
 const scene6WithNote = scene6?.querySelector('[data-scene6-with-note]');
+const scene6WithoutPhoto = scene6?.querySelector('[data-scene6-without-photo]');
 const scene6Progress = scene6?.querySelector('[data-scene6-progress]');
 
 const scene6Steps = [
@@ -625,6 +626,7 @@ const scene6Steps = [
     with: 'ГОСТИ УЧАСТВУЮТ В ШОУ',
     withoutNote: 'Без интерактива гости остаются наблюдателями: посмотрели номер, поаплодировали - и снова вернулись к своему столу и разговорам.',
     withNote: 'В интерактивной магии зритель не просто смотрит со стороны. Гости становятся частью номера, влияют на происходящее и получают личный опыт, который невозможно повторить для другого человека.',
+    withoutImage: '2_1.PNG',
     withImage: '2_2.JPG'
   },
   {
@@ -632,6 +634,7 @@ const scene6Steps = [
     with: 'ЕСТЬ ЧТО ВСПОМНИТЬ',
     withoutNote: 'Когда ничего не выделяет событие среди других, праздник может быстро раствориться в памяти. Остаётся приятный вечер, фотографии и разговоры за столом, но не всегда появляется тот самый момент, который хочется вспоминать отдельно.',
     withNote: 'Сильная эмоция превращает обычный эпизод в историю, которую хочется пересказать друзьям и повторить в разговоре спустя время. У гостей появляется общий яркий момент, связанный именно с этим мероприятием.',
+    withoutImage: '2_1.PNG',
     withImage: '3_2.JPG'
   }
 ];
@@ -658,6 +661,15 @@ function updateScene6Content(nextStep){
     photo?.classList.add('is-switching');
     window.setTimeout(()=>{
       withPhoto.src=item.withImage;
+      photo?.classList.remove('is-switching');
+    },180);
+  }
+
+  if(scene6WithoutPhoto && item.withoutImage){
+    const photo=scene6WithoutPhoto.closest('.scene6__photo');
+    photo?.classList.add('is-switching');
+    window.setTimeout(()=>{
+      scene6WithoutPhoto.src=item.withoutImage;
       photo?.classList.remove('is-switching');
     },180);
   }
