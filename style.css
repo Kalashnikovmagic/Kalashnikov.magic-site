@@ -1152,7 +1152,7 @@ body.format-modal-open{overflow:hidden}
   position:relative;
   isolation:isolate;
 }
-.scene6__side--with .scene6__photo{
+.scene6__photo{
   position:absolute;
   inset:0;
   width:100%;
@@ -1162,17 +1162,7 @@ body.format-modal-open{overflow:hidden}
   pointer-events:none;
   z-index:0;
 }
-.scene6__side--with .scene6__photo::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:
-    linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.14) 40%,rgba(0,0,0,.56) 100%),
-    radial-gradient(ellipse at center,rgba(0,0,0,.04) 20%,rgba(0,0,0,.22) 65%,rgba(0,0,0,.68) 100%);
-  pointer-events:none;
-}
-.scene6__side--with .scene6__photo img{
+.scene6__photo img{
   position:absolute;
   inset:0;
   width:100%;
@@ -1184,6 +1174,22 @@ body.format-modal-open{overflow:hidden}
   will-change:auto;
   transition:none;
   opacity:1;
+}
+.scene6__photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(0,0,0,.14) 40%,rgba(0,0,0,.56) 100%),
+    radial-gradient(ellipse at center,rgba(0,0,0,.04) 20%,rgba(0,0,0,.22) 65%,rgba(0,0,0,.68) 100%);
+  pointer-events:none;
+}
+.scene6__side--without .scene6__photo{
+  z-index:0;
+}
+.scene6__side--with .scene6__photo{
+  z-index:0;
 }
 .scene6__side--with .scene6__photo.is-switching img{opacity:.18}
 
@@ -1206,7 +1212,7 @@ body.format-modal-open{overflow:hidden}
     font-size:clamp(8px,2.2vw,11px);
     max-width:80vw;
   }
-  .scene6__side--with .scene6__photo img{
+  .scene6__photo img{
     position:absolute;
     inset:0;
     width:100%;
