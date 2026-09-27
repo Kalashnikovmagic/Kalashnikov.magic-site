@@ -1182,8 +1182,8 @@ body.format-modal-open{overflow:hidden}
   object-fit:cover;
   object-position:center center;
   transform:translate(-50%,-50%);
-  will-change:transform;
-  transition:opacity .22s var(--ease);
+  will-change:auto;
+  transition:none;
   opacity:1;
 }
 .scene6__side--with .scene6__photo.is-switching img{opacity:.18}
