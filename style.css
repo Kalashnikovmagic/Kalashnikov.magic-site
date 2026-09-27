@@ -1148,28 +1148,41 @@ body.format-modal-open{overflow:hidden}
   filter:blur(10px);
 }
 
-/* With-magician photography. */
+/* With-magician photography: one full-height visual area, changing only at block boundaries. */
+.scene6__side--with{
+  position:relative;
+}
 .scene6__side--with .scene6__scene{
-  height:38vh;
+  height:100%;
 }
 .scene6__side--with .scene6__photo{
   position:absolute;
-  left:50%;
-  bottom:-1vh;
-  width:58vw;
-  height:36vh;
-  transform:translateX(-50%) translate3d(0,var(--scene6-parallax-y,0),0) scale(1.04);
-  transform-origin:center bottom;
+  inset:0;
+  width:100%;
+  height:100%;
+  transform:none;
+  transform-origin:center center;
   overflow:hidden;
   background:#111;
   pointer-events:none;
+  z-index:0;
 }
 .scene6__side--with .scene6__photo img{
   display:block;
   width:100%;
   height:100%;
   object-fit:cover;
+  transform:scale(1.06) translate3d(0,0,0);
   will-change:transform;
+  transition:opacity .3s var(--ease),transform .15s linear;
+  opacity:1;
+}
+.scene6__side--with .scene6__photo.is-switching img{
+  opacity:.02;
+}
+.scene6__side--with .scene6__scene-main,
+.scene6__side--with .scene6__scene-note{
+  z-index:2;
 }
 
 /* Keep "БЕЗ ФОКУСНИКА" heading + note compact and readable. */
