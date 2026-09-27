@@ -1174,14 +1174,13 @@ body.format-modal-open{overflow:hidden}
 }
 .scene6__side--with .scene6__photo img{
   position:absolute;
-  top:50%;
-  left:50%;
-  width:100%;
-  height:100%;
+  inset:-10%;
+  width:120%;
+  height:120%;
   display:block;
   object-fit:cover;
   object-position:center center;
-  transform:translate(-50%,-50%);
+  transform:none !important;
   will-change:auto;
   transition:none;
   opacity:1;
@@ -1208,11 +1207,10 @@ body.format-modal-open{overflow:hidden}
     max-width:80vw;
   }
   .scene6__side--with .scene6__photo img{
-    top:50%;
-    left:50%;
-    width:100%;
-    height:100%;
-    transform:translate(-50%,-50%);
+    inset:-10%;
+    width:120%;
+    height:120%;
+    transform:none !important;
   }
   .scene6__side--without .scene6__side-label{top:4.15vh}
   .scene6__progress{right:5vw;top:4vh}
