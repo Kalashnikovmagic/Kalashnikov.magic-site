@@ -1232,3 +1232,30 @@ body.format-modal-open{overflow:hidden}
 @media(max-width:820px){
   .scene6__side--without .scene6__side-label{top:4.15vh}
 }
+
+
+/* Scene 6 heading adjustments */
+@media(min-width:821px){
+  /* Raise all Scene 6 headings except block 2 of the upper half. */
+  .scene6__side--without .scene6__scene-main{bottom:13vh}
+  .scene6__side--without .scene6__scene-main.scene6-step-1{bottom:13vh}
+  .scene6__side--without .scene6__scene-main.scene6-step-2{bottom:12vh}
+  .scene6__side--without .scene6__scene-main.scene6-step-3{bottom:13vh}
+
+  .scene6__side--with .scene6__scene-main{bottom:12.5vh}
+  .scene6__side--with .scene6__scene-main.scene6-step-1{bottom:12.5vh}
+  .scene6__side--with .scene6__scene-main.scene6-step-2{bottom:12.5vh}
+  .scene6__side--with .scene6__scene-main.scene6-step-3{bottom:12.5vh}
+}
+@media(max-width:820px){
+  /* Mobile: same subtle lift, with block 2 upper half preserved. */
+  .scene6__side--without .scene6__scene-main{bottom:11vh}
+  .scene6__side--without .scene6__scene-main.scene6-step-1{bottom:11vh}
+  .scene6__side--without .scene6__scene-main.scene6-step-2{bottom:10vh}
+  .scene6__side--without .scene6__scene-main.scene6-step-3{bottom:11vh}
+
+  .scene6__side--with .scene6__scene-main{bottom:11vh}
+  .scene6__side--with .scene6__scene-main.scene6-step-1{bottom:11vh}
+  .scene6__side--with .scene6__scene-main.scene6-step-2{bottom:11vh}
+  .scene6__side--with .scene6__scene-main.scene6-step-3{bottom:11vh}
+}
