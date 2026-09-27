@@ -644,7 +644,7 @@ function updateScene6Content(nextStep){
   if(!item)return;
   scene6Step=nextStep;
 
-  [scene6WithoutNote,scene6WithNote].forEach(el=>{
+  [scene6Without,scene6With,scene6WithoutNote,scene6WithNote].forEach(el=>{
     el?.classList.remove('scene6-step-1','scene6-step-2','scene6-step-3');
     el?.classList.add(`scene6-step-${nextStep+1}`);
   });
