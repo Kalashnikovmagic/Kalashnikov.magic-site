@@ -654,11 +654,12 @@ function updateScene6Content(nextStep){
 
   const withPhoto=scene6?.querySelector('[data-scene6-with-photo]');
   if(withPhoto && item.withImage){
-    withPhoto.closest('.scene6__photo')?.classList.add('is-switching');
+    const photo=withPhoto.closest('.scene6__photo');
+    photo?.classList.add('is-switching');
     window.setTimeout(()=>{
       withPhoto.src=item.withImage;
-      withPhoto.closest('.scene6__photo')?.classList.remove('is-switching');
-    },220);
+      photo?.classList.remove('is-switching');
+    },180);
   }
 
   [scene6Without,scene6With,scene6WithoutNote,scene6WithNote].forEach(el=>{
@@ -674,7 +675,7 @@ function updateScene6Content(nextStep){
     [scene6Without,scene6With,scene6WithoutNote,scene6WithNote].forEach(el=>{
       el?.classList.remove('is-changing');
     });
-  },220);
+  },180);
 
   if(scene6Progress)scene6Progress.textContent=String(nextStep+1).padStart(2,'0');
 }
@@ -690,9 +691,10 @@ function updateScene6(){
   if(withPhoto){
     const photoImg=withPhoto.querySelector('img');
     const localProgress=raw-nextStep;
-    const parallaxY=(localProgress-.5)*8;
-    if(photoImg)photoImg.style.transform=`scale(1.06) translate3d(0,${parallaxY*0.45}vh,0)`;
+    const parallaxY=(localProgress-.5)*10;
+    if(photoImg)photoImg.style.transform=`translate3d(0,${parallaxY}vh,0) scale(1.06)`;
   }
 }
+
 window.addEventListener('scroll',updateScene6,{passive:true});
 updateScene6();
