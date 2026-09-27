@@ -686,14 +686,6 @@ function updateScene6(){
   const raw=clamp(p*scene6Steps.length,0,scene6Steps.length-.0001);
   const nextStep=Math.min(scene6Steps.length-1,Math.floor(raw));
   updateScene6Content(nextStep);
-
-  const withPhoto=scene6?.querySelector('.scene6__side--with .scene6__photo');
-  if(withPhoto){
-    const photoImg=withPhoto.querySelector('img');
-    const localProgress=raw-nextStep;
-    const parallaxY=(localProgress-.5)*10;
-    if(photoImg)photoImg.style.transform=`translate3d(0,${parallaxY}vh,0) scale(1.06)`;
-  }
 }
 
 window.addEventListener('scroll',updateScene6,{passive:true});
