@@ -1110,7 +1110,7 @@ body.format-modal-open{overflow:hidden}
   z-index:4;
 }
 .scene6__side--without .scene6__scene-main{color:#777}
-.scene6__side--with .scene6__scene-main{color:var(--bone);bottom:12vh}
+.scene6__side--with .scene6__scene-main{color:var(--bone);bottom:11.5vh}
 
 .scene6__scene-note{
   position:absolute;
@@ -1125,7 +1125,7 @@ body.format-modal-open{overflow:hidden}
   transition:opacity .28s var(--ease),filter .28s var(--ease);
   z-index:4;
 }
-.scene6__side--with .scene6__scene-note{color:var(--lime);bottom:6.2vh}
+.scene6__side--with .scene6__scene-note{color:var(--lime);bottom:5.7vh}
 
 .scene6__progress{
   position:absolute;
@@ -1174,13 +1174,14 @@ body.format-modal-open{overflow:hidden}
 }
 .scene6__side--with .scene6__photo img{
   position:absolute;
-  inset:-16%;
-  width:132%;
-  height:132%;
+  top:50%;
+  left:50%;
+  width:100%;
+  height:100%;
   display:block;
   object-fit:cover;
   object-position:center center;
-  transform:translate3d(0,0,0);
+  transform:translate(-50%,-50%) scale(1.16);
   will-change:transform;
   transition:opacity .22s var(--ease);
   opacity:1;
@@ -1207,9 +1208,11 @@ body.format-modal-open{overflow:hidden}
     max-width:80vw;
   }
   .scene6__side--with .scene6__photo img{
-    inset:-9%;
-    width:118%;
-    height:118%;
+    top:50%;
+    left:50%;
+    width:100%;
+    height:100%;
+    transform:translate(-50%,-50%) scale(1.14);
   }
   .scene6__side--without .scene6__side-label{top:4.15vh}
   .scene6__progress{right:5vw;top:4vh}
