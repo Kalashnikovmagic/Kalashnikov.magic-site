@@ -771,7 +771,7 @@ body.format-modal-open{overflow:hidden}
   .scene4__layer--mid{
     object-position:center 15%;
   }
-  .scene4__layer--top{object-position:center 35%}
+  .scene4__layer--top{object-position:center 40%}
   .scene4__layer--top{z-index:3}
   .scene4__tint{
     position:absolute;
