@@ -767,6 +767,8 @@ body.format-modal-open{overflow:hidden}
     clip-path:polygon(0 0,100% 0,100% 0,0 0);
   }
   .scene4__layer--base::after{display:none}
+  .scene4__layer--mid{object-position:center 58%}
+  .scene4__layer--top{object-position:center 54%}
   .scene4__layer--top{z-index:3}
   .scene4__tint{
     position:absolute;
