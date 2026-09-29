@@ -768,9 +768,9 @@ body.format-modal-open{overflow:hidden}
   }
   .scene4__layer--base::after{display:none}
   /* Position logic: "цель выше" means move the image upward. */
-  /* Target positioning: higher target = higher image position. */
-  .scene4__layer--mid{object-position:center 65%}
-  .scene4__layer--top{object-position:center 57.5%}
+  /* Desktop image positions for Scene 4. */
+  .scene4__layer--mid{object-position:center 35%}
+  .scene4__layer--top{object-position:center 35%}
   .scene4__layer--top{z-index:3}
   .scene4__tint{
     position:absolute;
