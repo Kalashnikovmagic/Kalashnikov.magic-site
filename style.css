@@ -1275,26 +1275,42 @@ body.format-modal-open{overflow:hidden}
 }
 
 
-/* Scene 6 — content sits above global grain/vignette. */
+/* Scene 6 — global grain/vignette affect backgrounds only. */
 .scene6{
   isolation:isolate;
 }
+.scene6::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at center,transparent 40%,rgba(0,0,0,.62) 100%);
+}
+.scene6::after{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  z-index:11;
+  pointer-events:none;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+  animation:grain 0.25s steps(2) infinite;
+}
 .scene6__sticky{
   position:sticky;
-  z-index:60;
+  z-index:20;
 }
 .scene6__side-label,
 .scene6__scene,
 .scene6__progress{
   position:relative;
-  z-index:70;
-}
-.scene6__scene{
-  position:relative;
+  z-index:30;
 }
 .scene6__scene-main,
 .scene6__scene-note{
-  z-index:71;
+  z-index:31;
 }
 .scene6__photo{
   z-index:1 !important;
