@@ -1274,7 +1274,7 @@ body.format-modal-open{overflow:hidden}
     bottom:calc(5.1vh - 1%);
   }
   .scene6__side--without .scene6__scene-note.scene6-step-3{
-    bottom:calc(7vh - 3%);
+    bottom:calc(7vh - 6%);
   }
   .scene6__side--without .scene6__scene-main.scene6-step-1{
     transform:translateY(2%);
