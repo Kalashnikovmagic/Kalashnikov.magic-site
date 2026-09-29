@@ -788,146 +788,18 @@ updateScene7();
   });
   observer.observe(viewport,{childList:true,subtree:true});
   refresh();
-})();/* Scene 7 — robust horizontal Juicer carousel controls. */
-(function initScene7Carousel(){
-  const shell=document.querySelector('.scene7__juicer-shell');
-  const viewport=document.querySelector('.scene7__juicer');
-  const prev=document.querySelector('.scene7__nav--prev');
-  const next=document.querySelector('.scene7__nav--next');
-  if(!shell||!viewport||!prev||!next)return;
+})();/* Scene 7 — live Juicer feed.
+   The standard embed stays native/responsive. Navigation is intentionally
+   not reimplemented here because Juicer owns the generated feed DOM. */
+(function initScene7Feed(){
+  const scene7=document.querySelector('#scene7');
+  if(!scene7)return;
 
-  let track=null;
-  let items=[];
+  const refresh=()=>{
+    scene7.classList.add('scene7--feed-ready');
+  };
 
-  function findTrack(){
-    return viewport.querySelector('.j-gallery ul,.juicer-feed ul,.j-instagram ul,ul');
-  }
-
-  function collect(){
-    track=findTrack();
-    items=track?[...track.children].filter(el=>el.nodeType===1):[];
-    return !!track&&items.length>0;
-  }
-
-  function styleTrack(){
-    if(!track)return;
-
-    Object.assign(track.style,{
-      display:'flex',
-      flexDirection:'row',
-      flexWrap:'nowrap',
-      alignItems:'stretch',
-      gap:'14px',
-      width:'max-content',
-      maxWidth:'none',
-      margin:'0',
-      padding:'4px 4px 14px',
-      float:'none',
-      transform:'none'
-    });
-
-    items.forEach(item=>{
-      Object.assign(item.style,{
-        flex:'0 0 300px',
-        width:'300px',
-        minWidth:'300px',
-        maxWidth:'300px',
-        float:'none',
-        display:'block',
-        margin:'0'
-      });
-    });
-
-    /* The viewport itself is the only scrolling surface. */
-    viewport.style.overflowX='auto';
-    viewport.style.overflowY='hidden';
-  }
-
-  function updateButtons(){
-    const hasItems=items.length>0;
-    const max=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
-    const canScroll=max>4;
-
-    prev.disabled=!hasItems||!canScroll;
-    next.disabled=!hasItems||!canScroll;
-
-    shell.classList.toggle('has-overflow',canScroll);
-  }
-
-  function currentIndex(){
-    if(!items.length)return 0;
-    const center=viewport.scrollLeft+viewport.clientWidth*.5;
-    let best=0;
-    let bestDistance=Infinity;
-
-    items.forEach((item,index)=>{
-      const centerX=item.offsetLeft+item.offsetWidth*.5;
-      const distance=Math.abs(centerX-center);
-      if(distance<bestDistance){
-        bestDistance=distance;
-        best=index;
-      }
-    });
-
-    return best;
-  }
-
-  function goTo(index){
-    if(!items.length)return;
-    index=Math.max(0,Math.min(items.length-1,index));
-    const item=items[index];
-
-    viewport.scrollTo({
-      left:Math.max(0,item.offsetLeft-12),
-      behavior:'smooth'
-    });
-  }
-
-  prev.addEventListener('click',()=>{
-    if(!collect())return;
-    const index=currentIndex();
-    goTo(index-1);
-  });
-
-  next.addEventListener('click',()=>{
-    if(!collect())return;
-    const index=currentIndex();
-    goTo(index+1);
-  });
-
-  viewport.addEventListener('wheel',event=>{
-    if(viewport.scrollWidth<=viewport.clientWidth+4)return;
-    if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
-    event.preventDefault();
-    viewport.scrollLeft+=event.deltaY;
-  },{passive:false});
-
-  viewport.addEventListener('scroll',updateButtons,{passive:true});
-
-  const observer=new MutationObserver(()=>{
-    if(collect())styleTrack();
-    updateButtons();
-  });
-  observer.observe(viewport,{childList:true,subtree:true});
-
-  let tries=0;
-  const boot=setInterval(()=>{
-    tries++;
-    if(collect()){
-      styleTrack();
-      updateButtons();
-    }
-    if(tries>=100 || (track&&items.length>0)){
-      if(track&&items.length>0)clearInterval(boot);
-    }
-  },200);
-
-  window.addEventListener('resize',()=>{
-    if(collect())styleTrack();
-    updateButtons();
-  },{passive:true});
-
-  collect();
-  styleTrack();
-  updateButtons();
+  document.addEventListener('juicer:feedLoaded',refresh);
+  document.addEventListener('juicer:feedPaginated',refresh);
+  window.setTimeout(refresh,1500);
 })();
