@@ -1380,6 +1380,11 @@ body.format-modal-open{overflow:hidden}
   }
   .scene7__header{
     max-width:720px;
+    align-items:flex-start;
+    text-align:left;
+  }
+  .scene7__header > *{
+    text-align:left;
   }
   .scene7__eyebrow{
     font-size:14px;
