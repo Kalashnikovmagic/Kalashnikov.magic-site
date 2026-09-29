@@ -972,7 +972,8 @@ body.format-modal-open{overflow:hidden}
     z-index:1;
     pointer-events:none;
     background:
-      linear-gradient(90deg,#050505 0%,rgba(5,5,5,.98) 3%,rgba(5,5,5,.76) 10%,rgba(5,5,5,0) 22%,rgba(5,5,5,0) 78%,rgba(5,5,5,.76) 90%,rgba(5,5,5,.98) 97%,#050505 100%);
+      linear-gradient(90deg,#050505 0%,rgba(5,5,5,.98) 3%,rgba(5,5,5,.76) 10%,rgba(5,5,5,0) 22%,rgba(5,5,5,0) 78%,rgba(5,5,5,.76) 90%,rgba(5,5,5,.98) 97%,#050505 100%),
+      linear-gradient(180deg,rgba(5,5,5,.78) 0%,rgba(5,5,5,.25) 6%,rgba(5,5,5,0) 15%,rgba(5,5,5,0) 85%,rgba(5,5,5,.30) 94%,rgba(5,5,5,.72) 100%);
   }
   .hero__scrim{
     z-index:2;
