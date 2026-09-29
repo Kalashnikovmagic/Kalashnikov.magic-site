@@ -1371,6 +1371,49 @@ body.format-modal-open{overflow:hidden}
 .scene7__feed-wrap{width:100%;max-width:920px;min-width:0;justify-self:end;align-self:center}
 .scene7__feed-heading{display:flex;justify-content:space-between;gap:20px;margin:0 0 8px;padding:0 2px;font:600 9px/1 var(--mono);letter-spacing:.16em;color:#666;text-transform:uppercase}
 .scene7__feed-heading span:last-child{color:#8c8c86}
+/* Scene 7 — enlarge desktop presentation scale. */
+@media(min-width:821px){
+  .scene7__inner{
+    width:min(96vw,1520px);
+    column-gap:clamp(52px,6vw,112px);
+    padding:3vh 0 0;
+  }
+  .scene7__header{
+    max-width:660px;
+  }
+  .scene7__eyebrow{
+    font-size:13px;
+    margin-bottom:24px;
+  }
+  .scene7__header h2{
+    font-size:clamp(32px,3.6vw,54px);
+  }
+  .scene7__lead{
+    max-width:48ch;
+    margin-top:32px;
+    font-size:clamp(15px,1.2vw,19px);
+    line-height:1.5;
+  }
+  .scene7__profile{
+    gap:16px;
+    margin-top:34px;
+    padding-bottom:14px;
+  }
+  .scene7__avatar{
+    width:56px;
+    height:56px;
+    font-size:28px;
+  }
+  .scene7__profile-copy strong{font-size:16px}
+  .scene7__profile-copy small{font-size:11px}
+  .scene7__profile-arrow{font-size:25px}
+  .scene7__feed-wrap{max-width:1020px}
+  .scene7__feed-heading{
+    margin-bottom:14px;
+    font-size:11px;
+  }
+}
+
 
 .scene7__feed-wrap{width:100%;max-width:920px;min-width:0;justify-self:end;align-self:center}
 .scene7__feed-heading{display:flex;justify-content:space-between;gap:20px;margin:0 0 12px;padding:0 2px;font:600 9px/1 var(--mono);letter-spacing:.16em;color:#666;text-transform:uppercase}
