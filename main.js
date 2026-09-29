@@ -582,9 +582,7 @@ function updateScene4(){
     }
   }
 
-  // Show the next-step prompt only near the end of Scene 4, after the final image has settled.
-  const promptProgress=clamp((p-.90)/.07,0,1);
-  scene4NextPrompt?.classList.toggle('is-visible',promptProgress>0);
+  // The former Scene 4 next-step prompt has been removed.
   const shake=second>0?Math.sin(second*Math.PI*10)*(1-second)*3:0;
   scene4Top.style.transform='translate3d('+shake+'px,0,0)';
 }
