@@ -1374,43 +1374,43 @@ body.format-modal-open{overflow:hidden}
 /* Scene 7 — enlarge desktop presentation scale. */
 @media(min-width:821px){
   .scene7__inner{
-    width:min(96vw,1520px);
-    column-gap:clamp(52px,6vw,112px);
-    padding:3vh 0 0;
+    width:min(98vw,1640px);
+    column-gap:clamp(60px,6.5vw,120px);
+    padding:1vh 0 0;
   }
   .scene7__header{
-    max-width:660px;
+    max-width:720px;
   }
   .scene7__eyebrow{
-    font-size:13px;
-    margin-bottom:24px;
+    font-size:14px;
+    margin-bottom:26px;
   }
   .scene7__header h2{
-    font-size:clamp(32px,3.6vw,54px);
+    font-size:clamp(38px,4.3vw,66px);
   }
   .scene7__lead{
     max-width:48ch;
-    margin-top:32px;
-    font-size:clamp(15px,1.2vw,19px);
+    margin-top:36px;
+    font-size:clamp(17px,1.35vw,22px);
     line-height:1.5;
   }
   .scene7__profile{
-    gap:16px;
-    margin-top:34px;
-    padding-bottom:14px;
+    gap:18px;
+    margin-top:38px;
+    padding-bottom:16px;
   }
   .scene7__avatar{
-    width:56px;
-    height:56px;
-    font-size:28px;
+    width:64px;
+    height:64px;
+    font-size:32px;
   }
-  .scene7__profile-copy strong{font-size:16px}
-  .scene7__profile-copy small{font-size:11px}
-  .scene7__profile-arrow{font-size:25px}
-  .scene7__feed-wrap{max-width:1020px}
+  .scene7__profile-copy strong{font-size:18px}
+  .scene7__profile-copy small{font-size:12px}
+  .scene7__profile-arrow{font-size:28px}
+  .scene7__feed-wrap{max-width:1160px}
   .scene7__feed-heading{
-    margin-bottom:14px;
-    font-size:11px;
+    margin-bottom:16px;
+    font-size:12px;
   }
 }
 
