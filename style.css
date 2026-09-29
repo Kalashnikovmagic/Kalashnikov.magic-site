@@ -1423,7 +1423,7 @@ body.format-modal-open{overflow:hidden}
 .basement__brand{display:flex;flex-direction:column;align-items:flex-start}
 .basement__name{
   color:#fff;
-  font:900 clamp(20px,2.2vw,30px)/.9 'KalashnikovHead',Inter,Arial,sans-serif;
+  font:900 clamp(18px,2vw,27px)/.9 'KalashnikovHead',Inter,Arial,sans-serif;
   letter-spacing:-.055em;
 }
 .basement__role{
@@ -1490,7 +1490,7 @@ body.format-modal-open{overflow:hidden}
     flex-direction:column;
     gap:28px;
   }
-  .basement__name{font-size:clamp(19px,5.7vw,29px)}
+  .basement__name{font-size:clamp(18px,5.2vw,27px)}
   .basement__phone{margin-top:18px}
   .basement__links{
     justify-content:flex-start;
