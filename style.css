@@ -1257,8 +1257,8 @@ body.format-modal-open{overflow:hidden}
 /* Scene 6 — enlarge supporting text under the headings on desktop only. */
 @media(min-width:821px){
   .scene6__side .scene6__scene-note{
-    max-width:24ch;
-    line-height:1.35;
+    max-width:38ch;
+    line-height:1.3;
   }
 }
 
