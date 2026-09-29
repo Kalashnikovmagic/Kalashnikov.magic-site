@@ -788,18 +788,135 @@ updateScene7();
   });
   observer.observe(viewport,{childList:true,subtree:true});
   refresh();
-})();/* Scene 7 — live Juicer feed.
-   The standard embed stays native/responsive. Navigation is intentionally
-   not reimplemented here because Juicer owns the generated feed DOM. */
+})();/* SCENE 7 — Juicer feed + reliable horizontal navigation. */
 (function initScene7Feed(){
   const scene7=document.querySelector('#scene7');
-  if(!scene7)return;
+  const viewport=document.querySelector('.scene7__juicer');
+  const prev=document.querySelector('.scene7__nav--prev');
+  const next=document.querySelector('.scene7__nav--next');
+  if(!scene7||!viewport||!prev||!next)return;
 
-  const refresh=()=>{
-    scene7.classList.add('scene7--feed-ready');
-  };
+  let items=[];
+  let current=0;
 
-  document.addEventListener('juicer:feedLoaded',refresh);
-  document.addEventListener('juicer:feedPaginated',refresh);
-  window.setTimeout(refresh,1500);
+  function findItems(){
+    const selectors=[
+      '.j-gallery li',
+      '.juicer-feed li',
+      '.j-instagram li',
+      'ul > li',
+      '.feed-item'
+    ];
+    const seen=new Set();
+    const result=[];
+    selectors.forEach(selector=>{
+      viewport.querySelectorAll(selector).forEach(el=>{
+        if(!seen.has(el)){
+          seen.add(el);
+          result.push(el);
+        }
+      });
+    });
+    return result;
+  }
+
+  function setup(){
+    items=findItems();
+
+    const tracks=viewport.querySelectorAll('.j-gallery ul,.juicer-feed ul,.j-instagram ul,ul');
+    tracks.forEach(track=>{
+      Object.assign(track.style,{
+        display:'flex',
+        flexDirection:'row',
+        flexWrap:'nowrap',
+        alignItems:'stretch',
+        gap:'14px',
+        width:'max-content',
+        maxWidth:'none',
+        margin:'0',
+        padding:'4px 4px 14px'
+      });
+    });
+
+    items.forEach((item,index)=>{
+      Object.assign(item.style,{
+        float:'none',
+        display:'block',
+        flex:'0 0 300px',
+        width:'300px',
+        minWidth:'300px',
+        maxWidth:'300px',
+        margin:'0'
+      });
+      item.dataset.scene7Index=String(index);
+    });
+
+    if(current>=items.length)current=Math.max(0,items.length-1);
+    updateButtons();
+  }
+
+  function updateButtons(){
+    const maxScroll=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
+    const canNavigate=items.length>1 && maxScroll>4;
+    prev.disabled=!canNavigate || current<=0;
+    next.disabled=!canNavigate || current>=items.length-1;
+  }
+
+  function goTo(index){
+    if(!items.length)return;
+    current=Math.max(0,Math.min(index,items.length-1));
+
+    const item=items[current];
+    if(item){
+      viewport.scrollTo({
+        left:Math.max(0,item.offsetLeft-12),
+        behavior:'smooth'
+      });
+    }
+    updateButtons();
+  }
+
+  prev.addEventListener('click',()=>goTo(current-1));
+  next.addEventListener('click',()=>goTo(current+1));
+
+  viewport.addEventListener('scroll',()=>{
+    if(!items.length)return;
+    const center=viewport.scrollLeft+(viewport.clientWidth/2);
+    let nearest=0;
+    let distance=Infinity;
+
+    items.forEach((item,index)=>{
+      const itemCenter=item.offsetLeft+(item.offsetWidth/2);
+      const delta=Math.abs(itemCenter-center);
+      if(delta<distance){
+        distance=delta;
+        nearest=index;
+      }
+    });
+
+    current=nearest;
+    updateButtons();
+  },{passive:true});
+
+  viewport.addEventListener('wheel',event=>{
+    if(viewport.scrollWidth<=viewport.clientWidth+4)return;
+    if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
+    event.preventDefault();
+    viewport.scrollLeft+=event.deltaY;
+  },{passive:false});
+
+  const observer=new MutationObserver(()=>setup());
+  observer.observe(viewport,{childList:true,subtree:true});
+
+  let attempts=0;
+  const bootstrap=setInterval(()=>{
+    attempts++;
+    setup();
+    if(items.length>0 || attempts>=100){
+      clearInterval(bootstrap);
+    }
+  },200);
+
+  window.addEventListener('resize',setup,{passive:true});
+  setup();
 })();
