@@ -726,8 +726,18 @@ updateScene7();
   const next=document.querySelector('.scene7__nav--next');
   if(!shell||!viewport||!prev||!next)return;
 
-  const getTrack=()=>viewport.querySelector('.juicer-feed ul,.j-gallery ul,.j-instagram ul,ul');
-  const getStep=()=>Math.max(240,Math.min(340,viewport.clientWidth*.42));
+  const getTrack=()=>{
+    return viewport.querySelector('.juicer-feed ul,.j-gallery ul,.j-instagram ul,ul');
+  };
+  const getItems=()=>{
+    const track=getTrack();
+    return track?[...track.children].filter(el=>el.nodeType===1):[];
+  };
+  const getStep=()=>{
+    const first=getItems()[0];
+    const gap=14;
+    return first?Math.min(viewport.clientWidth*.72,first.getBoundingClientRect().width+gap):Math.max(240,Math.min(340,viewport.clientWidth*.42));
+  };
 
   const scrollByStep=(dir)=>{
     viewport.scrollBy({left:dir*getStep(),behavior:'smooth'});
@@ -753,10 +763,26 @@ updateScene7();
   const observer=new MutationObserver(()=>{
     const track=getTrack();
     if(track){
+      track.classList.add('scene7__juicer-track');
       track.style.display='flex';
       track.style.flexDirection='row';
       track.style.flexWrap='nowrap';
+      track.style.alignItems='stretch';
+      track.style.gap='14px';
       track.style.width='max-content';
+      track.style.maxWidth='none';
+      track.style.margin='0';
+      track.style.padding='4px 4px 14px';
+
+      [...track.children].forEach(item=>{
+        item.classList.add('scene7__juicer-item');
+        item.style.flex='0 0 300px';
+        item.style.width='300px';
+        item.style.minWidth='300px';
+        item.style.maxWidth='300px';
+        item.style.float='none';
+        item.style.margin='0';
+      });
     }
     refresh();
   });
