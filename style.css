@@ -1471,7 +1471,7 @@ body.format-modal-open{overflow:hidden}
   justify-content:space-between;
   align-items:center;
   gap:20px;
-  padding-top:20px;
+  padding-top:0;
   color:#4e4e4a;
   font:500 9px/1.4 var(--mono);
   letter-spacing:.04em;
@@ -1497,6 +1497,7 @@ body.format-modal-open{overflow:hidden}
     gap:14px 18px;
   }
   .basement__legal{padding-top:22px}
+  .basement__bottom{padding-top:0}
   .basement__legal,.basement__bottom{font-size:8px}
   .basement__bottom{
     flex-direction:column;
