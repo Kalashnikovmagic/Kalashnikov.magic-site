@@ -1084,7 +1084,7 @@ body.format-modal-open{overflow:hidden}
   letter-spacing:.12em;
   color:#fff;
 }
-.scene6__side--with .scene6__side-label{color:#fff}
+.scene6__side--with .scene6__side-label{color:var(--lime)}
 
 .scene6__scene{
   position:relative;
@@ -1110,7 +1110,7 @@ body.format-modal-open{overflow:hidden}
   z-index:4;
 }
 .scene6__side--without .scene6__scene-main{color:#fff}
-.scene6__side--with .scene6__scene-main{color:#fff;bottom:11.5vh}
+.scene6__side--with .scene6__scene-main{color:var(--lime);bottom:11.5vh}
 
 .scene6__scene-note{
   position:absolute;
