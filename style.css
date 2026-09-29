@@ -1234,6 +1234,15 @@ body.format-modal-open{overflow:hidden}
 }
 
 
+
+
+/* Scene 6 — upper section text must stay white. */
+.scene6__side--without .scene6__side-label,
+.scene6__side--without .scene6__scene-main,
+.scene6__side--without .scene6__scene-note{
+  color:#fff !important;
+}
+
 /* Scene 6 heading adjustments */
 @media(min-width:821px){
   /* Raise all Scene 6 headings except block 2 of the upper half. */
