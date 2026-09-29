@@ -703,3 +703,15 @@ function updateScene6(){
 
 window.addEventListener('scroll',updateScene6,{passive:true});
 updateScene6();
+
+
+/* SCENE 7 — subtle entrance motion; no dependency on external Instagram APIs. */
+const scene7=$('#scene7');
+function updateScene7(){
+  if(!scene7)return;
+  const rect=scene7.getBoundingClientRect();
+  const visible=rect.top < window.innerHeight*.92 && rect.bottom > window.innerHeight*.08;
+  scene7.classList.toggle('is-visible',visible);
+}
+window.addEventListener('scroll',updateScene7,{passive:true});
+updateScene7();
