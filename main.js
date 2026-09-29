@@ -530,7 +530,6 @@ const scene4=$('#scene4');
 const scene4Mid=$('#scene4Mid');
 const scene4Top=$('#scene4Top');
 const scene4Flash=$('#scene4Flash');
-const scene4NextPrompt=$('#scene4NextPrompt');
 const scene4Caps=[$('#scene4Cap0'),$('#scene4Cap1'),$('#scene4Cap2')];
 const scene4Headlines=[$('#scene4Headline0'),$('#scene4Headline1'),$('#scene4Headline2')];
 let scene4LastPhase=-1;
