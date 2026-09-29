@@ -1273,3 +1273,36 @@ body.format-modal-open{overflow:hidden}
 .scene6__side--with .scene6__scene-note{
   color:#fff !important;
 }
+
+
+/* Scene 6 — content sits above global grain/vignette. */
+.scene6{
+  isolation:isolate;
+}
+.scene6__sticky{
+  position:sticky;
+  z-index:60;
+}
+.scene6__side-label,
+.scene6__scene,
+.scene6__progress{
+  position:relative;
+  z-index:70;
+}
+.scene6__scene{
+  position:relative;
+}
+.scene6__scene-main,
+.scene6__scene-note{
+  z-index:71;
+}
+.scene6__photo{
+  z-index:1 !important;
+}
+.scene6__photo::after{
+  z-index:2;
+}
+.scene6__side--without .scene6__photo,
+.scene6__side--with .scene6__photo{
+  z-index:1 !important;
+}
