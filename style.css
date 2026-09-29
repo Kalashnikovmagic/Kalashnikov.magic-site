@@ -1254,6 +1254,11 @@ body.format-modal-open{overflow:hidden}
   color:#fff !important;
 }
 
+/* Scene 6 — enlarge supporting text under the headings on desktop only. */
+@media(min-width:821px){
+  .scene6__side .scene6__scene-note{font-size:clamp(14px,1.3vw,18px)}
+}
+
 /* Scene 6 heading adjustments */
 @media(min-width:821px){
   /* Raise all Scene 6 headings except block 2 of the upper half. */
