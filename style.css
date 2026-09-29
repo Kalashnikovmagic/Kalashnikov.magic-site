@@ -615,6 +615,9 @@ body.format-modal-open{overflow:hidden}
    without changing the mobile rules.
    ========================================================= */
 @media(min-width:821px){
+  /* Scene 1 — shorter desktop scroll distance for the wheel. */
+  .hero{height:320vh;}
+
   /* Scene 1 — full desktop hero title, restored from the current HTML structure. */
   .hero__title h1{
     display:block;
