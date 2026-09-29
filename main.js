@@ -715,3 +715,51 @@ function updateScene7(){
 }
 window.addEventListener('scroll',updateScene7,{passive:true});
 updateScene7();
+
+/* Scene 7 — horizontal Juicer feed controls.
+   Juicer injects its own markup after page load, so wire the arrows after
+   the cards appear and convert vertical wheel input into horizontal scroll. */
+(function initScene7Carousel(){
+  const shell=document.querySelector('.scene7__juicer-shell');
+  const viewport=document.querySelector('.scene7__juicer');
+  const prev=document.querySelector('.scene7__nav--prev');
+  const next=document.querySelector('.scene7__nav--next');
+  if(!shell||!viewport||!prev||!next)return;
+
+  const getTrack=()=>viewport.querySelector('.juicer-feed ul,.j-gallery ul,.j-instagram ul,ul');
+  const getStep=()=>Math.max(240,Math.min(340,viewport.clientWidth*.42));
+
+  const scrollByStep=(dir)=>{
+    viewport.scrollBy({left:dir*getStep(),behavior:'smooth'});
+  };
+
+  prev.addEventListener('click',()=>scrollByStep(-1));
+  next.addEventListener('click',()=>scrollByStep(1));
+
+  viewport.addEventListener('wheel',(event)=>{
+    if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
+    if(viewport.scrollWidth<=viewport.clientWidth)return;
+    event.preventDefault();
+    viewport.scrollLeft+=event.deltaY;
+  },{passive:false});
+
+  const refresh=()=>{
+    const max=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
+    prev.disabled=viewport.scrollLeft<=2;
+    next.disabled=viewport.scrollLeft>=max-2;
+  };
+  viewport.addEventListener('scroll',refresh,{passive:true});
+
+  const observer=new MutationObserver(()=>{
+    const track=getTrack();
+    if(track){
+      track.style.display='flex';
+      track.style.flexDirection='row';
+      track.style.flexWrap='nowrap';
+      track.style.width='max-content';
+    }
+    refresh();
+  });
+  observer.observe(viewport,{childList:true,subtree:true});
+  refresh();
+})();
