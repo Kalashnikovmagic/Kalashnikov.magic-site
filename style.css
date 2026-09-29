@@ -1109,7 +1109,7 @@ body.format-modal-open{overflow:hidden}
   transition:opacity .28s var(--ease),filter .28s var(--ease);
   z-index:4;
 }
-.scene6__side--without .scene6__scene-main{color:#777}
+.scene6__side--without .scene6__scene-main{color:#fff}
 .scene6__side--with .scene6__scene-main{color:var(--bone);bottom:11.5vh}
 
 .scene6__scene-note{
