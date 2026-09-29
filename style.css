@@ -1261,6 +1261,9 @@ body.format-modal-open{overflow:hidden}
     font-size:clamp(16px,1.45vw,20px);
     line-height:1.3;
   }
+  .scene6__side--without .scene6__scene-note.scene6-step-1{
+    bottom:calc(4.2vh - 5%);
+  }
 }
 
 /* Scene 6 heading adjustments */
