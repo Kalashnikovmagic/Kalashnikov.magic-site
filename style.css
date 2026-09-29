@@ -1407,10 +1407,14 @@ body.format-modal-open{overflow:hidden}
   .scene7__profile-copy strong{font-size:18px}
   .scene7__profile-copy small{font-size:12px}
   .scene7__profile-arrow{font-size:28px}
-  .scene7__feed-wrap{max-width:1160px}
+  .scene7__feed-wrap{
+    max-width:1320px;
+    transform:scale(1.14);
+    transform-origin:center center;
+  }
   .scene7__feed-heading{
-    margin-bottom:16px;
-    font-size:12px;
+    margin-bottom:18px;
+    font-size:13px;
   }
 }
 
