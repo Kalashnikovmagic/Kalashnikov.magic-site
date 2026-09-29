@@ -1262,7 +1262,7 @@ body.format-modal-open{overflow:hidden}
     line-height:1.3;
   }
   .scene6__side--without .scene6__scene-note.scene6-step-1{
-    bottom:calc(4.2vh - 3%);
+    bottom:calc(4.2vh - 4%);
   }
   .scene6__side--with .scene6__scene-note.scene6-step-1{
     bottom:calc(5.1vh - 1%);
