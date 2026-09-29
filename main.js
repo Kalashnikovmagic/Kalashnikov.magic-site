@@ -716,188 +716,144 @@ function updateScene7(){
 window.addEventListener('scroll',updateScene7,{passive:true});
 updateScene7();
 
-/* Scene 7 — horizontal Juicer feed controls.
-   Juicer injects its own markup after page load, so wire the arrows after
-   the cards appear and convert vertical wheel input into horizontal scroll. */
+/* SCENE 7 — single, isolated Juicer carousel controller. */
 (function initScene7Carousel(){
-  const shell=document.querySelector('.scene7__juicer-shell');
-  const viewport=document.querySelector('.scene7__juicer');
-  const prev=document.querySelector('.scene7__nav--prev');
-  const next=document.querySelector('.scene7__nav--next');
-  if(!shell||!viewport||!prev||!next)return;
-
-  const getTrack=()=>{
-    return viewport.querySelector('.juicer-feed ul,.j-gallery ul,.j-instagram ul,ul');
-  };
-  const getItems=()=>{
-    const track=getTrack();
-    return track?[...track.children].filter(el=>el.nodeType===1):[];
-  };
-  const getStep=()=>{
-    const first=getItems()[0];
-    const gap=14;
-    return first?Math.min(viewport.clientWidth*.72,first.getBoundingClientRect().width+gap):Math.max(240,Math.min(340,viewport.clientWidth*.42));
-  };
-
-  const scrollByStep=(dir)=>{
-    viewport.scrollBy({left:dir*getStep(),behavior:'smooth'});
-  };
-
-  prev.addEventListener('click',()=>scrollByStep(-1));
-  next.addEventListener('click',()=>scrollByStep(1));
-
-  viewport.addEventListener('wheel',(event)=>{
-    if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
-    if(viewport.scrollWidth<=viewport.clientWidth)return;
-    event.preventDefault();
-    viewport.scrollLeft+=event.deltaY;
-  },{passive:false});
-
-  const refresh=()=>{
-    const max=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
-    prev.disabled=viewport.scrollLeft<=2;
-    next.disabled=viewport.scrollLeft>=max-2;
-  };
-  viewport.addEventListener('scroll',refresh,{passive:true});
-
-  const observer=new MutationObserver(()=>{
-    const track=getTrack();
-    if(track){
-      track.classList.add('scene7__juicer-track');
-      track.style.display='flex';
-      track.style.flexDirection='row';
-      track.style.flexWrap='nowrap';
-      track.style.alignItems='stretch';
-      track.style.gap='14px';
-      track.style.width='max-content';
-      track.style.maxWidth='none';
-      track.style.margin='0';
-      track.style.padding='4px 4px 14px';
-
-      [...track.children].forEach(item=>{
-        item.classList.add('scene7__juicer-item');
-        item.style.flex='0 0 300px';
-        item.style.width='300px';
-        item.style.minWidth='300px';
-        item.style.maxWidth='300px';
-        item.style.float='none';
-        item.style.margin='0';
-      });
-    }
-    refresh();
-  });
-  observer.observe(viewport,{childList:true,subtree:true});
-  refresh();
-})();/* SCENE 7 — Juicer feed + reliable horizontal navigation. */
-(function initScene7Feed(){
   const scene7=document.querySelector('#scene7');
   const viewport=document.querySelector('.scene7__juicer');
   const prev=document.querySelector('.scene7__nav--prev');
   const next=document.querySelector('.scene7__nav--next');
   if(!scene7||!viewport||!prev||!next)return;
 
+  let track=null;
   let items=[];
-  let current=0;
+  let currentIndex=0;
 
-  function findItems(){
+  const findTrack=()=>{
     const selectors=[
-      '.j-gallery li',
-      '.juicer-feed li',
-      '.j-instagram li',
-      'ul > li',
-      '.feed-item'
+      '.j-gallery > ul',
+      '.juicer-feed > ul',
+      '.j-instagram > ul',
+      'ul'
     ];
-    const seen=new Set();
-    const result=[];
-    selectors.forEach(selector=>{
-      viewport.querySelectorAll(selector).forEach(el=>{
-        if(!seen.has(el)){
-          seen.add(el);
-          result.push(el);
-        }
-      });
-    });
-    return result;
-  }
+    for(const selector of selectors){
+      const found=viewport.querySelector(selector);
+      if(found)return found;
+    }
+    return null;
+  };
 
-  function setup(){
-    items=findItems();
+  const prepare=()=>{
+    track=findTrack();
+    if(!track)return false;
 
-    const tracks=viewport.querySelectorAll('.j-gallery ul,.juicer-feed ul,.j-instagram ul,ul');
-    tracks.forEach(track=>{
-      Object.assign(track.style,{
-        display:'flex',
-        flexDirection:'row',
-        flexWrap:'nowrap',
-        alignItems:'stretch',
-        gap:'14px',
-        width:'max-content',
-        maxWidth:'none',
-        margin:'0',
-        padding:'4px 4px 14px'
-      });
+    items=[...track.children].filter(el=>el.nodeType===1);
+    if(!items.length)return false;
+
+    /* Juicer may refresh its own inline layout. Re-apply our carousel model. */
+    Object.assign(track.style,{
+      display:'flex',
+      flexDirection:'row',
+      flexWrap:'nowrap',
+      gap:'14px',
+      width:'max-content',
+      minWidth:'max-content',
+      maxWidth:'none',
+      margin:'0',
+      padding:'4px 4px 18px',
+      float:'none'
     });
 
-    items.forEach((item,index)=>{
+    items.forEach(item=>{
       Object.assign(item.style,{
-        float:'none',
-        display:'block',
         flex:'0 0 300px',
         width:'300px',
         minWidth:'300px',
         maxWidth:'300px',
+        float:'none',
+        display:'block',
         margin:'0'
       });
-      item.dataset.scene7Index=String(index);
     });
 
-    if(current>=items.length)current=Math.max(0,items.length-1);
+    return true;
+  };
+
+  const updateButtons=()=>{
+    const canNavigate=items.length>1 && viewport.scrollWidth>viewport.clientWidth+4;
+    prev.disabled=!canNavigate||currentIndex<=0;
+    next.disabled=!canNavigate||currentIndex>=items.length-1;
+  };
+
+  const goTo=(index)=>{
+    if(!prepare())return;
+    currentIndex=Math.max(0,Math.min(index,items.length-1));
+    const item=items[currentIndex];
+    if(!item)return;
+    viewport.scrollTo({
+      left:Math.max(0,item.offsetLeft-12),
+      behavior:'smooth'
+    });
     updateButtons();
-  }
+  };
 
-  function updateButtons(){
-    const maxScroll=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
-    const canNavigate=items.length>1 && maxScroll>4;
-    prev.disabled=!canNavigate || current<=0;
-    next.disabled=!canNavigate || current>=items.length-1;
-  }
-
-  function goTo(index){
-    if(!items.length)return;
-    current=Math.max(0,Math.min(index,items.length-1));
-
-    const item=items[current];
-    if(item){
-      viewport.scrollTo({
-        left:Math.max(0,item.offsetLeft-12),
-        behavior:'smooth'
-      });
-    }
-    updateButtons();
-  }
-
-  prev.addEventListener('click',()=>goTo(current-1));
-  next.addEventListener('click',()=>goTo(current+1));
+  prev.addEventListener('click',()=>goTo(currentIndex-1));
+  next.addEventListener('click',()=>goTo(currentIndex+1));
 
   viewport.addEventListener('scroll',()=>{
     if(!items.length)return;
-    const center=viewport.scrollLeft+(viewport.clientWidth/2);
+    const center=viewport.scrollLeft+viewport.clientWidth/2;
     let nearest=0;
     let distance=Infinity;
-
     items.forEach((item,index)=>{
-      const itemCenter=item.offsetLeft+(item.offsetWidth/2);
-      const delta=Math.abs(itemCenter-center);
-      if(delta<distance){
-        distance=delta;
+      const itemCenter=item.offsetLeft+item.offsetWidth/2;
+      const d=Math.abs(itemCenter-center);
+      if(d<distance){
+        distance=d;
         nearest=index;
       }
     });
-
-    current=nearest;
+    currentIndex=nearest;
     updateButtons();
   },{passive:true});
 
+  /* Touch / pointer swipe: deliberately implemented on our viewport. */
+  let startX=0;
+  let startScrollLeft=0;
+  let dragging=false;
+
+  viewport.addEventListener('pointerdown',event=>{
+    if(event.pointerType==='mouse'&&event.button!==0)return;
+    startX=event.clientX;
+    startScrollLeft=viewport.scrollLeft;
+    dragging=true;
+    viewport.setPointerCapture?.(event.pointerId);
+  });
+
+  viewport.addEventListener('pointermove',event=>{
+    if(!dragging)return;
+    const dx=event.clientX-startX;
+    if(Math.abs(dx)>4)event.preventDefault();
+    viewport.scrollLeft=startScrollLeft-dx;
+  },{passive:false});
+
+  const endDrag=event=>{
+    if(!dragging)return;
+    dragging=false;
+    if(event.pointerId!=null){
+      try{viewport.releasePointerCapture?.(event.pointerId)}catch(_){}
+    }
+    const dx=event.clientX-startX;
+    if(Math.abs(dx)>45){
+      goTo(currentIndex+(dx<0?1:-1));
+    }else{
+      goTo(currentIndex);
+    }
+  };
+
+  viewport.addEventListener('pointerup',endDrag);
+  viewport.addEventListener('pointercancel',endDrag);
+
+  /* Mouse wheel over the feed becomes horizontal movement. */
   viewport.addEventListener('wheel',event=>{
     if(viewport.scrollWidth<=viewport.clientWidth+4)return;
     if(Math.abs(event.deltaY)<=Math.abs(event.deltaX))return;
@@ -905,18 +861,26 @@ updateScene7();
     viewport.scrollLeft+=event.deltaY;
   },{passive:false});
 
-  const observer=new MutationObserver(()=>setup());
+  const sync=()=>{
+    if(prepare()){
+      if(currentIndex>=items.length)currentIndex=Math.max(0,items.length-1);
+      updateButtons();
+    }
+  };
+
+  const observer=new MutationObserver(()=>{
+    window.requestAnimationFrame(sync);
+  });
   observer.observe(viewport,{childList:true,subtree:true});
 
   let attempts=0;
-  const bootstrap=setInterval(()=>{
+  const boot=setInterval(()=>{
     attempts++;
-    setup();
-    if(items.length>0 || attempts>=100){
-      clearInterval(bootstrap);
-    }
+    sync();
+    if(items.length>0||attempts>=100)clearInterval(boot);
   },200);
 
-  window.addEventListener('resize',setup,{passive:true});
-  setup();
+  window.addEventListener('resize',sync,{passive:true});
+
+  sync();
 })();
