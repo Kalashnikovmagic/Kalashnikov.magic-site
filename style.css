@@ -1082,9 +1082,9 @@ body.format-modal-open{overflow:hidden}
   z-index:15;
   font:700 clamp(18px,1.6vw,25px)/1 var(--mono);
   letter-spacing:.12em;
-  color:#6a6a66;
+  color:#fff;
 }
-.scene6__side--with .scene6__side-label{color:var(--lime)}
+.scene6__side--with .scene6__side-label{color:#fff}
 
 .scene6__scene{
   position:relative;
@@ -1110,7 +1110,7 @@ body.format-modal-open{overflow:hidden}
   z-index:4;
 }
 .scene6__side--without .scene6__scene-main{color:#fff}
-.scene6__side--with .scene6__scene-main{color:var(--bone);bottom:11.5vh}
+.scene6__side--with .scene6__scene-main{color:#fff;bottom:11.5vh}
 
 .scene6__scene-note{
   position:absolute;
@@ -1119,13 +1119,13 @@ body.format-modal-open{overflow:hidden}
   bottom:7vh;
   min-height:0;
   margin:0;
-  color:#5f5f5b;
+  color:#fff;
   font:500 clamp(12px,1.1vw,15px)/1.4 var(--mono);
   letter-spacing:.04em;
   transition:opacity .28s var(--ease),filter .28s var(--ease);
   z-index:4;
 }
-.scene6__side--with .scene6__scene-note{color:var(--lime);bottom:5.1vh}
+.scene6__side--with .scene6__scene-note{color:#fff;bottom:5.1vh}
 
 .scene6__progress{
   position:absolute;
