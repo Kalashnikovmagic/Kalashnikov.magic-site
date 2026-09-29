@@ -767,10 +767,9 @@ body.format-modal-open{overflow:hidden}
     clip-path:polygon(0 0,100% 0,100% 0,0 0);
   }
   .scene4__layer--base::after{display:none}
-  /* Position logic: "цель выше" means move the image upward. */
   /* Desktop image positions for Scene 4. */
-  .scene4__layer--mid{object-position:center 35%}
-  .scene4__layer--top{object-position:center 35%}
+  .scene4__layer--mid{object-position:center 25%}
+  .scene4__layer--top{object-position:center 40%}
   .scene4__layer--top{z-index:3}
   .scene4__tint{
     position:absolute;
