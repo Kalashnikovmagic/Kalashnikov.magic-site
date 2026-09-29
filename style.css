@@ -769,7 +769,7 @@ body.format-modal-open{overflow:hidden}
   .scene4__layer--base::after{display:none}
   /* Desktop image positions for Scene 4. */
   .scene4__layer--mid{
-    object-position:center 15%;
+    object-position:center 25%;
   }
   .scene4__layer--top{object-position:center 40%}
   .scene4__layer--top{z-index:3}
