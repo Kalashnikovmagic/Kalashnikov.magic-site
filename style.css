@@ -768,8 +768,8 @@ body.format-modal-open{overflow:hidden}
   }
   .scene4__layer--base::after{display:none}
   /* Position logic: "цель выше" means move the image upward. */
-  .scene4__layer--mid{object-position:center 40%}
-  .scene4__layer--top{object-position:center 44.5%}
+  .scene4__layer--mid{object-position:center 35%}
+  .scene4__layer--top{object-position:center 42.5%}
   .scene4__layer--top{z-index:3}
   .scene4__tint{
     position:absolute;
