@@ -1454,20 +1454,30 @@ body.format-modal-open{overflow:hidden}
   .scene7__inner{
     width:88vw;
     min-height:100vh;
-    padding:11vh 0 6vh;
+    padding:10vh 0 7vh;
     display:flex;
     flex-direction:column;
     align-items:stretch;
-    gap:36px;
+    gap:30px;
   }
   .scene7__header h2{font-size:clamp(42px,11.5vw,66px)}
-  .scene7__lead{margin-top:22px;font-size:11px;line-height:1.45}
-  .scene7__profile{margin-top:24px}
-  .scene7__feed{width:100%;gap:10px}
-  .scene7__post{min-height:30vw;padding:13px}
-  .scene7__post:nth-child(2n){transform:translateY(15px)}
-  .scene7__post i{font-size:clamp(22px,7vw,34px)}
-  .scene7__post:hover{transform:none}
-  .scene7__post:nth-child(2n):hover{transform:translateY(15px)}
-  .scene7__cta{align-self:flex-start;margin-top:8px;padding:15px 18px 14px 20px;font-size:10px}
+  .scene7__lead{margin-top:20px;font-size:11px;line-height:1.45}
+  .scene7__profile{margin-top:22px}
+  .scene7__feed-wrap{width:100%;max-width:none}
+  .scene7__feed-heading{
+    margin-bottom:10px;
+    font-size:8px;
+    letter-spacing:.12em;
+  }
+  .scene7__juicer{
+    min-height:360px;
+    padding:9px;
+  }
+  .scene7__juicer::before{inset:6px}
+  .scene7__cta{
+    align-self:flex-start;
+    margin-top:0;
+    padding:15px 18px 14px 20px;
+    font-size:10px;
+  }
 }
