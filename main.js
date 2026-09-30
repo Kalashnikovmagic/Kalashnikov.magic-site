@@ -306,8 +306,6 @@ function updateFacts(){
   }else{
     factsSection.classList.remove('is-revealing','is-surprise');
     factsUnlockedAtScroll=null;
-    surpriseCard?.classList.remove('is-flipped');
-    surpriseCardWrap?.classList.remove('surprise-card--revealed');
     if(factsHint)factsHint.textContent='ОТКРОЙТЕ ВСЕ 4 КАРТЫ';
   }
 }
