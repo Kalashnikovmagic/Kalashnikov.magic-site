@@ -9,25 +9,13 @@ const siteLoaderPercent=$('#loaderPercent');
 const siteLoaderFill=$('#loaderFill');
 const siteLoaderStatus=$('#loaderStatus');
 
-function updateSiteLoader(value,status){
-  const progress=clamp(value,0,100);
-  if(siteLoaderPercent)siteLoaderPercent.textContent=Math.round(progress)+'%';
-  if(siteLoaderFill)siteLoaderFill.style.width=progress+'%';
-  if(siteLoaderStatus&&status)siteLoaderStatus.textContent=status;
-}
-
-function hideSiteLoader(){
-  if(!siteLoader)return;
-  siteLoader.classList.add('is-hidden');
-  window.setTimeout(()=>siteLoader.remove(),950);
-}
-
 const loaderMessages=[
   [0,'ПОДГОТАВЛИВАЮ РЕКВИЗИТ'],
-  [24,'ПРОВЕРЯЮ СВОБОДНЫЕ ДАТЫ'],
-  [48,'НАСТРАИВАЮ СВЕТ'],
-  [72,'ГОТОВЛЮСЬ УДИВЛЯТЬ'],
-  [90,'ПОЧТИ ГОТОВО']
+  [22,'ПРОВЕРЯЮ СВОБОДНЫЕ ДАТЫ'],
+  [44,'НАСТРАИВАЮ СВЕТ'],
+  [66,'ГОТОВЛЮСЬ УДИВЛЯТЬ'],
+  [88,'ПОЧТИ ГОТОВО'],
+  [100,'ГОТОВО']
 ];
 
 function getLoaderMessage(progress){
@@ -39,21 +27,44 @@ function getLoaderMessage(progress){
   return message;
 }
 
-function startLoaderProgress(){
+function updateSiteLoader(value,status){
+  const progress=clamp(value,0,100);
+  if(siteLoaderPercent)siteLoaderPercent.textContent=Math.round(progress)+'%';
+  if(siteLoaderFill)siteLoaderFill.style.width=progress+'%';
+  if(siteLoaderStatus)siteLoaderStatus.textContent=status||getLoaderMessage(progress);
+}
+
+function hideSiteLoader(){
   if(!siteLoader)return;
-  const duration=3300;
+  siteLoader.classList.add('is-hidden');
+  window.setTimeout(()=>siteLoader.remove(),950);
+}
+
+function runInitialLoader(){
+  if(!siteLoader)return;
+  const duration=3500;
   const started=performance.now();
 
-  const tick=now=>{
+  function tick(now){
     if(!siteLoader)return;
-    const progress=Math.min(94,((now-started)/duration)*94);
+    const elapsed=now-started;
+    const progress=Math.min(100,(elapsed/duration)*100);
     updateSiteLoader(progress,getLoaderMessage(progress));
-    if(progress<94)requestAnimationFrame(tick);
-  };
 
+    if(progress<100){
+      requestAnimationFrame(tick);
+      return;
+    }
+
+    updateSiteLoader(100,'ГОТОВО');
+    window.setTimeout(hideSiteLoader,260);
+  }
+
+  updateSiteLoader(0,getLoaderMessage(0));
   requestAnimationFrame(tick);
 }
-startLoaderProgress();
+
+runInitialLoader();
 
 /* -------------------------------------------------------
    HERO FRAME SEQUENCE
@@ -165,8 +176,6 @@ function loadHeroFrame(index){
       if(index===0){
         heroLoaded=true;
         setHeroFrame(0);
-        updateSiteLoader(100,'ГОТОВО');
-        window.setTimeout(hideSiteLoader,260);
       }
 
       resolve(image);
