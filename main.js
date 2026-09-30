@@ -2,6 +2,38 @@ const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 
 /* -------------------------------------------------------
+   INITIAL LOADER
+   ------------------------------------------------------- */
+const siteLoader=$('#loader');
+const siteLoaderPercent=$('#loaderPercent');
+const siteLoaderFill=$('#loaderFill');
+const siteLoaderStatus=$('#loaderStatus');
+
+function updateSiteLoader(value,status){
+  const progress=clamp(value,0,100);
+  if(siteLoaderPercent)siteLoaderPercent.textContent=Math.round(progress)+'%';
+  if(siteLoaderFill)siteLoaderFill.style.width=progress+'%';
+  if(siteLoaderStatus && status)siteLoaderStatus.textContent=status;
+}
+
+function hideSiteLoader(){
+  if(!siteLoader)return;
+  siteLoader.classList.add('is-hidden');
+  window.setTimeout(()=>siteLoader.remove(),950);
+}
+
+async function runInitialLoader(){
+  if(!siteLoader)return;
+  updateSiteLoader(0,'ПОДГОТАВЛИВАЮ РЕКВИЗИТ');
+  await new Promise(resolve=>requestAnimationFrame(resolve));
+  updateSiteLoader(20,'ЗАПУСКАЮ СВЕТ');
+  await new Promise(resolve=>setTimeout(resolve,120));
+  updateSiteLoader(45,'ГОТОВЛЮ ПЕРВУЮ СЦЕНУ');
+  await new Promise(resolve=>setTimeout(resolve,120));
+}
+runInitialLoader();
+
+/* -------------------------------------------------------
    HERO FRAME SEQUENCE
    87 WebP frames, driven directly by hero scroll progress.
    ------------------------------------------------------- */
