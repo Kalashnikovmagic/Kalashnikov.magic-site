@@ -13,7 +13,7 @@ function updateSiteLoader(value,status){
   const progress=clamp(value,0,100);
   if(siteLoaderPercent)siteLoaderPercent.textContent=Math.round(progress)+'%';
   if(siteLoaderFill)siteLoaderFill.style.width=progress+'%';
-  if(siteLoaderStatus && status)siteLoaderStatus.textContent=status;
+  if(siteLoaderStatus&&status)siteLoaderStatus.textContent=status;
 }
 
 function hideSiteLoader(){
@@ -22,16 +22,38 @@ function hideSiteLoader(){
   window.setTimeout(()=>siteLoader.remove(),950);
 }
 
-async function runInitialLoader(){
-  if(!siteLoader)return;
-  updateSiteLoader(0,'ПОДГОТАВЛИВАЮ РЕКВИЗИТ');
-  await new Promise(resolve=>requestAnimationFrame(resolve));
-  updateSiteLoader(20,'ЗАПУСКАЮ СВЕТ');
-  await new Promise(resolve=>setTimeout(resolve,120));
-  updateSiteLoader(45,'ГОТОВЛЮ ПЕРВУЮ СЦЕНУ');
-  await new Promise(resolve=>setTimeout(resolve,120));
+const loaderMessages=[
+  [0,'ПОДГОТАВЛИВАЮ РЕКВИЗИТ'],
+  [24,'ПРОВЕРЯЮ СВОБОДНЫЕ ДАТЫ'],
+  [48,'НАСТРАИВАЮ СВЕТ'],
+  [72,'ГОТОВЛЮСЬ УДИВЛЯТЬ'],
+  [90,'ПОЧТИ ГОТОВО']
+];
+
+function getLoaderMessage(progress){
+  let message=loaderMessages[0][1];
+  for(const [threshold,text] of loaderMessages){
+    if(progress>=threshold)message=text;
+    else break;
+  }
+  return message;
 }
-runInitialLoader();
+
+function startLoaderProgress(){
+  if(!siteLoader)return;
+  const duration=3300;
+  const started=performance.now();
+
+  const tick=now=>{
+    if(!siteLoader)return;
+    const progress=Math.min(94,((now-started)/duration)*94);
+    updateSiteLoader(progress,getLoaderMessage(progress));
+    if(progress<94)requestAnimationFrame(tick);
+  };
+
+  requestAnimationFrame(tick);
+}
+startLoaderProgress();
 
 /* -------------------------------------------------------
    HERO FRAME SEQUENCE
