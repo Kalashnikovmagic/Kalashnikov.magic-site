@@ -190,7 +190,6 @@ button{font:inherit;color:inherit}
 .facts__hint{position:absolute;bottom:9vh;margin:0;font:10px var(--mono);letter-spacing:.2em;color:#555;transition:opacity 400ms var(--ease)}
 .facts.is-revealing .facts__hint{opacity:0}
 .facts.is-surprise .facts__hint{opacity:1;color:#666}
-.facts.is-surprise .facts__hint:after{content:"  ·  НАЖМИТЕ";color:var(--lime)}
 
 .transition{height:750vh;background:#000}
 .transition__sticky{display:grid;place-items:center;background:#000}
