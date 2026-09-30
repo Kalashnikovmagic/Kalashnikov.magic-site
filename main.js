@@ -142,7 +142,9 @@ function loadHeroFrame(index){
 
       if(index===0){
         heroLoaded=true;
-                setHeroFrame(0);
+        setHeroFrame(0);
+        updateSiteLoader(100,'ГОТОВО');
+        window.setTimeout(hideSiteLoader,260);
       }
 
       resolve(image);
