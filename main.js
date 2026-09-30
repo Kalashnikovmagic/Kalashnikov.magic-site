@@ -218,9 +218,6 @@ loadHeroSequence();
 
 const factsSection=$('#facts');
 const factCards=$$('.playing-card',factsSection).filter(card=>!card.classList.contains('playing-card--surprise'));
-const surpriseCard=null;
-const surpriseCardWrap=null;
-const surpriseMessage=null;
 const factsHint=$('#factsHint');
 let factsUnlockedAtScroll=null;
 
@@ -278,7 +275,6 @@ factCards.forEach(card=>{
   });
 });
 
-// Surprise bank-card block removed from Scene 2.
 
 function allFactsOpened(){
   return factCards.length===4 && factCards.every(card=>card.classList.contains('is-flipped'));
