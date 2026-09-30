@@ -461,6 +461,12 @@ button{font:inherit;color:inherit}
 body.format-modal-open{overflow:hidden}
 
 @media(min-width:821px){
+  .hero__title h1{
+    display:block;
+    font-family:'KalashnikovHead',Inter,Arial,sans-serif;
+  }
+}
+@media(min-width:821px){
   .hero__title h1{display:none;}
   .hero__title{left:50%;top:88%;right:auto;bottom:auto;transform:translate(-50%,-50%);text-align:center}
   .hero__eyebrow{font-size:24px;font-weight:900;letter-spacing:.06em;}
