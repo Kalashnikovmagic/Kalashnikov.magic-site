@@ -218,9 +218,9 @@ loadHeroSequence();
 
 const factsSection=$('#facts');
 const factCards=$$('.playing-card',factsSection).filter(card=>!card.classList.contains('playing-card--surprise'));
-const surpriseCard=$('#surpriseCard');
-const surpriseCardWrap=$('#surpriseCardWrap');
-const surpriseMessage=$('#surpriseMessage');
+const surpriseCard=null;
+const surpriseCardWrap=null;
+const surpriseMessage=null;
 const factsHint=$('#factsHint');
 let factsUnlockedAtScroll=null;
 
@@ -278,10 +278,7 @@ factCards.forEach(card=>{
   });
 });
 
-surpriseCard?.addEventListener('click',()=>{
-  surpriseCard.classList.toggle('is-flipped');
-  surpriseCardWrap?.classList.toggle('surprise-card--revealed',surpriseCard.classList.contains('is-flipped'));
-});
+// Surprise bank-card block removed from Scene 2.
 
 function allFactsOpened(){
   return factCards.length===4 && factCards.every(card=>card.classList.contains('is-flipped'));
